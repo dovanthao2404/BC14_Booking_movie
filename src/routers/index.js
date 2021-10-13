@@ -1,14 +1,14 @@
 import { lazy } from "react";
-import HomeTeplate from "../containers/HomeTemplate";
+import HomeTeplate from "../template/HomeTemplate";
 
 const routeHome = [
   {
-    Component: lazy(() => import("../containers/HomeTemplate/HomePage")),
+    Component: lazy(() => import("../pages/Home")),
     exact: true,
     path: "/",
   },
   {
-    Component: lazy(() => import("../containers/HomeTemplate/HomePage")),
+    Component: lazy(() => import("../pages/Home")),
     exact: false,
     path: "/home",
   },
