@@ -7,6 +7,12 @@ class UserManagementServices {
       `/api/QuanLyNguoiDung/LayDanhSachNguoiDung?MaNhom=${GROUP_ID}`
     );
   };
+  loginServices = (infoLogin) => {
+    return api.post(`/api/QuanLyNguoiDung/DangNhap`, infoLogin);
+  };
+  deleteUserServices = (taiKhoan) => {
+    return api.delete(`/api/QuanLyNguoiDung/XoaNguoiDung?TaiKhoan=${taiKhoan}`);
+  };
 }
 
 export const userManagementServices = new UserManagementServices();
