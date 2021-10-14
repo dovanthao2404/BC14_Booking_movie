@@ -52,8 +52,16 @@ export default function UserManagement(props) {
             }
           }
             onClick={() => {
-              setConfirmDialog({ isOpen: true, title: `Bạn có chắc muốn xóa tài khoản ${cell.row.taiKhoan} không`, subTitle: "neu xoa ban khong the khoi phuc lai" });
-              // dispatch(actDeleteUser(cell.row.taiKhoan, setNotify));
+              setConfirmDialog({
+                isOpen: true,
+                title: `Bạn có chắc muốn xóa tài khoản ${cell.row.taiKhoan} không?`,
+                subTitle: "Nếu xóa bạn sẽ không thể hoàn tác được.",
+                onConfirm: () => {
+                  setConfirmDialog({ ...confirmDialog, isOpen: false });
+                  dispatch(actDeleteUser(cell.row.taiKhoan, setNotify));
+                }
+              });
+
             }}
           />
         </>;

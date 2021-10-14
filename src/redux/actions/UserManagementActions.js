@@ -55,14 +55,34 @@ export const actLoginAdmin = (infoLogin, history) => {
 export const actDeleteUser = (taiKhoan, setNotify) => {
   return async dispatch => {
     try {
-      const result = await userManagementServices.deleteUserServices(taiKhoan);
+      await userManagementServices.deleteUserServices(taiKhoan);
+
       setNotify({ type: "success", isOpen: true, message: "Bạn đã xóa thành công" });
       dispatch(actGetListUser());
+
     } catch (error) {
 
       setNotify({ type: "error", isOpen: true, message: error.response.data.content });
 
     }
+  };
+};
+
+export const actAddUser = (info) => {
+  return async dipatch => {
+    try {
+      const result = await userManagementServices.addUserServices(info);
+      console.log(result.data.content);
+    } catch (error) {
+
+      console.log(error);
+    }
+  };
+};
+
+export const actHandleLogout = () => {
+  return {
+    type: ActionType.LOGOUT
   };
 };
 
@@ -106,22 +126,4 @@ export const actLoginFailed = (error) => {
   };
 };
 
-export const actDeleteRequest = () => {
-  return {
-    type: ActionType.DELETE_REQUEST
-  };
-};
 
-// export const actDeleteSuccess = (data) => {
-//   return {
-//     type: ActionType.DELETE_SUSSCESS,
-//     payload: data
-//   };
-// };
-
-// export const actDeleteFailed = (error) => {
-//   return {
-//     type: ActionType.DELETE_FAILED,
-//     payload: error
-//   };
-// };

@@ -1,5 +1,5 @@
 import { Box } from '@mui/system';
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { Route, Redirect } from 'react-router';
 import { Link, NavLink } from 'react-router-dom';
 import { USER_LOGIN } from "./../../utils/settings/config";
@@ -13,16 +13,46 @@ import GroupWorkIcon from '@mui/icons-material/GroupWork';
 import LocalMoviesIcon from '@mui/icons-material/LocalMovies';
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import ClickAwayListener from '@mui/material/ClickAwayListener';
+import Popper from '@mui/material/Popper';
+import MenuItem from '@mui/material/MenuItem';
+import Paper from '@mui/material/Paper';
+import Grow from '@mui/material/Grow';
+import Button from '@mui/material/Button';
+import MenuList from '@mui/material/MenuList';
+import { actHandleLogout } from 'redux/actions/UserManagementActions';
 
 export default function AdminTemplate({ Component, ...props }) {
+  const dispatch = useDispatch();
   const { userLogin } = useSelector(state => state.userManagementReducer);
   const [openUser, setOpenUser] = useState(true);
   const [openFilm, setOpenFilm] = useState(false);
+  const [open, setOpen] = useState(false);
+  const anchorRef = useRef(null);
 
+  const handleToggle = () => {
+    setOpen((prevOpen) => !prevOpen);
+  };
+
+  const handleClose = (event) => {
+    if (anchorRef.current && anchorRef.current.contains(event.target)) {
+      return;
+    }
+
+    setOpen(false);
+  };
+
+  function handleListKeyDown(event) {
+    if (event.key === 'Tab') {
+      event.preventDefault();
+      setOpen(false);
+    } else if (event.key === 'Escape') {
+      setOpen(false);
+    }
+  }
 
   return <Route {...props} render={(propsRoute) => {
-
     if (userLogin) {
       return <>
         <Box sx={{ display: "flex", justifyContent: "flex-end", background: "#f0f2f5" }}>
@@ -124,11 +154,58 @@ export default function AdminTemplate({ Component, ...props }) {
           </Box>
           <Box sx={{ width: "calc(100% - 300px)", }}>
             <Box >
-              <Box component="nav" padding="20px" sx={{ background: "#fff" }} >
-                <Box sx={{ display: "flex", alignItems: "center", justifyContent: "end" }}>
-                  <Box component="img" sx={{ borderRadius: "50%" }} src="https://picsum.photos/50/50" alt="" />
-                  <Box component="p" sx={{ marginLeft: "8px", fontWeight: "bold" }}>{userLogin?.hoTen}</Box>
+              <Box component="nav" padding="20px" sx={{ background: "#fff", }} >
+                <Box sx={{ display: "flex", alignItems: "center", justifyContent: "end", position: "relative" }}>
+                  <Button
+                    ref={anchorRef}
+                    id="composition-button"
+                    aria-controls={open ? 'composition-menu' : undefined}
+                    aria-expanded={open ? 'true' : undefined}
+                    aria-haspopup="true"
+                    onClick={handleToggle}
+                    type="link"
+                  >
+                    <Box component="img" sx={{ borderRadius: "50%" }} src="https://picsum.photos/50/50" alt="" />
+                    <Box component="p" sx={{ marginLeft: "8px", fontWeight: "bold" }}>{userLogin?.hoTen}</Box>
+                  </Button>
+                  <Box sx={{ position: "absolute", bottom: 0 }}>
+                    <Popper
+                      open={open}
+                      anchorEl={anchorRef.current}
+                      role={undefined}
+                      placement="bottom-start"
+                      transition
+                      disablePortal
+                    >
+                      {({ TransitionProps, placement }) => (
+                        <Grow
+                          {...TransitionProps}
+                          style={{
+                            transformOrigin:
+                              placement === 'bottom-start' ? 'left top' : 'left bottom',
+                          }}
+                        >
+                          <Paper>
+                            <ClickAwayListener onClickAway={handleClose}>
+                              <MenuList
+                                autoFocusItem={open}
+                                id="composition-menu"
+                                aria-labelledby="composition-button"
+                                onKeyDown={handleListKeyDown}
+                              >
+                                <MenuItem onClick={handleClose}>Chỉnh sửa</MenuItem>
+                                <MenuItem onClick={() => {
+                                  dispatch(actHandleLogout());
+                                }}>Đăng xuất</MenuItem>
+                              </MenuList>
+                            </ClickAwayListener>
+                          </Paper>
+                        </Grow>
+                      )}
+                    </Popper>
+                  </Box>
                 </Box>
+
               </Box>
               <Box sx={{ margin: "40px 40px 0", minHeight: "500px", background: "#fff" }}>
                 <Box sx={{ padding: "24px" }}>

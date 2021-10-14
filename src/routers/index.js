@@ -30,6 +30,11 @@ const routeAdmin = [
     Component: lazy(() => import("../pages/UserManagement")),
     exact: false,
     path: "/admin/user-management"
+  },
+  {
+    Component: lazy(() => import("../pages/AddUser")),
+    exact: false,
+    path: "/admin/add-user"
   }
 ];
 

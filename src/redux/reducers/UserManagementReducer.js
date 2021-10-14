@@ -57,7 +57,11 @@ const userManagementReducer = (state = initialState, { type, payload }) => {
       state.errorLogin = null;
 
       return { ...state };
-
+    case ActionType.LOGOUT:
+      state.userLogin = null;
+      localStorage.removeItem(USER_LOGIN);
+      localStorage.removeItem(ActionType.LOGOUT);
+      return { ...state };
     default:
       return state;
   }

@@ -13,7 +13,7 @@ export default function Notification(props) {
 
   return (
     <Snackbar open={notify.isOpen}
-      autoHideDuration={3000}
+      autoHideDuration={5000}
       anchorOrigin={{ vertical: "top", horizontal: "center" }}
       onClose={hanleClose}
     >
