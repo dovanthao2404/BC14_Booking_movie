@@ -14,6 +14,7 @@ api.interceptors.request.use(
       ...config.headers,
       TokenCybersoft: TOKEN_CYBERSOFT,
       Authorization: toKenUser,
+
     };
     return config;
   },

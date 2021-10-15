@@ -17,24 +17,41 @@ const routeHome = [
 
 const routeAdmin = [
   {
-    Component: lazy(() => import("../pages/Dashboard")),
+    Component: lazy(() => import("../pages/Admin/Dashboard")),
     exact: true,
     path: "/admin"
   },
   {
-    Component: lazy(() => import("../pages/Dashboard")),
+    Component: lazy(() => import("../pages/Admin/Dashboard")),
     exact: false,
     path: "/admin/dashboard"
   },
   {
-    Component: lazy(() => import("../pages/UserManagement")),
+    Component: lazy(() => import("../pages/Admin/UserManagement")),
     exact: false,
     path: "/admin/user-management"
   },
   {
-    Component: lazy(() => import("../pages/AddUser")),
+    Component: lazy(() => import("../pages/Admin/AddUser")),
     exact: false,
     path: "/admin/add-user"
+  },
+  {
+    Component: lazy(() => import("../pages/Admin/EditUser")),
+    exact: false,
+    path: "/admin/edit-user/:id"
+  }, {
+    Component: lazy(() => import("../pages/Admin/FilmManagement")),
+    exact: false,
+    path: "/admin/film-management"
+  }, {
+    Component: lazy(() => import("../pages/Admin/EditFilm")),
+    exact: false,
+    path: "/admin/edit-film/:id"
+  }, {
+    Component: lazy(() => import("../pages/Admin/AddFilm")),
+    exact: false,
+    path: "/admin/add-film"
   }
 ];
 

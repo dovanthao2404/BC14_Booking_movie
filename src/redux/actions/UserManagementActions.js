@@ -68,14 +68,46 @@ export const actDeleteUser = (taiKhoan, setNotify) => {
   };
 };
 
-export const actAddUser = (info) => {
+export const actUpdateInfoUser = (newInfo, setNotify) => {
+  return async dispatch => {
+    try {
+      await userManagementServices.updateInfoUserServices(newInfo);
+      console.log("dvao");
+      setNotify({ type: "success", isOpen: true, message: "Bạn đã cập nhật thành công" });
+      dispatch(actGetInfoUser(newInfo.taiKhoan));
+
+    } catch (error) {
+      console.log("eror");
+
+      setNotify({ type: "error", isOpen: true, message: error.response.data.content });
+
+    }
+  };
+};
+
+export const actAddUser = (info, setNotify, resetForm) => {
   return async dipatch => {
     try {
-      const result = await userManagementServices.addUserServices(info);
-      console.log(result.data.content);
+      await userManagementServices.addUserServices(info);
+      setNotify({ type: "success", isOpen: true, message: "Bạn đã thêm thành công" });
+      resetForm();
     } catch (error) {
 
-      console.log(error);
+      setNotify({ type: "error", isOpen: true, message: error.response.data.content });
+
+    }
+  };
+};
+
+export const actGetInfoUser = (taiKhoan) => {
+  return async dispatch => {
+    dispatch(actInfoUserRequest());
+
+    try {
+      const result = await userManagementServices.getInfoUserServices(taiKhoan);
+      dispatch(actInfoUserSuccess(result.data.content));
+    } catch (error) {
+      dispatch(actInfoUserFailed(error));
     }
   };
 };
@@ -94,7 +126,7 @@ export const actListUserRequest = () => {
 
 export const actListUserSuccess = (listUser) => {
   return {
-    type: ActionType.LIST_USER_SUSSCESS,
+    type: ActionType.LIST_USER_SUCCCESS,
     payload: listUser,
   };
 };
@@ -114,7 +146,7 @@ export const actLoginRequest = () => {
 
 export const actLoginSuccess = (userLogin) => {
   return {
-    type: ActionType.LOGIN_SUSSCESS,
+    type: ActionType.LOGIN_SUCCCESS,
     payload: userLogin
   };
 };
@@ -126,4 +158,22 @@ export const actLoginFailed = (error) => {
   };
 };
 
+export const actInfoUserSuccess = (infoUser) => {
+  return {
+    type: ActionType.INFO_USER_SUCCCESS,
+    payload: infoUser
+  };
+};
 
+export const actInfoUserFailed = (error) => {
+  return {
+    type: ActionType.INFO_USER_FAILED,
+    payload: error
+  };
+};
+
+export const actInfoUserRequest = () => {
+  return {
+    type: ActionType.INFO_USER_REQUEST
+  };
+};

@@ -1,17 +1,21 @@
-import React from "react";
+import Loading from "components/Loading";
+import React, { Suspense } from "react";
 import { Route } from "react-router";
 
 export default function HomeTeplate({ Component, ...props }) {
   return (
-    <Route
-      {...props}
-      render={(propsRoute) => {
-        return (
-          <>
-            <Component {...propsRoute} />
-          </>
-        );
-      }}
-    />
+    <Suspense fallback={<Loading />}>
+
+      <Route
+        {...props}
+        render={(propsRoute) => {
+          return (
+            <>
+              <Component {...propsRoute} />
+            </>
+          );
+        }}
+      />
+    </Suspense>
   );
 }

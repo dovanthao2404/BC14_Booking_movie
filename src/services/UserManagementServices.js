@@ -19,6 +19,14 @@ class UserManagementServices {
   addUserServices = (info) => {
     return api.post(`/api/QuanLyNguoiDung/ThemNguoiDung`, info);
   };
+
+  getInfoUserServices = (taiKhoan) => {
+    return api.post(`/api/QuanLyNguoiDung/LayThongTinNguoiDung?taiKhoan=${taiKhoan}`);
+  };
+
+  updateInfoUserServices = (newInfo) => {
+    return api.post(`/api/QuanLyNguoiDung/CapNhatThongTinNguoiDung`, newInfo);
+  };
 }
 
 export const userManagementServices = new UserManagementServices();

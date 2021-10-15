@@ -1,5 +1,4 @@
 import { Container, Button } from '@mui/material';
-import Loading from "./../../components/Loading";
 
 import { Box } from '@mui/system';
 import React, { useEffect } from 'react';
@@ -44,7 +43,7 @@ export default function Auth(props) {
           }}
           validationSchema={SignupSchema}
           onSubmit={values => {
-            // same shape as initial values
+
 
             dispatch(actLoginAdmin(values, props.history));
           }}

@@ -11,7 +11,8 @@ const initialState = {
   error: null,
   isLoading: false,
   userLogin,
-  errorLogin: null
+  errorLogin: null,
+  infoEdit: null
 };
 
 const userManagementReducer = (state = initialState, { type, payload }) => {
@@ -23,7 +24,7 @@ const userManagementReducer = (state = initialState, { type, payload }) => {
 
       return { ...state };
 
-    case ActionType.LIST_USER_SUSSCESS:
+    case ActionType.LIST_USER_SUCCCESS:
       state.listUser = payload;
       state.isLoading = false;
       state.error = null;
@@ -51,16 +52,36 @@ const userManagementReducer = (state = initialState, { type, payload }) => {
 
       return { ...state };
 
-    case ActionType.LOGIN_SUSSCESS:
+    case ActionType.LOGIN_SUCCCESS:
       state.userLogin = payload;
       state.isLoading = false;
       state.errorLogin = null;
 
       return { ...state };
+
     case ActionType.LOGOUT:
       state.userLogin = null;
       localStorage.removeItem(USER_LOGIN);
       localStorage.removeItem(ActionType.LOGOUT);
+      return { ...state };
+
+    case ActionType.INFO_USER_REQUEST:
+      state.infoEdit = null;
+      state.error = null;
+      state.isLoading = true;
+      return { ...state };
+
+    case ActionType.INFO_USER_FAILED:
+      state.infoEdit = null;
+      state.error = payload;
+      state.isLoading = false;
+      return { ...state };
+
+    case ActionType.INFO_USER_SUCCCESS:
+      state.infoEdit = payload;
+      state.error = null;
+      state.isLoading = false;
+
       return { ...state };
     default:
       return state;

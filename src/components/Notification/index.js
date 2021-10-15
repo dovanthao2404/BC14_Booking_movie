@@ -17,7 +17,7 @@ export default function Notification(props) {
       anchorOrigin={{ vertical: "top", horizontal: "center" }}
       onClose={hanleClose}
     >
-      <Alert variant="outlined" severity={notify.type}
+      <Alert variant="filled" severity={notify.type}
         onClose={hanleClose}
         security={notify.type}
       >

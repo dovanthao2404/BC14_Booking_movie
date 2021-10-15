@@ -1,8 +1,7 @@
 import { Box } from '@mui/system';
-import React, { useRef, useState } from 'react';
+import React, { Suspense, useRef, useState } from 'react';
 import { Route, Redirect } from 'react-router';
 import { Link, NavLink } from 'react-router-dom';
-import { USER_LOGIN } from "./../../utils/settings/config";
 import { ListItemText, ListItemButton, ListItemIcon, List, Collapse, } from '@mui/material';
 import AvTimerIcon from '@mui/icons-material/AvTimer';
 import GroupIcon from '@mui/icons-material/Group';
@@ -21,9 +20,11 @@ import Paper from '@mui/material/Paper';
 import Grow from '@mui/material/Grow';
 import Button from '@mui/material/Button';
 import MenuList from '@mui/material/MenuList';
-import { actHandleLogout } from 'redux/actions/UserManagementActions';
+import { actGetInfoUser, actHandleLogout } from 'redux/actions/UserManagementActions';
+import Loading from 'components/Loading';
 
-export default function AdminTemplate({ Component, ...props }) {
+export default function AdminTemplate({ Component, ...props })
+{
   const dispatch = useDispatch();
   const { userLogin } = useSelector(state => state.userManagementReducer);
   const [openUser, setOpenUser] = useState(true);
@@ -31,29 +32,37 @@ export default function AdminTemplate({ Component, ...props }) {
   const [open, setOpen] = useState(false);
   const anchorRef = useRef(null);
 
-  const handleToggle = () => {
+  const handleToggle = () =>
+  {
     setOpen((prevOpen) => !prevOpen);
   };
 
-  const handleClose = (event) => {
-    if (anchorRef.current && anchorRef.current.contains(event.target)) {
+  const handleClose = (event) =>
+  {
+    if (anchorRef.current && anchorRef.current.contains(event.target))
+    {
       return;
     }
 
     setOpen(false);
   };
 
-  function handleListKeyDown(event) {
-    if (event.key === 'Tab') {
+  function handleListKeyDown(event)
+  {
+    if (event.key === 'Tab')
+    {
       event.preventDefault();
       setOpen(false);
-    } else if (event.key === 'Escape') {
+    } else if (event.key === 'Escape')
+    {
       setOpen(false);
     }
   }
 
-  return <Route {...props} render={(propsRoute) => {
-    if (userLogin) {
+  return <Route {...props} render={(propsRoute) =>
+  {
+    if (userLogin)
+    {
       return <>
         <Box sx={{ display: "flex", justifyContent: "flex-end", background: "#f0f2f5" }}>
           <Box sx={{ width: "300px", height: "100vh", background: "#333", }}>
@@ -79,7 +88,8 @@ export default function AdminTemplate({ Component, ...props }) {
                       <ListItemText primary="Dashboard" />
                     </ListItemButton>
                   </NavLink>
-                  <ListItemButton onClick={() => {
+                  <ListItemButton onClick={() =>
+                  {
                     setOpenUser(!openUser);
                   }}>
                     <ListItemIcon>
@@ -109,7 +119,8 @@ export default function AdminTemplate({ Component, ...props }) {
                       </NavLink>
                     </List>
                   </Collapse>
-                  <ListItemButton onClick={() => {
+                  <ListItemButton onClick={() =>
+                  {
                     setOpenFilm(!openFilm);
                   }}>
                     <ListItemIcon>
@@ -193,8 +204,16 @@ export default function AdminTemplate({ Component, ...props }) {
                                 aria-labelledby="composition-button"
                                 onKeyDown={handleListKeyDown}
                               >
-                                <MenuItem onClick={handleClose}>Chỉnh sửa</MenuItem>
-                                <MenuItem onClick={() => {
+                                <MenuItem onClick={handleClose}>
+                                  <NavLink style={{ textDecoration: "none", color: "black" }} to={`/admin/edit-user/${ userLogin.taiKhoan }`}
+                                    onClick={() =>
+                                    {
+                                      dispatch(actGetInfoUser(userLogin.taiKhoan));
+                                    }}
+                                  >Chỉnh sửa</NavLink>
+                                </MenuItem>
+                                <MenuItem onClick={() =>
+                                {
                                   dispatch(actHandleLogout());
                                 }}>Đăng xuất</MenuItem>
                               </MenuList>
@@ -209,7 +228,9 @@ export default function AdminTemplate({ Component, ...props }) {
               </Box>
               <Box sx={{ margin: "40px 40px 0", minHeight: "500px", background: "#fff" }}>
                 <Box sx={{ padding: "24px" }}>
-                  <Component {...propsRoute} />
+                  <Suspense fallback={<Loading />}>
+                    <Component {...propsRoute} />
+                  </Suspense>
                 </Box>
               </Box>
             </Box>
