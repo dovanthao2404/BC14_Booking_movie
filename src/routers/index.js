@@ -19,40 +19,48 @@ const routeAdmin = [
   {
     Component: lazy(() => import("../pages/Admin/Dashboard")),
     exact: true,
-    path: "/admin"
+    path: "/admin",
   },
   {
     Component: lazy(() => import("../pages/Admin/Dashboard")),
     exact: false,
-    path: "/admin/dashboard"
+    path: "/admin/dashboard",
   },
   {
     Component: lazy(() => import("../pages/Admin/UserManagement")),
     exact: false,
-    path: "/admin/user-management"
+    path: "/admin/user-management",
   },
   {
     Component: lazy(() => import("../pages/Admin/AddUser")),
     exact: false,
-    path: "/admin/add-user"
+    path: "/admin/add-user",
   },
   {
     Component: lazy(() => import("../pages/Admin/EditUser")),
     exact: false,
-    path: "/admin/edit-user/:id"
-  }, {
+    path: "/admin/edit-user/:id",
+  },
+  {
     Component: lazy(() => import("../pages/Admin/FilmManagement")),
     exact: false,
-    path: "/admin/film-management"
-  }, {
+    path: "/admin/film-management",
+  },
+  {
     Component: lazy(() => import("../pages/Admin/EditFilm")),
     exact: false,
-    path: "/admin/edit-film/:id"
-  }, {
+    path: "/admin/edit-film/:id",
+  },
+  {
     Component: lazy(() => import("../pages/Admin/AddFilm")),
     exact: false,
-    path: "/admin/add-film"
-  }
+    path: "/admin/add-film",
+  },
+  {
+    Component: lazy(() => import("../pages/Admin/CreateShowtimes")),
+    exact: false,
+    path: "/admin/create-showtimes/:id/",
+  },
 ];
 
 export const renderRouteHome = () => {

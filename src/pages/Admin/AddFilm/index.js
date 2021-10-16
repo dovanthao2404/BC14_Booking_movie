@@ -35,6 +35,9 @@ const validate = (values) => {
 
   !values.danhGia && (errors.danhGia = "Vui lòng chọn đánh giá");
 
+  !values.ngayKhoiChieu &&
+    (errors.ngayKhoiChieu = "Vui lòng chọn ngày khởi chiếu");
+
   !values.hinhAnh && (errors.hinhAnh = "Vui lòng chọn hình ảnh");
 
   return errors;
@@ -281,7 +284,7 @@ const AddFilm = () => {
               </Box>
             </Box>
             <Box sx={{ paddingBottom: "10px" }}>
-              <Typography component="legend">10 stars</Typography>
+              <Typography component="legend">Đánh giá</Typography>
               <Rating
                 name="danhGia"
                 onChange={handleChangeRate}

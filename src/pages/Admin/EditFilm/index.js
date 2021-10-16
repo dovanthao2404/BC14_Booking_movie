@@ -23,7 +23,6 @@ import { useDispatch, useSelector } from "react-redux";
 import Notification from "components/Notification";
 import { LocalizationProvider } from "@mui/lab";
 import {
-  actAddNewFilm,
   actUpdateFilm,
   atcGetInfoFilm,
 } from "redux/actions/FilmManagementActions";
@@ -81,7 +80,8 @@ const EditFilm = (props) => {
     validate,
     onSubmit: (values) => {
       const formData = handleNewFormData(values);
-      dispatch(actUpdateFilm(formData, setNotify, resetForm));
+
+      dispatch(actUpdateFilm(formData, setNotify, setSrcImg));
     },
   });
 
@@ -97,12 +97,9 @@ const EditFilm = (props) => {
         formData.append(key, date);
       }
     }
-    return formData;
-  };
+    formData.append("maPhim", infoFilmEdit.maPhim);
 
-  const resetForm = () => {
-    formik.resetForm();
-    setSrcImg("");
+    return formData;
   };
 
   const handleChangeFile = async (e) => {
@@ -137,9 +134,9 @@ const EditFilm = (props) => {
   if (error) {
     return (
       <>
-        <p>{error.response.data.content}</p>
-        <Button onClick={() => history.push("/film-management")}>
-          Quay Về Quản Lý Người Dùng
+        <p>{error.response?.data?.content || error.response?.data?.MaPhim}</p>
+        <Button onClick={() => history.push("/admin/film-management")}>
+          Quay Về Quản Lý Phim
         </Button>
       </>
     );

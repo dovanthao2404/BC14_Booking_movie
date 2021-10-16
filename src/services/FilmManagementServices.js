@@ -8,7 +8,7 @@ class FilmManagementServices {
   };
 
   deleteFilmServices = (maPhim) => {
-    return api.delete(`/api/QuanLyPhim/XP?MaPhim=${maPhim}`);
+    return api.delete(`/api/QuanLyPhim/XP?MaPhim=${maPhim}`, maPhim);
   };
 
   addNewFilmServices = (formData) => {

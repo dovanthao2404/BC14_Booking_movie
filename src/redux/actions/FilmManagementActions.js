@@ -6,6 +6,7 @@ export const actGetListFilm = () => {
     try {
       const result = await filmManagementServices.getListFilmServices();
       dispatch(actListFilmSuccess(result.data.content));
+      console.log(result.data.content);
     } catch (error) {
       actListFilmFailed(actListFilmFailed(error));
     }
@@ -27,6 +28,7 @@ export const actListFilmFailed = (error) => ({
 });
 
 export const actDeleteFilm = (maPhim, setNotify) => {
+  console.log({ maPhim });
   return async (dispatch) => {
     try {
       await filmManagementServices.deleteFilmServices(maPhim);
@@ -37,20 +39,11 @@ export const actDeleteFilm = (maPhim, setNotify) => {
       });
       dispatch(actGetListFilm());
     } catch (error) {
-      if (!error.response) {
-        setNotify({
-          type: "success",
-          isOpen: true,
-          message: "Bạn đã xóa thành công",
-        });
-        dispatch(actGetListFilm());
-      } else {
-        setNotify({
-          type: "error",
-          isOpen: true,
-          message: error.response?.data.content,
-        });
-      }
+      setNotify({
+        type: "error",
+        isOpen: true,
+        message: error.response?.data.content,
+      });
     }
   };
 };
@@ -80,7 +73,6 @@ export const atcGetInfoFilm = (maPhim) => {
     dispatch(actInfoFilmRequest());
     try {
       const result = await filmManagementServices.getInfoFilm(maPhim);
-      console.log(result.data.content);
       dispatch(actInfoFilmSuccess(result.data.content));
     } catch (error) {
       dispatch(actInfoFilmFailed(error));
@@ -102,13 +94,22 @@ export const actInfoFilmFailed = (error) => ({
   payload: error,
 });
 
-export const actUpdateFilm = (formData) => {
+export const actUpdateFilm = (formData, setNotify, setSrcImg) => {
   return async (dispatch) => {
     try {
-      const result = await filmManagementServices.updateFilmServices(formData);
-      console.log(result.data.message);
+      await filmManagementServices.updateFilmServices(formData);
+      await setNotify({
+        type: "success",
+        isOpen: true,
+        message: "Bạn đã cập nhật thành công",
+      });
+      await atcGetInfoFilm(parseInt(formData.get("maPhim")));
     } catch (error) {
-      console.log(error);
+      setNotify({
+        type: "error",
+        isOpen: true,
+        message: error.response?.data.content,
+      });
     }
   };
 };
