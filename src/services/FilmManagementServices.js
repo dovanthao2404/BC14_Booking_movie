@@ -10,6 +10,18 @@ class FilmManagementServices {
   deleteFilmServices = (maPhim) => {
     return api.delete(`/api/QuanLyPhim/XP?MaPhim=${maPhim}`);
   };
+
+  addNewFilmServices = (formData) => {
+    return api.post(`/api/QuanLyPhim/ThemPhimUploadHinh`, formData);
+  };
+
+  getInfoFilm = (maPhim) => {
+    return api.get(`/api/QuanLyPhim/LayThongTinPhim?MaPhim=${maPhim}`);
+  };
+
+  updateFilmServices = (formData) => {
+    return api.post(`/api/QuanLyPhim/CapNhatPhimUpload`, formData);
+  };
 }
 
 export const filmManagementServices = new FilmManagementServices();

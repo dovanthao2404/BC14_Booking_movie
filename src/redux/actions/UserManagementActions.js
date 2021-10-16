@@ -10,12 +10,25 @@ export const actGetListUser = () => {
 
       const listUser = result.data.content;
       dispatch(actListUserSuccess(listUser));
-
     } catch (error) {
       dispatch(actListUserFailed(error));
     }
   };
 };
+
+export const actListUserRequest = () => ({
+  type: ActionType.LIST_USER_REQUEST,
+});
+
+export const actListUserSuccess = (listUser) => ({
+  type: ActionType.LIST_USER_SUCCCESS,
+  payload: listUser,
+});
+
+export const actListUserFailed = (error) => ({
+  type: ActionType.LIST_USER_FAILED,
+  payload: error,
+});
 
 export const actLoginAdmin = (infoLogin, history) => {
   return async (dispatch) => {
@@ -37,70 +50,99 @@ export const actLoginAdmin = (infoLogin, history) => {
         const error = {
           response: {
             data: {
-              content: "Tài khoản hoặc mật khẩu không đúng!"
-            }
-          }
+              content: "Tài khoản hoặc mật khẩu không đúng!",
+            },
+          },
         };
 
         dispatch(actLoginFailed(error));
-
       }
     } catch (error) {
       dispatch(actLoginFailed(error));
-
     }
   };
 };
 
+export const actLoginRequest = () => ({
+  type: ActionType.LOGIN_REQUEST,
+});
+
+export const actLoginSuccess = (userLogin) => ({
+  type: ActionType.LOGIN_SUCCCESS,
+  payload: userLogin,
+});
+
+export const actLoginFailed = (error) => ({
+  type: ActionType.LOGIN_FAILED,
+  payload: error,
+});
+
 export const actDeleteUser = (taiKhoan, setNotify) => {
-  return async dispatch => {
+  return async (dispatch) => {
     try {
       await userManagementServices.deleteUserServices(taiKhoan);
 
-      setNotify({ type: "success", isOpen: true, message: "Bạn đã xóa thành công" });
+      setNotify({
+        type: "success",
+        isOpen: true,
+        message: "Bạn đã xóa thành công",
+      });
       dispatch(actGetListUser());
-
     } catch (error) {
-
-      setNotify({ type: "error", isOpen: true, message: error.response.data.content });
-
+      setNotify({
+        type: "error",
+        isOpen: true,
+        message: error.response.data.content,
+      });
     }
   };
 };
 
 export const actUpdateInfoUser = (newInfo, setNotify) => {
-  return async dispatch => {
+  return async (dispatch) => {
     try {
       await userManagementServices.updateInfoUserServices(newInfo);
       console.log("dvao");
-      setNotify({ type: "success", isOpen: true, message: "Bạn đã cập nhật thành công" });
+      setNotify({
+        type: "success",
+        isOpen: true,
+        message: "Bạn đã cập nhật thành công",
+      });
       dispatch(actGetInfoUser(newInfo.taiKhoan));
-
     } catch (error) {
       console.log("eror");
 
-      setNotify({ type: "error", isOpen: true, message: error.response.data.content });
-
+      setNotify({
+        type: "error",
+        isOpen: true,
+        message: error.response.data.content,
+      });
     }
   };
 };
 
 export const actAddUser = (info, setNotify, resetForm) => {
-  return async dipatch => {
+  return async (dipatch) => {
     try {
       await userManagementServices.addUserServices(info);
-      setNotify({ type: "success", isOpen: true, message: "Bạn đã thêm thành công" });
+      setNotify({
+        type: "success",
+        isOpen: true,
+        message: "Bạn đã thêm thành công",
+      });
       resetForm();
     } catch (error) {
-
-      setNotify({ type: "error", isOpen: true, message: error.response.data.content });
-
+      setNotify({
+        type: "error",
+        isOpen: true,
+        message: error.response.data.content,
+      });
     }
   };
 };
 
 export const actGetInfoUser = (taiKhoan) => {
-  return async dispatch => {
+  return async (dispatch) => {
     dispatch(actInfoUserRequest());
 
     try {
@@ -112,68 +154,20 @@ export const actGetInfoUser = (taiKhoan) => {
   };
 };
 
-export const actHandleLogout = () => {
-  return {
-    type: ActionType.LOGOUT
-  };
-};
+export const actInfoUserSuccess = (infoUser) => ({
+  type: ActionType.INFO_USER_SUCCCESS,
+  payload: infoUser,
+});
 
-export const actListUserRequest = () => {
-  return {
-    type: ActionType.LIST_USER_REQUEST,
-  };
-};
+export const actInfoUserFailed = (error) => ({
+  type: ActionType.INFO_USER_FAILED,
+  payload: error,
+});
 
-export const actListUserSuccess = (listUser) => {
-  return {
-    type: ActionType.LIST_USER_SUCCCESS,
-    payload: listUser,
-  };
-};
+export const actInfoUserRequest = () => ({
+  type: ActionType.INFO_USER_REQUEST,
+});
 
-export const actListUserFailed = (error) => {
-  return {
-    type: ActionType.LIST_USER_FAILED,
-    payload: error,
-  };
-};
-
-export const actLoginRequest = () => {
-  return {
-    type: ActionType.LOGIN_REQUEST
-  };
-};
-
-export const actLoginSuccess = (userLogin) => {
-  return {
-    type: ActionType.LOGIN_SUCCCESS,
-    payload: userLogin
-  };
-};
-
-export const actLoginFailed = (error) => {
-  return {
-    type: ActionType.LOGIN_FAILED,
-    payload: error
-  };
-};
-
-export const actInfoUserSuccess = (infoUser) => {
-  return {
-    type: ActionType.INFO_USER_SUCCCESS,
-    payload: infoUser
-  };
-};
-
-export const actInfoUserFailed = (error) => {
-  return {
-    type: ActionType.INFO_USER_FAILED,
-    payload: error
-  };
-};
-
-export const actInfoUserRequest = () => {
-  return {
-    type: ActionType.INFO_USER_REQUEST
-  };
-};
+export const actHandleLogout = () => ({
+  type: ActionType.LOGOUT,
+});

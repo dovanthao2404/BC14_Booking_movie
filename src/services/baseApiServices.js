@@ -1,9 +1,8 @@
 import axios from "axios";
-import { DOMAIN } from "utils/settings/config";
 import { TOKEN, TOKEN_CYBERSOFT } from "../utils/settings/config";
 
 const api = axios.create({
-  baseURL: DOMAIN,
+  baseURL: "https://movienew.cybersoft.edu.vn",
 });
 
 api.interceptors.request.use(
@@ -14,7 +13,6 @@ api.interceptors.request.use(
       ...config.headers,
       TokenCybersoft: TOKEN_CYBERSOFT,
       Authorization: toKenUser,
-
     };
     return config;
   },

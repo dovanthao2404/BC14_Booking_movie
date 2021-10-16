@@ -12,7 +12,7 @@ const initialState = {
   isLoading: false,
   userLogin,
   errorLogin: null,
-  infoEdit: null
+  infoUserEdit: null,
 };
 
 const userManagementReducer = (state = initialState, { type, payload }) => {
@@ -66,19 +66,19 @@ const userManagementReducer = (state = initialState, { type, payload }) => {
       return { ...state };
 
     case ActionType.INFO_USER_REQUEST:
-      state.infoEdit = null;
+      state.infoUserEdit = null;
       state.error = null;
       state.isLoading = true;
       return { ...state };
 
     case ActionType.INFO_USER_FAILED:
-      state.infoEdit = null;
+      state.infoUserEdit = null;
       state.error = payload;
       state.isLoading = false;
       return { ...state };
 
     case ActionType.INFO_USER_SUCCCESS:
-      state.infoEdit = payload;
+      state.infoUserEdit = payload;
       state.error = null;
       state.isLoading = false;
 
