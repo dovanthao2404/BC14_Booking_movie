@@ -47,7 +47,12 @@ function toSlug(str) {
 
 export default function FilmManagement(props) {
   const dispatch = useDispatch();
-
+  const [sortModel, setSortModel] = useState([
+    {
+      field: "maPhim",
+      sort: "desc",
+    },
+  ]);
   const [valueSearch, setValueSearch] = useState("");
   const [notify, setNotify] = useState({
     isOpen: false,
@@ -67,18 +72,31 @@ export default function FilmManagement(props) {
 
   const columns = [
     { field: "maPhim", headerName: "Mã phim", width: 100 },
-    { field: "tenPhim", headerName: "Tên phim", width: 250 },
+    {
+      field: "tenPhim",
+      headerName: "Tên phim",
+      width: 300,
+      renderCell: (cell) => {
+        return (
+          <Box component="h3" sx={{ color: "#30e" }}>
+            {cell.row.tenPhim.length > 25
+              ? cell.row.tenPhim.slice(0, 25) + "..."
+              : cell.row.tenPhim}
+          </Box>
+        );
+      },
+    },
     {
       field: "hinhAnh",
       headerName: "Hình ảnh",
-      width: 200,
+      width: 150,
       sortable: false,
       renderCell: (cell) => {
         return (
           <img
             src={cell.row.hinhAnh}
             alt={cell.row.tenPHim}
-            style={{ width: 200, objectFit: "cover" }}
+            style={{ width: 100, height: 150, objectFit: "cover" }}
             onError={(e) => {
               e.target.onerror = null;
               e.target.src =
@@ -203,7 +221,10 @@ export default function FilmManagement(props) {
             rowsPerPageOptions={[10]}
             getRowId={(row) => row.maPhim}
             disableColumnMenu={true}
-            rowHeight={100}
+            rowHeight={200}
+            disableVirtualization
+            sortModel={sortModel}
+            onSortModelChange={(model) => setSortModel(model)}
             autoHeight={true}
           />
         )}

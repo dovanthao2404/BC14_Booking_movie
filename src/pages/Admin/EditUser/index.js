@@ -173,7 +173,7 @@ const EditUser = (props) => {
     return (
       <>
         <p>{error.response.data.content}</p>
-        <Button onClick={() => history.push("/user-management")}>
+        <Button onClick={() => history.replace("/admin/user-management")}>
           Quay Về Quản Lý Người Dùng
         </Button>
       </>

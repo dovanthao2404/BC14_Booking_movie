@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { GROUP_ID } from "utils/settings/config";
 import { useFormik } from "formik";
 import moment from "moment";
 import FormControl from "@mui/material/FormControl";
@@ -135,7 +134,7 @@ const EditFilm = (props) => {
     return (
       <>
         <p>{error.response?.data?.content || error.response?.data?.MaPhim}</p>
-        <Button onClick={() => history.push("/admin/film-management")}>
+        <Button onClick={() => history.replace("/admin/film-management")}>
           Quay Về Quản Lý Phim
         </Button>
       </>

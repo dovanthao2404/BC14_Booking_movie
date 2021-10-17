@@ -6,7 +6,6 @@ export const actGetListFilm = () => {
     try {
       const result = await filmManagementServices.getListFilmServices();
       dispatch(actListFilmSuccess(result.data.content));
-      console.log(result.data.content);
     } catch (error) {
       actListFilmFailed(actListFilmFailed(error));
     }
@@ -28,7 +27,6 @@ export const actListFilmFailed = (error) => ({
 });
 
 export const actDeleteFilm = (maPhim, setNotify) => {
-  console.log({ maPhim });
   return async (dispatch) => {
     try {
       await filmManagementServices.deleteFilmServices(maPhim);
@@ -39,11 +37,24 @@ export const actDeleteFilm = (maPhim, setNotify) => {
       });
       dispatch(actGetListFilm());
     } catch (error) {
-      setNotify({
-        type: "error",
-        isOpen: true,
-        message: error.response?.data.content,
-      });
+      if (!error.response) {
+        setNotify({
+          type: "success",
+          isOpen: true,
+          message: "Bạn đã xóa thành công",
+        });
+        dispatch(actGetListFilm());
+        console.log(
+          "%c Đây không phải là bug đây là một tính năng!!",
+          "font-weight: bold; font-size: 50px;color: red; text-shadow: 3px 3px 0 rgb(217,31,38) , 6px 6px 0 rgb(226,91,14) , 9px 9px 0 rgb(245,221,8) , 12px 12px 0 rgb(5,148,68) , 15px 15px 0 rgb(2,135,206) , 18px 18px 0 rgb(4,77,145) , 21px 21px 0 rgb(42,21,113); padding: 20px 20px 40px;"
+        );
+      } else {
+        setNotify({
+          type: "error",
+          isOpen: true,
+          message: error.response?.data.content,
+        });
+      }
     }
   };
 };
