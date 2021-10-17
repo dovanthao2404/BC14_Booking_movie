@@ -152,6 +152,7 @@ export default function UserManagement(props) {
             columns={columns}
             pageSize={10}
             rowsPerPageOptions={[10]}
+            sortingOrder={["desc", "asc"]}
             getRowId={(row) => row.taiKhoan}
             disableColumnMenu={true}
             autoHeight={true}

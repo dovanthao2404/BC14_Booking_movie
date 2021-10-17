@@ -222,6 +222,7 @@ export default function FilmManagement(props) {
             getRowId={(row) => row.maPhim}
             disableColumnMenu={true}
             rowHeight={200}
+            sortingOrder={["desc", "asc"]}
             disableVirtualization
             sortModel={sortModel}
             onSortModelChange={(model) => setSortModel(model)}
