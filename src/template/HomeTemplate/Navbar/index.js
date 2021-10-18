@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { HashLink, NavHashLink } from "react-router-hash-link";
+import { HashLink } from "react-router-hash-link";
 
 import {
   AppBar,
@@ -43,6 +43,8 @@ const Navbar = () => {
         sx={{
           background: "rgba(255,255,255,0.95)",
           boxShadow: "0 0 15px rgb(0 0 0 / 30%)",
+          height: "64px",
+          justifyContent: "space-evenly",
         }}
       >
         <Toolbar sx={{ alignItems: "center", justifyContent: "space-between" }}>

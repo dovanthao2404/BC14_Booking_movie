@@ -7,6 +7,7 @@ import { actGetListUser } from "redux/actions/UserManagementActions";
 import _ from "lodash";
 import moment from "moment";
 import Carousel from "./Carousel";
+import HomeTools from "./HomeTools";
 
 export default function HomgPage() {
   const dispatch = useDispatch();
@@ -24,7 +25,8 @@ export default function HomgPage() {
   return (
     <Box sx={{ marginTop: "64px" }}>
       <Carousel />
-      <Container>
+      <Container style={{ maxWidth: "940px", position: "relative" }}>
+        <HomeTools />
         <Box component="h1" sx={{ color: "red" }}>
           Này đọc cho dui, đọc xong xóa. Trang này ở HomePage
         </Box>

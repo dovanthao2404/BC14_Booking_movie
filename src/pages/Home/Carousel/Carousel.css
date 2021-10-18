@@ -1,5 +1,7 @@
 #booking-carousel .slick-dots {
   bottom: 12%;
+  display: flex;
+  justify-content: center;
 }
 
 #booking-carousel li button:before {

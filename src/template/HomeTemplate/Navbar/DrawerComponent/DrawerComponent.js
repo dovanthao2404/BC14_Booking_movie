@@ -18,13 +18,9 @@ const DrawerComponent = () => {
     drawerContainer: {
       width: "70%",
     },
-    iconButtonContainer: {
-      marginLeft: "auto",
-      color: "white",
-    },
 
     menuIconToggle: {
-      fontSize: "3rem",
+      fontSize: "2rem",
     },
     hashLink: {
       color: "#000",
@@ -131,13 +127,8 @@ const DrawerComponent = () => {
         </List>
       </Drawer>
 
-      <IconButton
-        className={classes.iconButtonContainer}
-        onClick={() => setOpenDrawer(!openDrawer)}
-        disableRipple
-      >
+      <IconButton onClick={() => setOpenDrawer(!openDrawer)} disableRipple>
         <MenuIcon className={classes.menuIconToggle} />
-        {/* toggle */}
       </IconButton>
     </>
   );

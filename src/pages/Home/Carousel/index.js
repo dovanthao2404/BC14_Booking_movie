@@ -3,7 +3,6 @@ import { Box } from "@mui/material";
 import Slider from "react-slick";
 import "./Carousel.css";
 import { Link } from "react-router-dom";
-import { useLongPress, LongPressDetectEvents } from "use-long-press";
 
 // Custom arrow react-slick
 function SampleNextArrow(props) {
@@ -43,16 +42,7 @@ const settings = {
 };
 
 export default function Carousel() {
-  const [enabled, setEnabled] = useState(true);
   const [mousePosition, setMousePosition] = useState(0);
-
-  const bind = useLongPress(enabled ? "a" : null, {
-    onStart: (e) => setMousePosition(e.pageX),
-    threshold: 10000000000,
-    captureEvent: true,
-    cancelOnMovement: false,
-    // detect: LongPressDetectEvents.BOTH,
-  });
 
   return (
     <>
@@ -101,16 +91,15 @@ export default function Carousel() {
                   className="carousel__item"
                 >
                   <Link
+                    onMouseDown={(e) => {
+                      setMousePosition(e.pageX);
+                    }}
                     onClick={(e) => {
                       const { pageX } = e;
-                      console.log(pageX);
-                      console.log(mousePosition);
-                      console.log(pageX - mousePosition);
                       if (Math.abs(pageX - mousePosition) > 10) {
                         e.preventDefault();
                       }
                     }}
-                    {...bind}
                     to="/detail/"
                     style={{ position: "relative" }}
                   >
@@ -165,12 +154,11 @@ export default function Carousel() {
                   className="carousel__item"
                 >
                   <Link
-                    {...bind}
+                    onMouseDown={(e) => {
+                      setMousePosition(e.pageX);
+                    }}
                     onClick={(e) => {
                       const { pageX } = e;
-                      console.log(pageX);
-                      console.log(mousePosition);
-                      console.log(pageX - mousePosition);
                       if (Math.abs(pageX - mousePosition) > 10) {
                         e.preventDefault();
                       }
