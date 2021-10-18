@@ -7,16 +7,20 @@ class FilmManagementServices {
     return api.get(`/api/QuanLyPhim/LayDanhSachPhim?maNhom=${GROUP_ID}`);
   };
 
+  getInfoFilm = (maPhim) => {
+    return api.get(`/api/QuanLyPhim/LayThongTinPhim?MaPhim=${maPhim}`);
+  };
+
+  getListBannerServices = () => {
+    return api.get(`/api/QuanLyPhim/LayDanhSachBanner`);
+  };
+
   deleteFilmServices = (maPhim) => {
     return api.delete(`/api/QuanLyPhim/XP?MaPhim=${maPhim}`, maPhim);
   };
 
   addNewFilmServices = (formData) => {
     return api.post(`/api/QuanLyPhim/ThemPhimUploadHinh`, formData);
-  };
-
-  getInfoFilm = (maPhim) => {
-    return api.get(`/api/QuanLyPhim/LayThongTinPhim?MaPhim=${maPhim}`);
   };
 
   updateFilmServices = (formData) => {

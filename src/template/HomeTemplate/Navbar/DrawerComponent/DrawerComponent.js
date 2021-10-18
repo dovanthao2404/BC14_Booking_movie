@@ -2,18 +2,23 @@ import React, { useState } from "react";
 import {
   List,
   ListItem,
-  ListItemIcon,
   IconButton,
   ListItemText,
   Drawer,
 } from "@material-ui/core";
-import { makeStyles } from "@mui/styles";
+import { makeStyles, styled } from "@mui/styles";
 import Box from "@mui/material/Box";
-import { NavLink } from "react-router-dom";
 import MenuIcon from "@mui/icons-material/Menu";
 import { HashLink } from "react-router-hash-link";
+import { actHandleLogout } from "redux/actions/UserManagementActions";
+import { useDispatch } from "react-redux";
+import { useHistory } from "react-router";
 
-const DrawerComponent = () => {
+const DrawerComponent = (props) => {
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const { userLogin } = props;
+
   const useStyles = makeStyles((theme) => ({
     drawerContainer: {
       width: "70%",
@@ -46,84 +51,139 @@ const DrawerComponent = () => {
         open={openDrawer}
       >
         <List>
-          <ListItem divider button onClick={() => setOpenDrawer(false)}>
-            <ListItemIcon>
-              <ListItemText>
-                <Box>
-                  <NavLink
-                    to="/login"
-                    style={{ textDecoration: "none", color: "#9b9b9b" }}
-                    onMouseOver={(e) => {
-                      e.target.style.color = "#9b9b9b";
-                    }}
-                  >
-                    <Box sx={{ display: "flex", alignContent: "center" }}>
-                      <Box sx={{ display: "flex", alignItems: "center" }}>
-                        <Box
-                          component="img"
-                          sx={{
-                            width: 30,
-                            heigth: 30,
-                            borderRadius: "50%",
-                          }}
-                          src="https://tix.vn/app/assets/img/avatar.png"
-                          alt="https://tix.vn/app/assets/img/avatar.png"
-                        />
-                      </Box>
-                      <Box
-                        component="p"
-                        sx={{
-                          marginLeft: "8px",
-                        }}
-                      >
-                        Đăng nhập
-                      </Box>
-                    </Box>
-                  </NavLink>
+          <ListItem
+            divider
+            button
+            onClick={() => {
+              setOpenDrawer(false);
+              if (userLogin) {
+                history.push("/profile");
+              } else {
+                history.push("/login");
+              }
+            }}
+          >
+            <ListItemText>
+              <Box sx={{ display: "flex", alignItems: "center" }}>
+                <Box
+                  component="img"
+                  sx={{
+                    width: 30,
+                    heigth: 30,
+                    borderRadius: "50%",
+                  }}
+                  src={
+                    userLogin
+                      ? "https://picsum.photos/30/30"
+                      : "https://tix.vn/app/assets/img/avatar.png"
+                  }
+                  alt={
+                    userLogin
+                      ? "https://picsum.photos/30/30"
+                      : "https://tix.vn/app/assets/img/avatar.png"
+                  }
+                />
+                <Box
+                  component="p"
+                  sx={{
+                    marginLeft: "8px",
+                  }}
+                >
+                  {userLogin ? userLogin.hoTen : "Đăng nhập"}
                 </Box>
-              </ListItemText>
-            </ListItemIcon>
+              </Box>
+            </ListItemText>
           </ListItem>
 
-          <ListItem divider button onClick={() => setOpenDrawer(false)}>
-            <ListItemIcon>
-              <ListItemText>
-                <HashLink to="/" className={classes.hashLink}>
-                  Lịch chiếu
-                </HashLink>
-              </ListItemText>
-            </ListItemIcon>
+          <ListItem
+            sx={{ padding: 0 }}
+            divider
+            button
+            onClick={() => setOpenDrawer(false)}
+          >
+            <HashLink
+              style={{
+                padding: "8px 16px",
+                textDecoration: "none",
+                color: "#000",
+                width: "100%",
+              }}
+              to="/a"
+            >
+              <ListItemText>Lịch chiếu</ListItemText>
+            </HashLink>
           </ListItem>
 
-          <ListItem divider button onClick={() => setOpenDrawer(false)}>
-            <ListItemIcon>
-              <ListItemText>
-                <HashLink to="/" className={classes.hashLink}>
-                  Cụm rạp
-                </HashLink>
-              </ListItemText>
-            </ListItemIcon>
+          <ListItem
+            sx={{ padding: 0 }}
+            divider
+            button
+            onClick={() => setOpenDrawer(false)}
+          >
+            <HashLink
+              style={{
+                padding: "8px 16px",
+                textDecoration: "none",
+                color: "#000",
+                width: "100%",
+              }}
+              to="/"
+            >
+              <ListItemText>Cụm rạp</ListItemText>
+            </HashLink>
           </ListItem>
 
-          <ListItem divider button onClick={() => setOpenDrawer(false)}>
-            <ListItemIcon>
-              <ListItemText>
-                <HashLink to="/" className={classes.hashLink}>
-                  Tin tức
-                </HashLink>
-              </ListItemText>
-            </ListItemIcon>
+          <ListItem
+            sx={{ padding: 0 }}
+            divider
+            button
+            onClick={() => setOpenDrawer(false)}
+          >
+            <HashLink
+              style={{
+                padding: "8px 16px",
+                textDecoration: "none",
+                color: "#000",
+                width: "100%",
+              }}
+              to="/"
+            >
+              <ListItemText>Tin tức</ListItemText>
+            </HashLink>
           </ListItem>
 
-          <ListItem divider button onClick={() => setOpenDrawer(false)}>
-            <ListItemIcon>
-              <ListItemText>
-                <HashLink to="/" className={classes.hashLink}>
-                  Ứng dụng
-                </HashLink>
-              </ListItemText>
-            </ListItemIcon>
+          <ListItem
+            sx={{ padding: 0 }}
+            divider
+            button
+            onClick={() => setOpenDrawer(false)}
+          >
+            <HashLink
+              style={{
+                padding: "8px 16px",
+                textDecoration: "none",
+                color: "#000",
+                width: "100%",
+              }}
+              to="/"
+            >
+              <ListItemText>Ứng dụng</ListItemText>
+            </HashLink>
           </ListItem>
+          {userLogin ? (
+            <ListItem
+              divider
+              button
+              onClick={() => {
+                setOpenDrawer(false);
+                dispatch(actHandleLogout());
+              }}
+            >
+              <ListItemText>Đăng xuất</ListItemText>
+            </ListItem>
+          ) : (
+            ""
+          )}
         </List>
       </Drawer>
 

@@ -5,6 +5,7 @@ const initialState = {
   error: null,
   isLoading: false,
   infoFilmEdit: null,
+  listBanner: null,
 };
 
 const filmManagementReducer = (state = initialState, { type, payload }) => {
@@ -46,7 +47,9 @@ const filmManagementReducer = (state = initialState, { type, payload }) => {
       state.isLoading = false;
 
       return { ...state };
-
+    case ActionType.SET_LIST_BANNER:
+      state.listBanner = payload;
+      return { ...state };
     default:
       return state;
   }

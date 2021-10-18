@@ -3,6 +3,7 @@ import { Box } from "@mui/material";
 import Slider from "react-slick";
 import "./Carousel.css";
 import { Link } from "react-router-dom";
+import { makeStyles } from "@mui/styles";
 
 // Custom arrow react-slick
 function SampleNextArrow(props) {
@@ -41,8 +42,78 @@ const settings = {
   autoplay: true,
 };
 
-export default function Carousel() {
+const useStyles = makeStyles({
+  absoluteFull: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    height: "100%",
+    width: "100%",
+  },
+  relativeFull: {
+    position: "relative",
+    top: 0,
+    left: 0,
+    height: "100%",
+    width: "100%",
+  },
+  imgCarousel: {
+    width: "100%",
+    maxHeight: "100%",
+    objectFit: "cover",
+    objectPosition: "contain",
+    display: "block",
+  },
+});
+
+export default function Carousel(props) {
   const [mousePosition, setMousePosition] = useState(0);
+  const classes = useStyles(props);
+
+  const renderBanner = () => {
+    return props.listBanner?.map((item) => {
+      return (
+        <Box key={item.maPhim} className={classes.relativeFull}>
+          <Box className={`${classes.absoluteFull} carousel__item`}>
+            <Link
+              onMouseDown={(e) => {
+                setMousePosition(e.pageX);
+              }}
+              onClick={(e) => {
+                const { pageX } = e;
+                if (Math.abs(pageX - mousePosition) > 10) {
+                  e.preventDefault();
+                }
+              }}
+              to="/detail/"
+              style={{ position: "relative" }}
+            >
+              <Box
+                component="img"
+                src={item.hinhAnh}
+                alt={item.hinhAnh}
+                className={classes.imgCarousel}
+              />
+              <Box
+                className={classes.absoluteFull}
+                sx={{
+                  background: "linear-gradient(to top,#000,transparent 20%)",
+                }}
+              ></Box>
+            </Link>
+            <img
+              src="https://tix.vn/app/assets/img/icons/play-video.png"
+              alt="https://tix.vn/app/assets/img/icons/play-video.png"
+              className="play-icon"
+              onClick={() => {
+                console.log("a");
+              }}
+            />
+          </Box>
+        </Box>
+      );
+    });
+  };
 
   return (
     <>
@@ -50,157 +121,17 @@ export default function Carousel() {
         id="booking-carousel"
         sx={{ paddingBottom: "43%", position: "relative" }}
       >
-        <div
-          style={{
+        <Box
+          sx={{
             zIndex: 1,
-            width: "100%",
-            position: "absolute",
-            top: 0,
-            left: 0,
-            bottom: 0,
-            height: "100%",
             backgroundColor: "#e8e8e8",
           }}
+          className={classes.absoluteFull}
         >
-          <div
-            style={{
-              position: "relative",
-              top: 0,
-              left: 0,
-              width: "100%",
-              height: "100%",
-            }}
-          >
-            <Slider {...settings}>
-              <Box
-                sx={{
-                  position: "relative",
-                  top: 0,
-                  left: 0,
-                  width: "100%",
-                  height: "100%",
-                }}
-              >
-                <Box
-                  sx={{
-                    position: "absolute",
-                    inset: 0,
-                    height: "100%",
-                    width: "100%",
-                  }}
-                  className="carousel__item"
-                >
-                  <Link
-                    onMouseDown={(e) => {
-                      setMousePosition(e.pageX);
-                    }}
-                    onClick={(e) => {
-                      const { pageX } = e;
-                      if (Math.abs(pageX - mousePosition) > 10) {
-                        e.preventDefault();
-                      }
-                    }}
-                    to="/detail/"
-                    style={{ position: "relative" }}
-                  >
-                    <img
-                      src="https://movienew.cybersoft.edu.vn/hinhanh/ban-tay-diet-quy.png"
-                      alt="https://movienew.cybersoft.edu.vn/hinhanh/ban-tay-diet-quy.png"
-                      style={{
-                        width: "100%",
-                        maxHeight: "100%",
-                        objectFit: "cover",
-                        objectPosition: "contain",
-                        display: "block",
-                      }}
-                    />
-                    <Box
-                      sx={{
-                        position: "absolute",
-                        width: "100%",
-                        height: "100%",
-                        background:
-                          "linear-gradient(to top,#000,transparent 20%)",
-                        top: "0",
-                      }}
-                    ></Box>
-                  </Link>
-                  <img
-                    src="https://tix.vn/app/assets/img/icons/play-video.png"
-                    alt="https://tix.vn/app/assets/img/icons/play-video.png"
-                    className="play-icon"
-                    onClick={() => {
-                      console.log("a");
-                    }}
-                  />
-                </Box>
-              </Box>
-              <Box
-                sx={{
-                  position: "relative",
-                  top: 0,
-                  left: 0,
-                  width: "100%",
-                  height: "100%",
-                }}
-              >
-                <Box
-                  sx={{
-                    position: "absolute",
-                    inset: 0,
-                    height: "100%",
-                    width: "100%",
-                  }}
-                  className="carousel__item"
-                >
-                  <Link
-                    onMouseDown={(e) => {
-                      setMousePosition(e.pageX);
-                    }}
-                    onClick={(e) => {
-                      const { pageX } = e;
-                      if (Math.abs(pageX - mousePosition) > 10) {
-                        e.preventDefault();
-                      }
-                    }}
-                    to="/detail/"
-                    style={{ position: "relative" }}
-                  >
-                    <img
-                      src="https://movienew.cybersoft.edu.vn/hinhanh/ban-tay-diet-quy.png"
-                      alt="https://movienew.cybersoft.edu.vn/hinhanh/ban-tay-diet-quy.png"
-                      style={{
-                        width: "100%",
-                        maxHeight: "100%",
-                        objectFit: "cover",
-                        objectPosition: "contain",
-                        display: "block",
-                      }}
-                    />
-                    <Box
-                      sx={{
-                        position: "absolute",
-                        width: "100%",
-                        height: "100%",
-                        background:
-                          "linear-gradient(to top,#000,transparent 20%)",
-                        top: "0",
-                      }}
-                    ></Box>
-                  </Link>
-                  <img
-                    src="https://tix.vn/app/assets/img/icons/play-video.png"
-                    alt="https://tix.vn/app/assets/img/icons/play-video.png"
-                    className="play-icon"
-                    onClick={() => {
-                      console.log("a");
-                    }}
-                  />
-                </Box>
-              </Box>
-            </Slider>
-          </div>
-        </div>
+          <Box className={classes.relativeFull}>
+            <Slider {...settings}>{renderBanner()}</Slider>
+          </Box>
+        </Box>
       </Box>
     </>
   );

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { HashLink } from "react-router-hash-link";
 
 import {
@@ -10,9 +10,10 @@ import {
 } from "@material-ui/core";
 import { makeStyles } from "@mui/styles";
 import Box from "@mui/material/Box";
-import { NavLink } from "react-router-dom";
 
 import DrawerComponent from "./DrawerComponent/DrawerComponent";
+import { useSelector } from "react-redux";
+import Login from "./Login";
 
 const useStyles = makeStyles({
   hashLink: {
@@ -31,10 +32,11 @@ const useStyles = makeStyles({
 
 const Navbar = () => {
   const theme = useTheme();
-
   const classes = useStyles();
 
   const isMatch = useMediaQuery(theme.breakpoints.down("md"));
+
+  const { userLogin } = useSelector((state) => state.userManagementReducer);
 
   return (
     <>
@@ -58,7 +60,7 @@ const Navbar = () => {
           </Typography>
           {isMatch ? (
             <>
-              <DrawerComponent />
+              <DrawerComponent userLogin={userLogin} />
             </>
           ) : (
             <>
@@ -87,59 +89,7 @@ const Navbar = () => {
                   </HashLink>
                 </Box>
               </Box>
-              <Box sx={{ display: "flex" }}>
-                <Box>
-                  <NavLink
-                    to="/login"
-                    style={{ textDecoration: "none", color: "#9b9b9b" }}
-                    onMouseOver={(e) => {
-                      e.target.style.color = "#9b9b9b";
-                    }}
-                  >
-                    <Box sx={{ display: "flex", alignContent: "center" }}>
-                      <Box sx={{ display: "flex", alignItems: "center" }}>
-                        <Box
-                          component="img"
-                          sx={{
-                            width: 30,
-                            heigth: 30,
-                            borderRadius: "50%",
-                          }}
-                          src="https://tix.vn/app/assets/img/avatar.png"
-                          alt="https://tix.vn/app/assets/img/avatar.png"
-                        />
-                      </Box>
-                      <Box
-                        component="p"
-                        sx={{
-                          marginLeft: "8px",
-                        }}
-                      >
-                        Đăng nhập
-                      </Box>
-                    </Box>
-                  </NavLink>
-                </Box>
-                <Box
-                  sx={{
-                    border: "1px solid #e9e9e9",
-                    margin: "12px",
-                  }}
-                ></Box>
-                <Box>
-                  <NavLink
-                    to="/register"
-                    style={{ textDecoration: "none", color: "#9b9b9b" }}
-                    onMouseOver={(e) => {
-                      e.target.style.color = "#9b9b9b";
-                    }}
-                  >
-                    <Box sx={{ display: "flex", alignContent: "center" }}>
-                      <Box component="p">Đăng ký</Box>
-                    </Box>
-                  </NavLink>
-                </Box>
-              </Box>
+              <Login userLogin={userLogin} />
             </>
           )}
         </Toolbar>

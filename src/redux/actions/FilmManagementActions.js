@@ -124,3 +124,17 @@ export const actUpdateFilm = (formData, setNotify, setSrcImg) => {
     }
   };
 };
+
+export const actGetListBanner = () => {
+  return async (dispatch) => {
+    try {
+      const result = await filmManagementServices.getListBannerServices();
+      dispatch({
+        type: ActionType.SET_LIST_BANNER,
+        payload: result.data.content,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
