@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Box, Container } from "@mui/material";
+import { Box } from "@mui/material";
 import Loading from "./../../components/Loading";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -9,9 +9,14 @@ import {
   actGetListBanner,
   actGetListFilm,
 } from "redux/actions/FilmManagementActions";
+import HomeFilm from "./HomeFilm";
 
 export default function HomgPage() {
   const [screenWidth, setScreenWidth] = useState(window.screen.width);
+
+  window.onresize = (e) => {
+    setScreenWidth(e.target.innerWidth);
+  };
 
   const dispatch = useDispatch();
   const { listBanner, listFilmNowShowing, isLoading } = useSelector(
@@ -23,10 +28,6 @@ export default function HomgPage() {
     dispatch(actGetListFilm());
   }, []);
 
-  window.onresize = (e) => {
-    setScreenWidth(e.target.innerWidth);
-  };
-
   const renderHomeTool = () => {
     if (screenWidth > 975) {
       return <HomeTools listFilmNowShowing={listFilmNowShowing} />;
@@ -36,9 +37,8 @@ export default function HomgPage() {
   return (
     <Box sx={{ marginTop: "64px" }}>
       <Carousel listBanner={listBanner} />
-      <Container style={{ maxWidth: "940px", position: "relative" }}>
-        {renderHomeTool()}
-      </Container>
+      {renderHomeTool()}
+      <HomeFilm />
       <div style={{ height: "1000px" }}></div>
     </Box>
   );

@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { actGetInfoFilmShowtimesById } from "redux/actions/CinemaManagementActions";
 import moment from "moment";
 import { useHistory } from "react-router-dom";
-import { Box } from "@mui/material";
+import { Box, Container } from "@mui/material";
 
 const BootstrapInput = styled(InputBase)(({ theme }) => ({
   "label + &": {
@@ -211,126 +211,128 @@ export default function HomeTools(props) {
   };
 
   return (
-    <Box
-      id="home-tool"
-      sx={{
-        display: "flex",
-        height: "80px",
-        alignItems: "center",
-        boxShadow: "0 0 10px rgb(0 0 0 / 30%)",
-        borderRadius: "5px",
-        position: "absolute",
-        width: "100%",
-        transform: "translate(-50%,-50%)",
-        left: "50%",
-        zIndex: 2,
-        background: "#fff",
-      }}
-    >
-      <Box sx={{ width: "30%" }}>
-        <FormControl
-          sx={{
-            width: "100%",
-          }}
-        >
-          <Select
-            labelId="demo-customized-select-label"
-            id="homeTool-film"
-            value={infoHomeTool.film}
-            onChange={handleChangeFilm}
-            input={<BootstrapInput />}
-            name="film"
-          >
-            <MenuItem sx={{ display: "none" }} value="film">
-              Phim
-            </MenuItem>
-            {renderOptionFilm()}
-          </Select>
-        </FormControl>
-      </Box>
-      <Box style={{ width: "calc(70% / 4)" }}>
-        <FormControl
-          sx={{
-            width: "100%",
-          }}
-        >
-          <Select
-            labelId="demo-customized-select-label"
-            id="homeTool-cinema"
-            value={infoHomeTool.cinema}
-            onChange={handleChangeClusterInformation}
-            input={<BootstrapInput />}
-            className={classes.slectItem}
-            name="cinema"
-          >
-            <MenuItem sx={{ display: "none" }} value="cinema">
-              Rạp
-            </MenuItem>
-            {renderOptionCinema()}
-          </Select>
-        </FormControl>
-      </Box>
-      <Box style={{ width: "calc(70% / 4)" }}>
-        <FormControl
-          sx={{
-            width: "100%",
-          }}
-        >
-          <Select
-            labelId="demo-customized-select-label"
-            id="homeTool-date"
-            value={infoHomeTool.showDate}
-            onChange={handleChangeDate}
-            input={<BootstrapInput />}
-            defaultValue="NgayChieu"
-            className={classes.slectItem}
-          >
-            <MenuItem sx={{ display: "none" }} value="showDate">
-              Ngày Chiếu
-            </MenuItem>
-            {renderOptionShowDate()}
-          </Select>
-        </FormControl>
-      </Box>
-      <Box style={{ width: "calc(70% / 4)" }}>
-        <FormControl
-          sx={{
-            width: "100%",
-          }}
-        >
-          <Select
-            labelId="demo-customized-select-label"
-            id="homeTool-time"
-            value={infoHomeTool.filmShowtimes}
-            onChange={handleChangeFilmShowtime}
-            input={<BootstrapInput />}
-            defaultValue="GioChieu"
-            className={classes.slectItem}
-          >
-            <MenuItem sx={{ display: "none" }} value="filmShowtimes">
-              Giờ Chiếu
-            </MenuItem>
-            {renderOptionFilmShowtimes()}
-          </Select>
-        </FormControl>
-      </Box>
-      <Box style={{ width: "calc(70% / 4)" }} className={classes.slectItem}>
-        <Box sx={{ padding: "10px 15px" }}>
-          <button
-            className={` ${classes.btnBuyTicket} ${
-              !infoHomeTool.showtimeId
-                ? classes.btnBuyTicketDisabled
-                : classes.btnBuyTicketEnabled
-            }`}
-            onClick={() => {
-              infoHomeTool.showtimeId &&
-                history.push(`/detail/${infoHomeTool.showtimeId}`);
+    <Container style={{ maxWidth: "940px", position: "relative" }}>
+      <Box
+        id="home-tool"
+        sx={{
+          display: "flex",
+          height: "80px",
+          alignItems: "center",
+          boxShadow: "0 0 10px rgb(0 0 0 / 30%)",
+          borderRadius: "5px",
+          position: "absolute",
+          width: "100%",
+          transform: "translate(-50%,-50%)",
+          left: "50%",
+          zIndex: 2,
+          background: "#fff",
+        }}
+      >
+        <Box sx={{ width: "30%" }}>
+          <FormControl
+            sx={{
+              width: "100%",
             }}
           >
-            Mua vé ngay
-          </button>
+            <Select
+              labelId="demo-customized-select-label"
+              id="homeTool-film"
+              value={infoHomeTool.film}
+              onChange={handleChangeFilm}
+              input={<BootstrapInput />}
+              name="film"
+            >
+              <MenuItem sx={{ display: "none" }} value="film">
+                Phim
+              </MenuItem>
+              {renderOptionFilm()}
+            </Select>
+          </FormControl>
+        </Box>
+        <Box style={{ width: "calc(70% / 4)" }}>
+          <FormControl
+            sx={{
+              width: "100%",
+            }}
+          >
+            <Select
+              labelId="demo-customized-select-label"
+              id="homeTool-cinema"
+              value={infoHomeTool.cinema}
+              onChange={handleChangeClusterInformation}
+              input={<BootstrapInput />}
+              className={classes.slectItem}
+              name="cinema"
+            >
+              <MenuItem sx={{ display: "none" }} value="cinema">
+                Rạp
+              </MenuItem>
+              {renderOptionCinema()}
+            </Select>
+          </FormControl>
+        </Box>
+        <Box style={{ width: "calc(70% / 4)" }}>
+          <FormControl
+            sx={{
+              width: "100%",
+            }}
+          >
+            <Select
+              labelId="demo-customized-select-label"
+              id="homeTool-date"
+              value={infoHomeTool.showDate}
+              onChange={handleChangeDate}
+              input={<BootstrapInput />}
+              defaultValue="NgayChieu"
+              className={classes.slectItem}
+            >
+              <MenuItem sx={{ display: "none" }} value="showDate">
+                Ngày Chiếu
+              </MenuItem>
+              {renderOptionShowDate()}
+            </Select>
+          </FormControl>
+        </Box>
+        <Box style={{ width: "calc(70% / 4)" }}>
+          <FormControl
+            sx={{
+              width: "100%",
+            }}
+          >
+            <Select
+              labelId="demo-customized-select-label"
+              id="homeTool-time"
+              value={infoHomeTool.filmShowtimes}
+              onChange={handleChangeFilmShowtime}
+              input={<BootstrapInput />}
+              defaultValue="GioChieu"
+              className={classes.slectItem}
+            >
+              <MenuItem sx={{ display: "none" }} value="filmShowtimes">
+                Giờ Chiếu
+              </MenuItem>
+              {renderOptionFilmShowtimes()}
+            </Select>
+          </FormControl>
+        </Box>
+        <Box style={{ width: "calc(70% / 4)" }} className={classes.slectItem}>
+          <Box sx={{ padding: "10px 15px" }}>
+            <button
+              className={` ${classes.btnBuyTicket} ${
+                !infoHomeTool.showtimeId
+                  ? classes.btnBuyTicketDisabled
+                  : classes.btnBuyTicketEnabled
+              }`}
+              onClick={() => {
+                infoHomeTool.showtimeId &&
+                  history.push(`/detail/${infoHomeTool.showtimeId}`);
+              }}
+            >
+              Mua vé ngay
+            </button>
+          </Box>
         </Box>
       </Box>
-    </Box>
+    </Container>
   );
 }

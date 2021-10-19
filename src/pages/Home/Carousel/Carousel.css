@@ -1,33 +1,3 @@
-#booking-carousel .slick-dots {
-  bottom: 12%;
-  display: flex;
-  justify-content: center;
-}
-
-#booking-carousel li button:before {
-  font-size: 14px;
-  color: white;
-  opacity: 1;
-}
-
-#booking-carousel li.slick-active button:before {
-  color: #fb4226;
-  font-size: 14px;
-}
-
-#booking-carousel .slick-arrow {
-  position: absolute;
-  top: 45%;
-  transform: translateY(-50%);
-  background-color: transparent;
-  border: none;
-  width: 50px;
-  height: 100px;
-  z-index: 2;
-  opacity: 0.5;
-  object-position: center;
-  object-fit: contain;
-}
 #booking-carousel .slick-next {
   right: 12px;
 }

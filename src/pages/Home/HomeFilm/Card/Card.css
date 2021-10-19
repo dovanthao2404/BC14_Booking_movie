@@ -1,0 +1,120 @@
+.home-card {
+  cursor: pointer;
+  padding: 20px 10px 0;
+  margin-bottom: 25px;
+}
+
+.rating-box {
+  font-size: 16px;
+  background-color: rgba(12, 27, 54, 0.8);
+  border: 1px solid #1f2e46;
+  border-radius: 4px;
+  padding: 2px;
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  color: #fff;
+  width: 54px;
+  text-align: center;
+  line-height: 1.1;
+}
+.rating-number {
+  font-weight: bold;
+}
+.rating {
+  display: flex;
+  list-style: none;
+  justify-content: center;
+}
+.rating .rating__icon,
+.rating .rating__haft {
+  border-radius: 4px;
+  display: inline-block;
+  max-width: 8px;
+}
+.rating .rating__haft {
+  max-width: 10px;
+}
+.publishDate {
+  font-size: 16px;
+  background-color: rgba(12, 27, 54, 0.8);
+  border: 1px solid #1f2e46;
+  border-radius: 4px;
+  padding: 2px;
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  color: #fff;
+}
+.card-img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+
+  background: linear-gradient(to top, #000, transparent 100%);
+  top: 0;
+  left: 0;
+  border-radius: 4px;
+}
+.card-img {
+  visibility: hidden;
+  opacity: 0;
+  transition: all 0.2s;
+}
+
+.btn-playTrailer {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 60px;
+  height: 60px;
+  visibility: hidden;
+  opacity: 0;
+  transition: all 0.2s;
+  z-index: 10000000;
+}
+.home-card:hover .card-img,
+.home-card:hover .btn-playTrailer {
+  visibility: unset;
+  opacity: 1;
+}
+
+.btn-playTrailer:hover {
+  opacity: 0.8 !important;
+}
+.homeCard__footer {
+  font-size: 16px;
+  font-weight: 500;
+  height: 42px;
+  max-height: 42px;
+  margin-top: 8px;
+}
+
+.homeCard__filmName {
+  transition: all 0.2s;
+  opacity: 1;
+}
+.home-card:hover .homeCard__filmName {
+  visibility: hidden;
+  opacity: 0;
+}
+.btn-buyTicket {
+  width: 100%;
+  height: 100%;
+  background: #fb4226;
+  left: 0;
+  top: 0;
+  position: absolute;
+  border: none;
+  border-radius: 4px;
+  color: #fff;
+  font-size: 18px;
+  cursor: pointer;
+  visibility: hidden;
+  opacity: 0;
+}
+.home-card:hover .btn-buyTicket {
+  visibility: unset;
+  opacity: 1;
+}

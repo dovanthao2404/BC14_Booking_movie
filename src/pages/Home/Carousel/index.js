@@ -131,7 +131,7 @@ export default function Carousel(props) {
           }}
           className={classes.absoluteFull}
         >
-          <Box className={classes.relativeFull}>
+          <Box className={`${classes.relativeFull} home-slick`}>
             <Slider {...settings}>{renderBanner()}</Slider>
           </Box>
         </Box>
