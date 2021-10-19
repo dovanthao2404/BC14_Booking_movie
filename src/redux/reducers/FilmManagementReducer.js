@@ -2,6 +2,9 @@ import * as ActionType from "./../constants/FilmManagementConstants";
 
 const initialState = {
   listFilm: null,
+  listFilmComingSoon: null,
+  listFilmNowShowing: null,
+  listFilmDefault: null,
   error: null,
   isLoading: false,
   infoFilmEdit: null,
@@ -13,18 +16,35 @@ const filmManagementReducer = (state = initialState, { type, payload }) => {
     case ActionType.LIST_FILM_REQUEST:
       state.listFilm = null;
       state.error = null;
+      state.listFilmComingSoon = null;
+      state.listFilmNowShowing = null;
+      state.listFilmDefault = null;
       state.isLoading = true;
       return { ...state };
 
     case ActionType.LIST_FILM_SUCCESS:
       state.listFilm = payload;
+      state.listFilmDefault = payload;
+
+      state.listFilmNowShowing = payload.filter(
+        (film) => film.dangChieu === true
+      );
+
+      state.listFilmComingSoon = payload.filter(
+        (film) => film.sapChieu === true
+      );
+
       state.error = null;
       state.isLoading = false;
+
       return { ...state };
 
     case ActionType.LIST_FILM_FAILED:
       state.listFilm = null;
       state.error = payload;
+      state.listFilmDefault = null;
+      state.listFilmComingSoon = null;
+      state.listFilmNowShowing = null;
       state.isLoading = false;
       return { ...state };
 

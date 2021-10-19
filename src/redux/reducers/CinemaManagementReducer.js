@@ -4,6 +4,7 @@ const initialState = {
   error: null,
   isLoading: false,
   cinemaClusterInformation: null,
+  infoFilmShowtimes: null,
 };
 
 const cinemaManagementReducer = (state = initialState, { type, payload }) => {
@@ -28,6 +29,10 @@ const cinemaManagementReducer = (state = initialState, { type, payload }) => {
       return { ...state };
     case ActionType.SET_CINEMA_CLUSTER_INFORMATION:
       state.cinemaClusterInformation = payload;
+      return { ...state };
+
+    case ActionType.SET_INFO_FILM_SHOWTIMES:
+      state.infoFilmShowtimes = payload;
       return { ...state };
 
     default:

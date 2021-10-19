@@ -11,3 +11,6 @@ export const CINEMA_SYSTEM_INFORMATION_FAILED =
 // Thông tin cụm rạp
 export const SET_CINEMA_CLUSTER_INFORMATION =
   "@cinema/SET_CINEMA_CLUSTER_INFORMATION";
+
+// Lịch chiếu
+export const SET_INFO_FILM_SHOWTIMES = "@cinema/SET_INFO_FILM_SHOWTIMES";

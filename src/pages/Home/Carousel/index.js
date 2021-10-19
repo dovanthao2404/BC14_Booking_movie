@@ -119,7 +119,10 @@ export default function Carousel(props) {
     <>
       <Box
         id="booking-carousel"
-        sx={{ paddingBottom: "43%", position: "relative" }}
+        sx={{
+          paddingBottom: "43%",
+          position: "relative",
+        }}
       >
         <Box
           sx={{

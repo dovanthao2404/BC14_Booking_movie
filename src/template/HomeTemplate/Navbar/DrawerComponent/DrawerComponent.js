@@ -6,7 +6,7 @@ import {
   ListItemText,
   Drawer,
 } from "@material-ui/core";
-import { makeStyles, styled } from "@mui/styles";
+import { makeStyles } from "@mui/styles";
 import Box from "@mui/material/Box";
 import MenuIcon from "@mui/icons-material/Menu";
 import { HashLink } from "react-router-hash-link";

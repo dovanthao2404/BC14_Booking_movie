@@ -1,9 +1,8 @@
 import { Box } from "@mui/system";
-import React, { Suspense, useRef, useState } from "react";
+import React, { Suspense } from "react";
 import { Route, Redirect } from "react-router";
-import { NavLink } from "react-router-dom";
 
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 import Loading from "components/Loading";
 import Sidebar from "./Sidebar";

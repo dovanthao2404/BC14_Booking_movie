@@ -44,3 +44,19 @@ export const actSetCinemaClusterInformation = (data) => ({
   type: ActionType.SET_CINEMA_CLUSTER_INFORMATION,
   payload: data,
 });
+
+export const actGetInfoFilmShowtimesById = (maPhim) => {
+  return async (dispatch) => {
+    try {
+      const result =
+        await cinemaManagementServices.getInfoFilmShowtimesByIdServices(maPhim);
+      dispatch(actSetInfoFilmShowtimes(result.data.content));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+export const actSetInfoFilmShowtimes = (data) => ({
+  type: ActionType.SET_INFO_FILM_SHOWTIMES,
+  payload: data,
+});
