@@ -12,5 +12,10 @@ export const CINEMA_SYSTEM_INFORMATION_FAILED =
 export const SET_CINEMA_CLUSTER_INFORMATION =
   "@cinema/SET_CINEMA_CLUSTER_INFORMATION";
 
-// Lịch chiếu
+// Lịch chiếu phim
 export const SET_INFO_FILM_SHOWTIMES = "@cinema/SET_INFO_FILM_SHOWTIMES";
+
+// Lịch chiếu hệ thống rạp
+
+export const SET_INFO_SHOWTIMES_CINEMA_SYSTEM =
+  "@cinema/SET_INFO_SHOWTIMES_CINEMA_SYSTEM";

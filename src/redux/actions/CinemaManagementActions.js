@@ -60,3 +60,20 @@ export const actSetInfoFilmShowtimes = (data) => ({
   type: ActionType.SET_INFO_FILM_SHOWTIMES,
   payload: data,
 });
+
+export const actGetInfoShowtimesCinemaSystem = () => {
+  return async (dispatch) => {
+    try {
+      const result =
+        await cinemaManagementServices.getInfoShowtimesCinemaSystemServices();
+      dispatch(actSetInfoShowimesCinemaSystem(result.data.content));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const actSetInfoShowimesCinemaSystem = (data) => ({
+  type: ActionType.SET_INFO_SHOWTIMES_CINEMA_SYSTEM,
+  payload: data,
+});

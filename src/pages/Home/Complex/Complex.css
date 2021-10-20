@@ -8,7 +8,8 @@
 /* Dùng regex để select phần tử html */
 /* Chọn tất cả các button có tiền tố id là vertical-tab- */
 button[id^="vertical-tab-"] {
-  display: block;
+  display: flex;
+  align-items: flex-start;
   padding: 0;
   max-width: unset;
   min-width: unset;
@@ -27,6 +28,21 @@ button[id^="vertical-tab-"]::before {
   border-color: rgba(238, 238, 238, 0.88);
 }
 /* Chọn tất cả các button có tiền tố id là vertical-tabpanel */
+div[id^="vertical-tabpanel"] {
+  overflow: auto;
+}
+div[id^="vertical-tabpanel"]::-webkit-scrollbar {
+  width: 4px;
+}
+div[id^="vertical-tabpanel"]::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+div[id^="vertical-tabpanel"]::-webkit-scrollbar-thumb {
+  background: #888;
+}
+div[id^="vertical-tabpanel"]::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
 
 div[id^="vertical-tabpanel"] > div {
   padding: 0;
