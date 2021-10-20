@@ -28,22 +28,26 @@ button[id^="vertical-tab-"]::before {
   border-color: rgba(238, 238, 238, 0.88);
 }
 /* Chọn tất cả các button có tiền tố id là vertical-tabpanel */
-div[id^="vertical-tabpanel"] {
-  overflow: auto;
-}
-div[id^="vertical-tabpanel"]::-webkit-scrollbar {
-  width: 4px;
-}
-div[id^="vertical-tabpanel"]::-webkit-scrollbar-track {
-  background: #f1f1f1;
-}
-div[id^="vertical-tabpanel"]::-webkit-scrollbar-thumb {
-  background: #888;
-}
-div[id^="vertical-tabpanel"]::-webkit-scrollbar-thumb:hover {
-  background: #555;
-}
 
 div[id^="vertical-tabpanel"] > div {
   padding: 0;
+}
+#homeCinemaComplex .MuiTabs-scroller,
+.accordionDetailId {
+  overflow-y: scroll !important;
+}
+
+#homeCinemaComplex .MuiTabs-scroller::-webkit-scrollbar,
+#accordionDetailId::-webkit-scrollbar {
+  width: 5px;
+}
+
+#accordionDetailId::-webkit-scrollbar-thumb,
+#homeCinemaComplex .MuiTabs-scroller::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+#accordionDetailId::-webkit-scrollbar-thumb:hover,
+#homeCinemaComplex .MuiTabs-scroller::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }

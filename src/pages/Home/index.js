@@ -45,7 +45,7 @@ export default function HomgPage() {
       {responsiveCarousel()}
       {responsiveHomeTool()}
       <HomeFilm screenWidth={screenWidth} />
-      <Complex />
+      <Complex screenWidth={screenWidth} />
       <div style={{ height: "1000px" }}></div>
     </Box>
   );

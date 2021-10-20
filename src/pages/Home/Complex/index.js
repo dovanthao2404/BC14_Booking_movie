@@ -8,7 +8,8 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import { useDispatch, useSelector } from "react-redux";
 import { actGetInfoShowtimesCinemaSystem } from "redux/actions/CinemaManagementActions";
-import { KeyboardReturnSharp } from "@mui/icons-material";
+import ClusterCinema from "./ClusterCinema";
+import Accordions from "./Accordions";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -43,7 +44,8 @@ function a11yProps(index) {
   };
 }
 
-export default function Complex() {
+export default function Complex(props) {
+  const { screenWidth } = props;
   const [cinema, setCinema] = useState(0);
   const [cluster, setCluster] = useState(0);
   const dispatch = useDispatch();
@@ -76,10 +78,16 @@ export default function Complex() {
               <img
                 src={heThongRap.logo}
                 alt={heThongRap.logo}
-                style={{ width: "50px", padding: "20px", display: "block" }}
+                style={{
+                  width: "50px",
+                  height: "50%",
+                  padding: "20px",
+                  display: "block",
+                }}
               />
             </>
           }
+          style={{ width: "90px" }}
           value={index}
           {...a11yProps(heThongRap.maHeThongRap)}
         />
@@ -92,46 +100,12 @@ export default function Complex() {
       cumRap.id = index;
       return (
         <Tab
+          sx={{ width: "290px" }}
           key={index}
           value={index}
           label={
             <>
-              <div
-                style={{
-                  display: "flex",
-                  padding: "20px",
-                }}
-              >
-                <img
-                  src={cumRap.hinhAnh}
-                  alt={cumRap.hinhAnh}
-                  style={{
-                    width: "50px",
-
-                    display: "block",
-                  }}
-                />
-                <div
-                  style={{
-                    textAlign: "left",
-                    marginLeft: "8px",
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "center",
-                  }}
-                >
-                  <h4 style={{ textTransform: "none" }}>
-                    {cumRap.tenCumRap.length > 25
-                      ? cumRap.tenCumRap.slice(0, 25) + "..."
-                      : cumRap.tenCumRap}
-                  </h4>
-                  <p style={{ fontSize: "14px", textTransform: "none" }}>
-                    {cumRap.diaChi.length > 25
-                      ? cumRap.diaChi.slice(0, 25) + "..."
-                      : cumRap.diaChi}
-                  </p>
-                </div>
-              </div>
+              <ClusterCinema cumRap={cumRap} />
             </>
           }
           {...a11yProps(index)}
@@ -140,13 +114,28 @@ export default function Complex() {
     });
   };
 
-  const renderShowtimes = (listFilm) => {
-    if (listFilm)
-      return listFilm.slice(0, 3).map((film) => {
+  const renderShowtimes = (lstCumRap) => {
+    if (lstCumRap)
+      return lstCumRap.map((listFilm, index) => {
         return (
-          <Fragment key={film.maPhim}>
-            <div key={film.tenPhim}>{film.tenPhim}</div> <br />
-          </Fragment>
+          <TabPanel key={index} value={cluster} index={index}>
+            <Box
+              id="accordionDetailId"
+              sx={{
+                height: "540px",
+                overflow: "auto",
+                maxWidth: "532px",
+              }}
+            >
+              {listFilm.danhSachPhim.map((film) => {
+                return (
+                  <div key={film.maPhim} id="homeAccordion">
+                    <Accordions />
+                  </div>
+                );
+              })}
+            </Box>
+          </TabPanel>
         );
       });
   };
@@ -161,22 +150,30 @@ export default function Complex() {
               sx={{
                 flexGrow: 1,
                 bgcolor: "background.paper",
-                display: "flex",
+                // display: "flex",
+                height: "540px",
               }}
             >
-              <Tabs
-                orientation="vertical"
-                variant="scrollable"
-                value={cluster}
-                onChange={handleChangeTabsCluster}
-                aria-label="Vertical tabs example"
-                sx={{ borderRight: 1, borderColor: "divider" }}
+              <Box
+                sx={{
+                  flexGrow: 1,
+                  bgcolor: "background.paper",
+                  // display: "flex",
+                }}
               >
-                {renderClusterCinema()}
-              </Tabs>
-              {renderShowtimes(
-                infoShowtimesCinemaSystem[cinema].lstCumRap[index].danhSachPhim
-              )}
+                <Tabs
+                  orientation={screenWidth > 900 ? "vertical" : "horizontal"}
+                  value={cluster}
+                  onChange={handleChangeTabsCluster}
+                  aria-label="Vertical tabs example"
+                  sx={{ borderRight: 1, borderColor: "divider" }}
+                >
+                  {renderClusterCinema()}
+                </Tabs>
+                <div>
+                  {renderShowtimes(infoShowtimesCinemaSystem[cinema].lstCumRap)}
+                </div>
+              </Box>
             </Box>
           </TabPanel>
         );
@@ -195,300 +192,25 @@ export default function Complex() {
           sx={{
             flexGrow: 1,
             bgcolor: "background.paper",
-            display: "flex",
-            height: "546px",
+            // display: "flex",
+            height: "540px",
             border: "1px solid #ebebec",
           }}
         >
-          <Tabs
-            orientation="vertical"
-            value={cinema}
-            onChange={handleChangeTabsCinema}
-            aria-label="Vertical tabs example"
-            sx={{ borderRight: 1, borderColor: "divider" }}
-          >
-            {renderTabs()}
-          </Tabs>
+          <Box>
+            <Tabs
+              orientation={screenWidth > 900 ? "vertical" : "horizontal"}
+              value={cinema}
+              onChange={handleChangeTabsCinema}
+              aria-label="Vertical tabs example"
+              sx={{ borderRight: 1, borderColor: "divider" }}
+            >
+              {renderTabs()}
+            </Tabs>
+          </Box>
           {renderCinemaCluster()}
         </Box>
       </div>
     </Container>
   );
 }
-
-// <Box
-// sx={{
-//   flexGrow: 1,
-//   bgcolor: "background.paper",
-//   display: "flex",
-//   height: "546px",
-// }}
-// >
-// <Tabs
-//   style={{ padding: 0 }}
-//   orientation="vertical"
-//   value={value2}
-//   onChange={(e, value) => {
-//     console.log(value);
-//     setValue2(value);
-//   }}
-//   aria-label="Vertical tabs example"
-//   sx={{ borderRight: 1, borderColor: "divider" }}
-// >
-//   <Tab
-//     value={15}
-//     label={
-//       <>
-//         <div
-//           style={{
-//             display: "flex",
-//             padding: "20px",
-//           }}
-//         >
-//           <img
-//             src="https://s3img.vcdn.vn/123phim/2018/09/f32670fd0eb083c9c4c804f0f3a252ed.png"
-//             alt=""
-//             style={{
-//               width: "50px",
-
-//               display: "block",
-//             }}
-//           />
-//           <div
-//             style={{
-//               textAlign: "left",
-//               marginLeft: "8px",
-//               display: "flex",
-//               flexDirection: "column",
-//               justifyContent: "center",
-//             }}
-//           >
-//             <h4 style={{ textTransform: "none" }}>Ten Rap</h4>
-//             <p
-//               style={{ fontSize: "14px", textTransform: "none" }}
-//             >
-//               di chi
-//             </p>
-//           </div>
-//         </div>
-//       </>
-//     }
-//     {...a11yProps(10)}
-//   />
-//   <Tab
-//     label={
-//       <>
-//         <div
-//           style={{
-//             display: "flex",
-//             padding: "20px",
-//           }}
-//         >
-//           <img
-//             src="https://s3img.vcdn.vn/123phim/2018/09/f32670fd0eb083c9c4c804f0f3a252ed.png"
-//             alt=""
-//             style={{
-//               width: "50px",
-
-//               display: "block",
-//             }}
-//           />
-//           <div
-//             style={{
-//               textAlign: "left",
-//               marginLeft: "8px",
-//               display: "flex",
-//               justifyContent: "center",
-//               flexDirection: "column",
-//             }}
-//           >
-//             <h4 style={{ textTransform: "none" }}>Ten Rap</h4>
-//             <p
-//               style={{ fontSize: "14px", textTransform: "none" }}
-//             >
-//               di chi
-//             </p>
-//           </div>
-//         </div>
-//       </>
-//     }
-//     {...a11yProps(11)}
-//   />
-//   <Tab
-//     label={
-//       <>
-//         <div
-//           style={{
-//             display: "flex",
-//             padding: "20px",
-//           }}
-//         >
-//           <img
-//             src="https://s3img.vcdn.vn/123phim/2018/09/f32670fd0eb083c9c4c804f0f3a252ed.png"
-//             alt=""
-//             style={{
-//               width: "50px",
-
-//               display: "block",
-//             }}
-//           />
-//           <div
-//             style={{
-//               textAlign: "left",
-//               marginLeft: "8px",
-//               display: "flex",
-//               justifyContent: "center",
-//               flexDirection: "column",
-//             }}
-//           >
-//             <h4 style={{ textTransform: "none" }}>Ten Rap</h4>
-//             <p
-//               style={{ fontSize: "14px", textTransform: "none" }}
-//             >
-//               di chi
-//             </p>
-//           </div>
-//         </div>
-//       </>
-//     }
-//     {...a11yProps(12)}
-//   />
-//   <Tab
-//     label={
-//       <>
-//         <div
-//           style={{
-//             display: "flex",
-//             padding: "20px",
-//           }}
-//         >
-//           <img
-//             src="https://s3img.vcdn.vn/123phim/2018/09/f32670fd0eb083c9c4c804f0f3a252ed.png"
-//             alt=""
-//             style={{
-//               width: "50px",
-
-//               display: "block",
-//             }}
-//           />
-//           <div
-//             style={{
-//               textAlign: "left",
-//               marginLeft: "8px",
-//               display: "flex",
-//               flexDirection: "column",
-//               justifyContent: "center",
-//             }}
-//           >
-//             <h4 style={{ textTransform: "none" }}>Ten Rap</h4>
-//             <p
-//               style={{ fontSize: "14px", textTransform: "none" }}
-//             >
-//               di chi
-//             </p>
-//           </div>
-//         </div>
-//       </>
-//     }
-//     {...a11yProps(13)}
-//   />
-//   <Tab
-//     label={
-//       <>
-//         <div
-//           style={{
-//             display: "flex",
-//             padding: "20px",
-//           }}
-//         >
-//           <img
-//             src="https://s3img.vcdn.vn/123phim/2018/09/f32670fd0eb083c9c4c804f0f3a252ed.png"
-//             alt=""
-//             style={{
-//               width: "50px",
-
-//               display: "block",
-//             }}
-//           />
-//           <div
-//             style={{
-//               textAlign: "left",
-//               marginLeft: "8px",
-//               display: "flex",
-//               justifyContent: "center",
-//               flexDirection: "column",
-//             }}
-//           >
-//             <h4 style={{ textTransform: "none" }}>Ten Rap</h4>
-//             <p
-//               style={{ fontSize: "14px", textTransform: "none" }}
-//             >
-//               di chi
-//             </p>
-//           </div>
-//         </div>
-//       </>
-//     }
-//     {...a11yProps(14)}
-//   />
-
-//   <Tab
-//     label={
-//       <>
-//         <div
-//           style={{
-//             display: "flex",
-//             padding: "20px",
-//           }}
-//         >
-//           <img
-//             src="https://s3img.vcdn.vn/123phim/2018/09/f32670fd0eb083c9c4c804f0f3a252ed.png"
-//             alt=""
-//             style={{
-//               width: "50px",
-
-//               display: "block",
-//             }}
-//           />
-//           <div
-//             style={{
-//               textAlign: "left",
-//               marginLeft: "8px",
-//               display: "flex",
-//               justifyContent: "center",
-//               flexDirection: "column",
-//             }}
-//           >
-//             <h4 style={{ textTransform: "none" }}>Ten Rap</h4>
-//             <p
-//               style={{ fontSize: "14px", textTransform: "none" }}
-//             >
-//               di chi
-//             </p>
-//           </div>
-//         </div>
-//       </>
-//     }
-//     {...a11yProps(15)}
-//   />
-// </Tabs>
-
-// <TabPanel value={value2} index={20}>
-//   Item asdffffffffffff
-// </TabPanel>
-// <TabPanel value={value2} index={21}>
-//   Item Two
-// </TabPanel>
-// <TabPanel value={value2} index={22}>
-//   Item Two
-// </TabPanel>
-// <TabPanel value={value2} index={23}>
-//   Item Two
-// </TabPanel>
-// <TabPanel value={value2} index={24}>
-//   Item Two
-// </TabPanel>
-// <TabPanel value={value2} index={25}>
-//   Item Two
-// </TabPanel>
-// </Box>
