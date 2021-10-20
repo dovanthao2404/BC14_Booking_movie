@@ -82,9 +82,11 @@ export default function HomeTools(props) {
     filmShowtimes: "filmShowtimes",
     showtimeId: null,
   });
+
   const { infoFilmShowtimes } = useSelector(
     (state) => state.cinemaManagementReducer
   );
+
   const { listFilmNowShowing } = props;
 
   useEffect(() => {

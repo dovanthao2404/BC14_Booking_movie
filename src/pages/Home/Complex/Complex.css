@@ -1,0 +1,33 @@
+#homeCinemaComplex {
+  background: url("https://tix.vn/app/assets/img/icons/back-news.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  padding-top: 120px;
+}
+
+/* Dùng regex để select phần tử html */
+/* Chọn tất cả các button có tiền tố id là vertical-tab- */
+button[id^="vertical-tab-"] {
+  display: block;
+  padding: 0;
+  max-width: unset;
+  min-width: unset;
+  position: relative;
+  min-height: unset;
+}
+
+button[id^="vertical-tab-"]::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: calc(100% - 40px);
+  transform: translateX(-50%);
+  border-bottom: 1px solid #fff;
+  border-color: rgba(238, 238, 238, 0.88);
+}
+/* Chọn tất cả các button có tiền tố id là vertical-tabpanel */
+
+div[id^="vertical-tabpanel"] > div {
+  padding: 0;
+}

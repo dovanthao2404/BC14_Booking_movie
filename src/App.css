@@ -1,26 +1,12 @@
 /* GLOBAL */
+html {
+  scroll-behavior: smooth;
+}
 * {
   padding: 0;
   margin: 0;
 }
 /* HOME */
-.home-slick .slick-dots {
-  bottom: 12%;
-  display: flex;
-  justify-content: center;
-}
-
-.home-slick li button:before {
-  font-size: 14px;
-  color: white;
-  opacity: 1;
-}
-
-.home-slick li.slick-active button:before {
-  color: #fb4226;
-  font-size: 14px;
-}
-
 .home-slick .slick-arrow {
   position: absolute;
   top: 45%;
@@ -33,4 +19,12 @@
   opacity: 0.5;
   object-position: center;
   object-fit: contain;
+}
+
+.home-slick .slick-next {
+  right: 12px;
+}
+.home-slick .slick-prev {
+  left: 12px;
+  z-index: 2;
 }

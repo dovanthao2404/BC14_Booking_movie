@@ -10,9 +10,10 @@ import {
   actGetListFilm,
 } from "redux/actions/FilmManagementActions";
 import HomeFilm from "./HomeFilm";
+import Complex from "./Complex";
 
 export default function HomgPage() {
-  const [screenWidth, setScreenWidth] = useState(window.screen.width);
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
 
   window.onresize = (e) => {
     setScreenWidth(e.target.innerWidth);
@@ -28,17 +29,23 @@ export default function HomgPage() {
     dispatch(actGetListFilm());
   }, []);
 
-  const renderHomeTool = () => {
+  const responsiveHomeTool = () => {
     if (screenWidth > 975) {
       return <HomeTools listFilmNowShowing={listFilmNowShowing} />;
+    }
+  };
+  const responsiveCarousel = () => {
+    if (screenWidth > 768) {
+      return <Carousel listBanner={listBanner} />;
     }
   };
   if (isLoading) return <Loading />;
   return (
     <Box sx={{ marginTop: "64px" }}>
-      <Carousel listBanner={listBanner} />
-      {renderHomeTool()}
-      <HomeFilm />
+      {responsiveCarousel()}
+      {responsiveHomeTool()}
+      <HomeFilm screenWidth={screenWidth} />
+      <Complex />
       <div style={{ height: "1000px" }}></div>
     </Box>
   );

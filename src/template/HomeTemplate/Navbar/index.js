@@ -66,7 +66,7 @@ const Navbar = () => {
             <>
               <Box component="ul" sx={{ display: "flex", padding: 0 }}>
                 <Box component="li">
-                  <HashLink className={classes.hashLink} to="#">
+                  <HashLink className={classes.hashLink} to="#homeFilm">
                     Lịch chiếu
                   </HashLink>
                 </Box>

@@ -10,7 +10,7 @@ const Login = (props) => {
 
   return (
     <>
-      <Box sx={{ display: "flex" }}>
+      <Box sx={{ display: "flex", alignItems: "center" }}>
         <NavLink
           to={userLogin ? "/profile" : "/login"}
           style={{ textDecoration: "none", color: "#9b9b9b" }}
@@ -18,8 +18,13 @@ const Login = (props) => {
             e.target.style.color = "#9b9b9b";
           }}
         >
-          <Box sx={{ display: "flex", alignContent: "center" }}>
-            <Box sx={{ display: "flex", alignItems: "center" }}>
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+            }}
+          >
+            <Box sx={{ display: "flex" }}>
               <Box
                 component="img"
                 sx={{
@@ -52,7 +57,8 @@ const Login = (props) => {
         <Box
           sx={{
             border: "1px solid #e9e9e9",
-            margin: "12px",
+            margin: "0 12px",
+            padding: "12px 0",
           }}
         ></Box>
         <NavLink
@@ -68,8 +74,8 @@ const Login = (props) => {
             }
           }}
         >
-          <Box sx={{ display: "flex", alignContent: "center" }}>
-            <Box component="p">{userLogin ? "Đăng xuất" : "Đăng ký"}</Box>
+          <Box sx={{ height: "100%" }} component="p">
+            {userLogin ? "Đăng xuất" : "Đăng ký"}
           </Box>
         </NavLink>
       </Box>

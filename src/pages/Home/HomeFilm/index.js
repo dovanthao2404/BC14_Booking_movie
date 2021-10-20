@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { Box, Container } from "@mui/material";
+import { Container } from "@mui/material";
 import Slider from "react-slick";
 import "./HomeFilm.css";
 import Card from "./Card";
+import { useSelector } from "react-redux";
 
 // Custom arrow react-slick
 function SampleNextArrow(props) {
@@ -29,50 +30,46 @@ function SamplePrevArrow(props) {
   );
 }
 
-export default function HomeFilm() {
+export default function HomeFilm(props) {
+  const { screenWidth } = props;
   const [isNowShow, setIsNowShow] = useState(true);
-  const [screenWidth, setScreenWidth] = useState(window.screen.width);
+
+  const { listFilmComingSoon, listFilmNowShowing } = useSelector(
+    (state) => state.filmManagementReducer
+  );
   const settings = {
     className: "center",
-    centerMode: true,
+    centerMode: screenWidth >= 1052 ? false : true,
     infinite: true,
-    centerPadding: "0",
-    slidesToShow: 2,
-    speed: 500,
+    centerPadding: screenWidth >= 1052 ? "0" : "20px",
+    slidesToShow: screenWidth > 820 ? 2 : screenWidth > 678 ? 1.5 : 1,
+    speed: 250,
     rows: 2,
     slidesPerRow: 2,
-    // arrows: false,
-    arrows: screenWidth > 1050 ? true : false,
+    arrows: screenWidth > 1052 ? true : false,
     nextArrow: <SampleNextArrow />,
     prevArrow: <SamplePrevArrow />,
   };
 
-  window.onresize = (e) => {
-    setScreenWidth(e.target.innerWidth);
+  const renderCardFilm = () => {
+    if (listFilmNowShowing || listFilmComingSoon) {
+      const listFilmNew = isNowShow
+        ? [...listFilmNowShowing]
+        : [...listFilmComingSoon];
+      return listFilmNew?.map((value, key) => (
+        <div key={key}>
+          <Card film={value} screenWidth={screenWidth} />
+        </div>
+      ));
+    }
   };
 
-  const renderCardFilm = () => {
-    let a = [2, 3, 3, 3, 3, 3, 3, 3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 22];
-    a.length = 20;
-    return a.map((value, key) => {
-      console.log(key);
-      return (
-        <div key={key}>
-          <Card />
-        </div>
-      );
-    });
-  };
   return (
-    <Container
-      id="homeFilm"
-      style={{ maxWidth: "940px", position: "relative", paddingTop: "75px" }}
-      className="home-slick"
-    >
+    <Container id="homeFilm" className="home-slick">
       <ul className={"homeFilm__nav"}>
         <li
           onClick={() => {
-            setIsNowShow(!isNowShow);
+            setIsNowShow(true);
           }}
           className={`homeFilm__navChild  ${isNowShow ? `active` : ""}`}
         >
@@ -80,7 +77,7 @@ export default function HomeFilm() {
         </li>
         <li
           onClick={() => {
-            setIsNowShow(!isNowShow);
+            setIsNowShow(false);
           }}
           className={`homeFilm__navChild ${!isNowShow ? `active` : ""}`}
         >

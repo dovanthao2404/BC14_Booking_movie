@@ -1,46 +1,76 @@
-import React from "react";
+import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import "./Card.css";
-export default function Card() {
+import { useHistory } from "react-router";
+import moment from "moment";
+export default function Card(props) {
+  const history = useHistory();
+  const { film } = props;
+  const [mousePosition, setMousePosition] = useState(0);
+
+  const renderStar = (totalStar) => {
+    let star = [];
+    for (let i = 0; i < totalStar; i++) {
+      star.push(
+        <li key={i}>
+          <img
+            className="rating__icon"
+            src="https://tix.vn/app/assets/img/icons/star1.png"
+            alt=""
+          />
+        </li>
+      );
+    }
+    return star;
+  };
+
+  const renderRating = () => {
+    const totalStar = Math.floor(film.danhGia / 2);
+    return film.dangChieu ? (
+      <span className="rating-box">
+        <span className="rating-number">{film.danhGia}</span>
+        <ul className="rating">
+          {renderStar(totalStar)}
+
+          <li>
+            <img
+              className="rating__haft"
+              src="https://tix.vn/app/assets/img/icons/star1.2.png"
+              alt=""
+            />
+          </li>
+        </ul>
+      </span>
+    ) : (
+      ""
+    );
+  };
+
   return (
     <div className="home-card">
       <div className="card-content" style={{ position: "relative" }}>
-        <NavLink to="detail">
-          <img
-            src="https://s3img.vcdn.vn/mobile/123phim/2021/04/trang-ti-16194120693380_215x318.jpg"
-            alt="https://s3img.vcdn.vn/mobile/123phim/2021/04/trang-ti-16194120693380_215x318.jpg"
-            style={{ width: "100%", height: "100%", borderRadius: "5px" }}
-          />
+        <NavLink
+          to={`/detail/${film.maPhim}`}
+          onMouseDown={(e) => {
+            setMousePosition(e.pageX);
+          }}
+          onClick={(e) => {
+            const { pageX } = e;
+            if (Math.abs(pageX - mousePosition) > 10) {
+              e.preventDefault();
+            }
+          }}
+        >
+          <div className="overall-img">
+            <img src={film.hinhAnh} alt={film.hinhAnh} className="card-img" />
 
-          <div className="card-img"></div>
+            <div className="card-overlay"></div>
+          </div>
         </NavLink>
-        <span className="rating-box">
-          <span className="rating-number">9</span>
-          <ul className="rating">
-            <li>
-              <img
-                className="rating__icon"
-                src="https://tix.vn/app/assets/img/icons/star1.png"
-                alt=""
-              />
-            </li>
-            <li>
-              <img
-                className="rating__icon"
-                src="https://tix.vn/app/assets/img/icons/star1.png"
-                alt=""
-              />
-            </li>
-            <li>
-              <img
-                className="rating__haft"
-                src="https://tix.vn/app/assets/img/icons/star1.2.png"
-                alt=""
-              />
-            </li>
-          </ul>
+        {renderRating()}
+        <span className="publishDate ">
+          {film.sapChieu ? moment(film.ngayKhoiChieu).format("DD/MM") : ""}
         </span>
-        <span class="publishDate ">05/03</span>
 
         <img
           className="btn-playTrailer"
@@ -48,11 +78,23 @@ export default function Card() {
           alt=""
         />
       </div>
-      <div>
-        <div className="homeCard__footer" style={{ position: "relative" }}>
-          <div className="homeCard__filmName">ádfasdsfd</div>
-          <button className="btn-buyTicket">MUA VÉ</button>
+      <div className="homeCard__footer">
+        <div className="homeCardNameParent">
+          <div className="homeCard__filmName">
+            {film.tenPhim.length > 30
+              ? film.tenPhim.slice(0, 30) + "..."
+              : film.tenPhim}
+          </div>
         </div>
+
+        <button
+          onClick={() => {
+            history.push(`/detail/${film.maPhim}`);
+          }}
+          className="btn-buyTicket"
+        >
+          MUA VÉ
+        </button>
       </div>
     </div>
   );
