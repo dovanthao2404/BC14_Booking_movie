@@ -60,10 +60,15 @@ export default function Accordions() {
         <AccordionSummary
           aria-controls="panel1d-content"
           id="panel1d-header"
-          sx={{ padding: "20px", flexDirection: "row", margin: 0 }}
+          sx={{
+            padding: "8px 20px",
+            flexDirection: "row",
+            margin: 0,
+            paddingLeft: "12px",
+          }}
         >
           <Typography component="div">
-            <Box sx={{ display: "flex" }}>
+            <Box sx={{ display: "flex", margin: 0 }}>
               <img
                 src="https://s3img.vcdn.vn/123phim/2021/01/bhd-star-bitexco-16105952137769.png"
                 alt=""

@@ -35,11 +35,13 @@ div[id^="vertical-tabpanel"] > div {
 #homeCinemaComplex .MuiTabs-scroller,
 .accordionDetailId {
   overflow-y: scroll !important;
+  overflow-x: scroll !important;
 }
 
 #homeCinemaComplex .MuiTabs-scroller::-webkit-scrollbar,
 #accordionDetailId::-webkit-scrollbar {
   width: 5px;
+  height: 5px;
 }
 
 #accordionDetailId::-webkit-scrollbar-thumb,
@@ -50,4 +52,7 @@ div[id^="vertical-tabpanel"] > div {
 #accordionDetailId::-webkit-scrollbar-thumb:hover,
 #homeCinemaComplex .MuiTabs-scroller::-webkit-scrollbar-thumb:hover {
   background: #555;
+}
+#homeCinemaComplex .MuiTabs-flexContainer {
+  justify-content: center;
 }

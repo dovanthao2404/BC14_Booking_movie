@@ -80,7 +80,7 @@ export default function Complex(props) {
                 alt={heThongRap.logo}
                 style={{
                   width: "50px",
-                  height: "50%",
+                  height: "50px",
                   padding: "20px",
                   display: "block",
                 }}
@@ -124,7 +124,7 @@ export default function Complex(props) {
               sx={{
                 height: "540px",
                 overflow: "auto",
-                maxWidth: "532px",
+                maxWidth: "auto",
               }}
             >
               {listFilm.danhSachPhim.map((film) => {
@@ -150,7 +150,7 @@ export default function Complex(props) {
               sx={{
                 flexGrow: 1,
                 bgcolor: "background.paper",
-                // display: "flex",
+                display: screenWidth > 768 ? "flex" : "block",
                 height: "540px",
               }}
             >
@@ -158,11 +158,13 @@ export default function Complex(props) {
                 sx={{
                   flexGrow: 1,
                   bgcolor: "background.paper",
-                  // display: "flex",
+                  display: screenWidth > 768 ? "flex" : "block",
                 }}
               >
                 <Tabs
-                  orientation={screenWidth > 900 ? "vertical" : "horizontal"}
+                  orientation={screenWidth > 768 ? "vertical" : "horizontal"}
+                  // orientation="vertical"
+                  // variant={screenWidth > 768 ? "standard" : "scrollable"}
                   value={cluster}
                   onChange={handleChangeTabsCluster}
                   aria-label="Vertical tabs example"
@@ -170,10 +172,8 @@ export default function Complex(props) {
                 >
                   {renderClusterCinema()}
                 </Tabs>
-                <div>
-                  {renderShowtimes(infoShowtimesCinemaSystem[cinema].lstCumRap)}
-                </div>
               </Box>
+              {renderShowtimes(infoShowtimesCinemaSystem[cinema].lstCumRap)}
             </Box>
           </TabPanel>
         );
@@ -192,18 +192,24 @@ export default function Complex(props) {
           sx={{
             flexGrow: 1,
             bgcolor: "background.paper",
-            // display: "flex",
+            display: screenWidth > 768 ? "flex" : "block",
             height: "540px",
             border: "1px solid #ebebec",
           }}
         >
           <Box>
             <Tabs
-              orientation={screenWidth > 900 ? "vertical" : "horizontal"}
+              // centered
+              orientation={screenWidth > 768 ? "vertical" : "horizontal"}
+              // variant={screenWidth > 768 ? "standard" : "scrollable"}
               value={cinema}
               onChange={handleChangeTabsCinema}
               aria-label="Vertical tabs example"
-              sx={{ borderRight: 1, borderColor: "divider" }}
+              sx={{
+                borderRight: 1,
+                borderColor: "divider",
+                justifyContent: "center",
+              }}
             >
               {renderTabs()}
             </Tabs>
