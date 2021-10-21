@@ -66,12 +66,12 @@ export default function HomeFilm(props) {
 
   return (
     <Container id="homeFilm" className="home-slick">
-      <ul className={"homeFilm__nav"}>
+      <ul className={"tab-header"}>
         <li
           onClick={() => {
             setIsNowShow(true);
           }}
-          className={`homeFilm__navChild  ${isNowShow ? `active` : ""}`}
+          className={`tab-header__child  ${isNowShow ? `active` : ""}`}
         >
           Đang chiếu{" "}
         </li>
@@ -79,7 +79,7 @@ export default function HomeFilm(props) {
           onClick={() => {
             setIsNowShow(false);
           }}
-          className={`homeFilm__navChild ${!isNowShow ? `active` : ""}`}
+          className={`tab-header__child ${!isNowShow ? `active` : ""}`}
         >
           Sắp chiếu{" "}
         </li>

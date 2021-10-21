@@ -71,12 +71,15 @@ const Navbar = () => {
                   </HashLink>
                 </Box>
                 <Box component="li">
-                  <HashLink className={classes.hashLink} to="#">
+                  <HashLink
+                    className={classes.hashLink}
+                    to="#homeCinemaComplex"
+                  >
                     Cụm rạp
                   </HashLink>
                 </Box>
                 <Box component="li">
-                  <HashLink className={classes.hashLink} to="#">
+                  <HashLink className={classes.hashLink} to="#homeNews">
                     Tin tức
                   </HashLink>
                 </Box>

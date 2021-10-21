@@ -1,8 +1,8 @@
 #homeCinemaComplex {
   background: url("https://tix.vn/app/assets/img/icons/back-news.png");
-  background-size: cover;
-  background-repeat: no-repeat;
+  background-position: center;
   padding-top: 120px;
+  background-repeat: no-repeat;
 }
 
 /* Dùng regex để select phần tử html */
@@ -40,11 +40,11 @@ div[id^="vertical-tabpanel"] > div {
 div[id^="vertical-tabpanel"] .MuiTabs-scroller {
   height: 540px;
 }
-@media (max-width: 768px) {
+
+@media (max-width: 767.98px) {
   #homeCinemaComplex .MuiTabs-indicator {
     display: none;
   }
-
   div[id^="vertical-tabpanel"] .MuiTabs-scroller {
     height: auto;
   }

@@ -1,0 +1,36 @@
+#homeNews {
+  background: url("https://tix.vn/app/assets/img/icons/back-news.png");
+  background-position: center;
+  padding-top: 120px;
+  background-repeat: no-repeat;
+}
+
+.news-items-half {
+  width: 50%;
+  float: left;
+}
+.news-items-half > div {
+  padding: 0 7.5px;
+  margin-bottom: 20px;
+}
+.news-items-third {
+  width: calc((100% * 2 / 3) / 2);
+  float: left;
+}
+.news-items-third > div:not(.news-items-one-third) {
+  padding: 0 7.5px;
+  margin-bottom: 20px;
+}
+.news-items-third .news-items-one-third {
+  padding: 0 7.5px;
+  margin-bottom: 10px;
+}
+
+@media (max-width: 566.98px) {
+  .news-items-half {
+    width: 100%;
+  }
+  .news-items-third {
+    width: 100%;
+  }
+}

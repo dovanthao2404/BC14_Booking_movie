@@ -67,7 +67,7 @@ const useStyles = makeStyles({
 });
 
 export default function Accordions(props) {
-  const { film } = props;
+  const { film, screenWidth } = props;
   let history = useHistory();
   const [expanded, setExpanded] = useState("panel1");
   const classes = useStyles();
@@ -174,7 +174,17 @@ export default function Accordions(props) {
             </Box>
           </Typography>
         </AccordionSummary>
-        <AccordionDetails sx={{ maxHeight: "150px", overflow: "auto" }}>
+        <AccordionDetails
+          sx={{
+            maxHeight:
+              screenWidth >= 982
+                ? "200px"
+                : screenWidth >= 768
+                ? "180px"
+                : "180px",
+            overflow: "auto",
+          }}
+        >
           <Box>
             <Box
               component="h2"

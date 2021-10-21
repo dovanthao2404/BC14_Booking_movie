@@ -18,6 +18,34 @@ html {
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
+
+/* Tabs */
+
+.tab-header {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  text-align: center;
+  border: none;
+  margin-bottom: 30px;
+}
+.tab-header__child {
+  font-size: 20px;
+  line-height: 24px;
+  height: 24px;
+  font-weight: 500;
+  padding: 0 25px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.tab-header__child:hover {
+  font-size: 24px;
+}
+.tab-header__child.active {
+  color: #fa5238;
+  font-size: 24px;
+}
+
 /* HOME */
 .home-slick .slick-arrow {
   position: absolute;
@@ -39,4 +67,18 @@ html {
 .home-slick .slick-prev {
   left: 12px;
   z-index: 2;
+}
+
+@media (max-width: 767.98px) {
+  .tab-header__child {
+    font-size: 18px;
+    padding: 0 8px;
+  }
+  .tab-header__child:hover {
+    font-size: 22px;
+  }
+  .tab-header__child.active {
+    color: #fa5238;
+    font-size: 22px;
+  }
 }

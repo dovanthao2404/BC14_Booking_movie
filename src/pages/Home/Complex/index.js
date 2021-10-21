@@ -124,13 +124,13 @@ export default function Complex(props) {
               id="accordionDetailId"
               sx={{
                 overflow: "auto",
-                height: screenWidth > 768 ? "540px" : "340px",
+                height: screenWidth >= 768 ? "540px" : "340px",
               }}
             >
               {listFilm.danhSachPhim.map((film) => {
                 return (
                   <div key={film.maPhim} id="homeAccordion">
-                    <Accordions film={film} />
+                    <Accordions screenWidth={screenWidth} film={film} />
                   </div>
                 );
               })}
@@ -150,7 +150,7 @@ export default function Complex(props) {
               sx={{
                 flexGrow: 1,
                 bgcolor: "background.paper",
-                display: screenWidth > 768 ? "flex" : "block",
+                display: screenWidth >= 768 ? "flex" : "block",
                 heigth: "540px",
                 overflow: "auto",
               }}
@@ -159,11 +159,11 @@ export default function Complex(props) {
                 sx={{
                   flexGrow: 1,
                   bgcolor: "background.paper",
-                  display: screenWidth > 768 ? "flex" : "block",
+                  display: screenWidth >= 768 ? "flex" : "block",
                 }}
               >
                 <Tabs
-                  orientation={screenWidth > 768 ? "vertical" : "horizontal"}
+                  orientation={screenWidth >= 768 ? "vertical" : "horizontal"}
                   value={cluster}
                   onChange={handleChangeTabsCluster}
                   aria-label="Vertical tabs example"
@@ -188,39 +188,42 @@ export default function Complex(props) {
   };
 
   return (
-    <Container style={{ maxWidth: "940px" }}>
-      <div id="homeCinemaComplex">
-        <Box
-          sx={{
-            flexGrow: 1,
-            bgcolor: "background.paper",
-            display: screenWidth > 768 ? "flex" : "block",
-            height: screenWidth > 768 ? "540px" : "auto",
-            border: "1px solid #ebebec",
-          }}
-        >
-          <Box>
-            <Tabs
-              // centered
-              id="tabsParent"
-              orientation={screenWidth > 768 ? "vertical" : "horizontal"}
-              variant={screenWidth > 582 ? "standard" : "scrollable"}
-              centered={screenWidth > 582 ? true : false}
-              value={cinema}
-              onChange={handleChangeTabsCinema}
-              aria-label="Vertical tabs example"
-              sx={{
-                borderRight: 1,
-                borderColor: "divider",
-                justifyContent: "center",
-              }}
-            >
-              {renderTabs()}
-            </Tabs>
+    <div style={{ paddingBottom: "40px" }}>
+      <Container style={{ maxWidth: "940px" }}>
+        <div id="homeCinemaComplex"></div>
+        <div>
+          <Box
+            sx={{
+              flexGrow: 1,
+              bgcolor: "background.paper",
+              display: screenWidth >= 768 ? "flex" : "block",
+              height: screenWidth >= 768 ? "540px" : "auto",
+              border: "2px solid #ebebec",
+            }}
+          >
+            <Box>
+              <Tabs
+                // centered
+                id="tabsParent"
+                orientation={screenWidth >= 768 ? "vertical" : "horizontal"}
+                variant={screenWidth > 582 ? "standard" : "scrollable"}
+                centered={screenWidth > 582 ? true : false}
+                value={cinema}
+                onChange={handleChangeTabsCinema}
+                aria-label="Vertical tabs example"
+                sx={{
+                  borderRight: 1,
+                  borderColor: "divider",
+                  justifyContent: "center",
+                }}
+              >
+                {renderTabs()}
+              </Tabs>
+            </Box>
+            {renderCinemaCluster()}
           </Box>
-          {renderCinemaCluster()}
-        </Box>
-      </div>
-    </Container>
+        </div>
+      </Container>
+    </div>
   );
 }
