@@ -3,6 +3,7 @@ import React, { Suspense, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Route } from "react-router";
 import { actGetCinemaSystemInformation } from "redux/actions/CinemaManagementActions";
+import Footer from "./Footer";
 import Navbar from "./Navbar";
 
 export default function HomeTeplate({ Component, ...props }) {
@@ -21,6 +22,7 @@ export default function HomeTeplate({ Component, ...props }) {
             <>
               <Navbar />
               <Component {...propsRoute} />
+              <Footer />
             </>
           );
         }}

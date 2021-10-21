@@ -50,7 +50,6 @@ export default function HomgPage() {
       <Complex screenWidth={screenWidth} />
       <HomeNews screenWidth={screenWidth} />
       <HomeApp screenWidth={screenWidth} />
-      <div style={{ height: "1000px" }}></div>
     </Box>
   );
 }
