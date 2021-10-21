@@ -37,22 +37,24 @@ div[id^="vertical-tabpanel"] > div {
   overflow-y: scroll !important;
   overflow-x: scroll !important;
 }
+div[id^="vertical-tabpanel"] .MuiTabs-scroller {
+  height: 540px;
+}
+@media (max-width: 768px) {
+  #homeCinemaComplex .MuiTabs-indicator {
+    display: none;
+  }
 
-#homeCinemaComplex .MuiTabs-scroller::-webkit-scrollbar,
-#accordionDetailId::-webkit-scrollbar {
-  width: 5px;
-  height: 5px;
-}
+  div[id^="vertical-tabpanel"] .MuiTabs-scroller {
+    height: auto;
+  }
 
-#accordionDetailId::-webkit-scrollbar-thumb,
-#homeCinemaComplex .MuiTabs-scroller::-webkit-scrollbar-thumb {
-  background: #888;
-  border-radius: 10px;
-}
-#accordionDetailId::-webkit-scrollbar-thumb:hover,
-#homeCinemaComplex .MuiTabs-scroller::-webkit-scrollbar-thumb:hover {
-  background: #555;
-}
-#homeCinemaComplex .MuiTabs-flexContainer {
-  justify-content: center;
+  #tabsParent .MuiTabs-indicator {
+    display: block;
+  }
+
+  #homeCinemaComplex .MuiTabs-scroller::-webkit-scrollbar,
+  #accordionDetailId::-webkit-scrollbar {
+    display: none;
+  }
 }

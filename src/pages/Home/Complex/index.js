@@ -73,6 +73,7 @@ export default function Complex(props) {
       return (
         <Tab
           key={heThongRap.maHeThongRap}
+          variant={screenWidth > 582 ? "standard" : "scrollable"}
           label={
             <>
               <img
@@ -122,15 +123,14 @@ export default function Complex(props) {
             <Box
               id="accordionDetailId"
               sx={{
-                height: "540px",
                 overflow: "auto",
-                maxWidth: "auto",
+                height: screenWidth > 768 ? "540px" : "340px",
               }}
             >
               {listFilm.danhSachPhim.map((film) => {
                 return (
                   <div key={film.maPhim} id="homeAccordion">
-                    <Accordions />
+                    <Accordions film={film} />
                   </div>
                 );
               })}
@@ -151,7 +151,8 @@ export default function Complex(props) {
                 flexGrow: 1,
                 bgcolor: "background.paper",
                 display: screenWidth > 768 ? "flex" : "block",
-                height: "540px",
+                heigth: "540px",
+                overflow: "auto",
               }}
             >
               <Box
@@ -163,12 +164,13 @@ export default function Complex(props) {
               >
                 <Tabs
                   orientation={screenWidth > 768 ? "vertical" : "horizontal"}
-                  // orientation="vertical"
-                  // variant={screenWidth > 768 ? "standard" : "scrollable"}
                   value={cluster}
                   onChange={handleChangeTabsCluster}
                   aria-label="Vertical tabs example"
-                  sx={{ borderRight: 1, borderColor: "divider" }}
+                  sx={{
+                    borderRight: 1,
+                    borderColor: "divider",
+                  }}
                 >
                   {renderClusterCinema()}
                 </Tabs>
@@ -193,15 +195,17 @@ export default function Complex(props) {
             flexGrow: 1,
             bgcolor: "background.paper",
             display: screenWidth > 768 ? "flex" : "block",
-            height: "540px",
+            height: screenWidth > 768 ? "540px" : "auto",
             border: "1px solid #ebebec",
           }}
         >
           <Box>
             <Tabs
               // centered
+              id="tabsParent"
               orientation={screenWidth > 768 ? "vertical" : "horizontal"}
-              // variant={screenWidth > 768 ? "standard" : "scrollable"}
+              variant={screenWidth > 582 ? "standard" : "scrollable"}
+              centered={screenWidth > 582 ? true : false}
               value={cinema}
               onChange={handleChangeTabsCinema}
               aria-label="Vertical tabs example"

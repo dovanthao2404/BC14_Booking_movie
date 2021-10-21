@@ -28,13 +28,13 @@ export default function ClusterCinema(props) {
         }}
       >
         <h4 style={{ textTransform: "none" }}>
-          {cumRap.tenCumRap.length > 24
-            ? cumRap.tenCumRap.slice(0, 24) + "..."
+          {cumRap.tenCumRap.length > 22
+            ? cumRap.tenCumRap.slice(0, 22) + "..."
             : cumRap.tenCumRap}
         </h4>
         <p style={{ fontSize: "14px", textTransform: "none" }}>
-          {cumRap.diaChi.length > 24
-            ? cumRap.diaChi.slice(0, 24) + "..."
+          {cumRap.diaChi.length > 22
+            ? cumRap.diaChi.slice(0, 22) + "..."
             : cumRap.diaChi}
         </p>
       </div>

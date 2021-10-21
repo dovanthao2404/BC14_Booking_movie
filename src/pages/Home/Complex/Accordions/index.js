@@ -1,12 +1,15 @@
-import * as React from "react";
+import React, { Fragment, useState } from "react";
 import { styled } from "@mui/material/styles";
 import ArrowForwardIosSharpIcon from "@mui/icons-material/ArrowForwardIosSharp";
 import MuiAccordion from "@mui/material/Accordion";
 import MuiAccordionSummary from "@mui/material/AccordionSummary";
 import MuiAccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { useHistory } from "react-router-dom";
+
 import { Box } from "@mui/system";
+import { makeStyles } from "@mui/styles";
+import moment from "moment";
 
 const Accordion = styled((props) => (
   <MuiAccordion disableGutters elevation={0} square {...props} />
@@ -44,19 +47,102 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
   borderTop: "1px solid rgba(0, 0, 0, .125)",
 }));
 
-export default function Accordions() {
-  const [expanded, setExpanded] = React.useState("panel1");
+const useStyles = makeStyles({
+  btnCheckout: {
+    margin: "0 10px 10px 0",
+    outline: "none",
+    width: "75px",
+    height: "35px",
 
+    fontSize: "16px",
+    borderRadius: "4px",
+    color: "#108f3e",
+    border: "1px solid #e4e4e4",
+    cursor: "pointer",
+    transition: "all 0.5s",
+    "&:hover": {
+      boxShadow: "0 0 5px 1px #108f3e",
+    },
+  },
+});
+
+export default function Accordions(props) {
+  const { film } = props;
+  let history = useHistory();
+  const [expanded, setExpanded] = useState("panel1");
+  const classes = useStyles();
   const handleChange = (panel) => (event, newExpanded) => {
     setExpanded(newExpanded ? panel : false);
   };
 
+  // Chuyển lịch chiếu thành {ngayChieu: [<Danh sách lịch chiếu của ngày chiếu>]}
+  const flatArrayShowtimesToObject = (arr) => {
+    if (arr) {
+      const temp = {};
+      for (let i = 0; i < arr.length; i++) {
+        const date = moment(arr[i].ngayChieuGioChieu).format("DD/MM/YYYY");
+        if (
+          !Object.keys(temp).includes(date) ||
+          Object.keys(temp).length === 0
+        ) {
+          temp[date] = [{ ...arr[i] }];
+          for (let j = i + 1; j < arr.length; j++) {
+            const calendarCurrent = { ...arr[j] };
+            const dateCurrent = moment(arr[j].ngayChieuGioChieu).format(
+              "DD/MM/YYYY"
+            );
+            dateCurrent === date && temp[date].push(calendarCurrent);
+          }
+        }
+      }
+
+      return temp;
+    }
+  };
+
+  const renderTime = (danhSachLichChieuTheoNgay, key) => {
+    return danhSachLichChieuTheoNgay[key].map((lichChieu) => {
+      return (
+        <Box
+          key={lichChieu.maLichChieu}
+          onClick={() => {
+            history.push(`/checkout/${lichChieu.maLichChieu}`);
+          }}
+          component="button"
+          className={classes.btnCheckout}
+          variant="contained"
+        >
+          {moment(lichChieu.ngayChieuGioChieu).format("hh:mm")}
+        </Box>
+      );
+    });
+  };
+
+  const renderShowtimes = () => {
+    const danhSachLichChieuTheoNgay = flatArrayShowtimesToObject(
+      film?.lstLichChieuTheoPhim
+    );
+    const listShowDate = [];
+    for (let key in danhSachLichChieuTheoNgay) {
+      listShowDate.push(
+        <Fragment key={key}>
+          <div>
+            <Box component="h4" sx={{ mb: 1 }}>
+              Ngày: {key}
+            </Box>
+          </div>
+          <Box sx={{ marginTop: "8px", display: "flex", flexWrap: "wrap" }}>
+            <div>{renderTime(danhSachLichChieuTheoNgay, key)}</div>
+          </Box>
+        </Fragment>
+      );
+    }
+    return listShowDate;
+  };
+
   return (
     <div>
-      <Accordion
-        expanded={expanded === "panel1"}
-        onChange={handleChange("panel1")}
-      >
+      <Accordion onChange={handleChange("panel1")}>
         <AccordionSummary
           aria-controls="panel1d-content"
           id="panel1d-header"
@@ -70,8 +156,13 @@ export default function Accordions() {
           <Typography component="div">
             <Box sx={{ display: "flex", margin: 0 }}>
               <img
-                src="https://s3img.vcdn.vn/123phim/2021/01/bhd-star-bitexco-16105952137769.png"
-                alt=""
+                src={film?.hinhAnh}
+                alt={film?.hinhAnh}
+                onError={(e) => {
+                  e.onError = null;
+                  e.target.src =
+                    "https://bitsofco.de/content/images/2018/12/broken-1.png";
+                }}
                 style={{
                   width: "50px",
                   height: "50px",
@@ -79,17 +170,21 @@ export default function Accordions() {
                   borderRadius: "6px",
                 }}
               />
-              <Box sx={{ pl: "12px", fontWeight: "bold" }}>Ten phim</Box>
+              <Box sx={{ pl: "12px", fontWeight: "bold" }}>{film?.tenPhim}</Box>
             </Box>
           </Typography>
         </AccordionSummary>
-        <AccordionDetails>
-          <Typography>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-            malesuada lacus ex, sit amet blandit leo lobortis eget. Lorem ipsum
-            dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada
-            lacus ex, sit amet blandit leo lobortis eget.
-          </Typography>
+        <AccordionDetails sx={{ maxHeight: "150px", overflow: "auto" }}>
+          <Box>
+            <Box
+              component="h2"
+              sx={{ fontWeight: "bold", mb: 1, color: "#1976d2" }}
+            >
+              2D Digital
+            </Box>
+
+            {renderShowtimes()}
+          </Box>
         </AccordionDetails>
       </Accordion>
     </div>
