@@ -86,7 +86,7 @@ const Navbar = () => {
                 <Box component="li">
                   <HashLink
                     className={`${classes.hashLink} ${classes.lastChild}`}
-                    to="#"
+                    to="#homeApp"
                   >
                     Ứng dụng
                   </HashLink>

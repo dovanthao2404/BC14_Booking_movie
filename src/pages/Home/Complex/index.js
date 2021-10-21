@@ -75,18 +75,18 @@ export default function Complex(props) {
           key={heThongRap.maHeThongRap}
           variant={screenWidth > 582 ? "standard" : "scrollable"}
           label={
-            <>
-              <img
+            <Box sx={{ padding: "20px" }}>
+              <Box
+                component="img"
                 src={heThongRap.logo}
                 alt={heThongRap.logo}
-                style={{
+                sx={{
                   width: "50px",
                   height: "50px",
-                  padding: "20px",
                   display: "block",
                 }}
               />
-            </>
+            </Box>
           }
           style={{ width: "90px" }}
           value={index}

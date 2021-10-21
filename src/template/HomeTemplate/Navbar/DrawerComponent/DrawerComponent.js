@@ -165,7 +165,7 @@ const DrawerComponent = (props) => {
                 color: "#000",
                 width: "100%",
               }}
-              to="/"
+              to="#homeApp"
             >
               <ListItemText>Ứng dụng</ListItemText>
             </HashLink>

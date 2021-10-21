@@ -48,11 +48,14 @@ div[id^="vertical-tabpanel"] .MuiTabs-scroller {
   div[id^="vertical-tabpanel"] .MuiTabs-scroller {
     height: auto;
   }
+  div[id^="vertical-tabpanel"] .MuiTabs-flexContainer {
+    overflow: auto;
+  }
 
   #tabsParent .MuiTabs-indicator {
     display: block;
   }
-
+  div[id^="vertical-tabpanel"] .MuiTabs-flexContainer::-webkit-scrollbar,
   #homeCinemaComplex .MuiTabs-scroller::-webkit-scrollbar,
   #accordionDetailId::-webkit-scrollbar {
     display: none;

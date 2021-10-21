@@ -12,6 +12,7 @@ import {
 import HomeFilm from "./HomeFilm";
 import Complex from "./Complex";
 import HomeNews from "./HomeNews";
+import HomeApp from "./HomeApp";
 
 export default function HomgPage() {
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
@@ -48,6 +49,7 @@ export default function HomgPage() {
       <HomeFilm screenWidth={screenWidth} />
       <Complex screenWidth={screenWidth} />
       <HomeNews screenWidth={screenWidth} />
+      <HomeApp screenWidth={screenWidth} />
       <div style={{ height: "1000px" }}></div>
     </Box>
   );
