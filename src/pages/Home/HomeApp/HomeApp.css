@@ -1,6 +1,11 @@
 #homeApp {
-  padding: 120px 0;
+  padding: 120px 0 80px 0;
   background: url(https://tix.vn/app/assets/img/icons/backapp.jpg);
   background-size: contain;
   color: #fff;
+}
+@media (max-width: 900px) {
+  #homeApp {
+    padding-top: 10px;
+  }
 }

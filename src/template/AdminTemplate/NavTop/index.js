@@ -7,10 +7,7 @@ import Grow from "@mui/material/Grow";
 import Button from "@mui/material/Button";
 import MenuList from "@mui/material/MenuList";
 import { Box } from "@mui/system";
-import {
-  actGetInfoUser,
-  actHandleLogout,
-} from "redux/actions/UserManagementActions";
+import { actHandleLogout } from "redux/actions/UserManagementActions";
 import { useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
 

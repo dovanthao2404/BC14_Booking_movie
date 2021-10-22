@@ -20,7 +20,11 @@ export default function SmartPhone() {
         <Box key={i}>
           <Box
             component="img"
-            sx={{ width: "100%", height: "100%", display: "block" }}
+            sx={{
+              width: "100%",
+              height: "100%",
+              display: "block",
+            }}
             src={`https://tix.vn/app/assets/img/icons/slide/slide${i}.jpg`}
             alt={`https://tix.vn/app/assets/img/icons/slide/slide${i}.jpg`}
           />
@@ -37,7 +41,7 @@ export default function SmartPhone() {
         alt="https://tix.vn/app/assets/img/icons/mobile.png"
         sx={{
           maxWidth: "100%",
-          height: "auto",
+          height: "100%",
           display: "block",
           padding: "0 28%",
         }}
@@ -49,6 +53,7 @@ export default function SmartPhone() {
           top: 0,
           left: 0,
           width: "100%",
+          overflow: "hidden",
         }}
       >
         <Box

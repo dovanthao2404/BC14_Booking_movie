@@ -2,9 +2,6 @@ import React from "react";
 
 import Box from "@mui/material/Box";
 
-import ThumbUpAltIcon from "@mui/icons-material/ThumbUpAlt";
-import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
-
 export default function CardSM(props) {
   const { news } = props;
   return (
@@ -62,11 +59,37 @@ export default function CardSM(props) {
                 marginRight: "25px",
               }}
             >
-              <ThumbUpAltIcon />
+              <Box
+                sx={{
+                  width: "18px",
+                  cursor: "pointer",
+                  display: "block",
+                  mr: "4px",
+                  "&:hover": {
+                    transform: "scale(1.2)",
+                  },
+                }}
+                component="img"
+                src="https://tix.vn/app/assets/img/icons/like.png"
+                alt="https://tix.vn/app/assets/img/icons/like.png"
+              />
               <span style={{ marginLeft: "4px" }}>{news?.up_vote}</span>
             </Box>
             <Box sx={{ display: "flex", alignItems: "center" }}>
-              <ChatBubbleOutlineIcon />
+              <Box
+                sx={{
+                  width: "18px",
+                  cursor: "pointer",
+                  display: "block",
+                  mr: "4px",
+                  "&:hover": {
+                    transform: "scale(1.2)",
+                  },
+                }}
+                component="img"
+                src="https://tix.vn/app/assets/img/icons/comment.png"
+                alt="https://tix.vn/app/assets/img/icons/comment.png"
+              />
               <span style={{ marginLeft: "4px" }}>{news?.total_comment}</span>
             </Box>
           </Box>

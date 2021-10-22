@@ -1,0 +1,31 @@
+.seat {
+  width: 30px;
+  height: 30px;
+  background: #3e515d;
+  margin-right: 5px;
+  display: block;
+  margin-bottom: 10px;
+  border-radius: 4px;
+  color: #fff;
+  text-align: center;
+  line-height: 30px;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  cursor: pointer;
+}
+.seatVip {
+  background: #f7b500;
+}
+.seatSelected {
+  background: #108f3e;
+}
+.seatOtherSelected {
+  background: #ccc;
+  cursor: no-drop;
+}
+.a {
+}

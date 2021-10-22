@@ -1,5 +1,6 @@
 import { lazy } from "react";
 import AdminTemplate from "template/AdminTemplate";
+import UserTemplate from "template/UserTemplate";
 import HomeTeplate from "../template/HomeTemplate";
 
 const routeHome = [
@@ -63,6 +64,24 @@ const routeAdmin = [
   },
 ];
 
+const routeUser = [
+  {
+    Component: lazy(() => import("../pages/Checkout")),
+    exact: false,
+    path: "/checkout/:id",
+  },
+  {
+    Component: lazy(() => import("../pages/Login")),
+    exact: false,
+    path: "/login",
+  },
+  {
+    Component: lazy(() => import("../pages/Register")),
+    exact: false,
+    path: "/register",
+  },
+];
+
 export const renderRouteHome = () => {
   return routeHome.map((route, key) => {
     return (
@@ -80,6 +99,19 @@ export const renderRouteAdmin = () => {
   return routeAdmin.map((route, key) => {
     return (
       <AdminTemplate
+        key={key}
+        exact={route.exact}
+        Component={route.Component}
+        path={route.path}
+      />
+    );
+  });
+};
+
+export const renderRouteUser = () => {
+  return routeUser.map((route, key) => {
+    return (
+      <UserTemplate
         key={key}
         exact={route.exact}
         Component={route.Component}
