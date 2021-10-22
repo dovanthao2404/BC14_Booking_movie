@@ -52,7 +52,7 @@ export default function Complex(props) {
 
   useEffect(() => {
     dispatch(actGetInfoShowtimesCinemaSystem());
-  }, []);
+  }, [dispatch]);
 
   const { infoShowtimesCinemaSystem } = useSelector(
     (state) => state.cinemaManagementReducer
@@ -197,7 +197,7 @@ export default function Complex(props) {
               flexGrow: 1,
               bgcolor: "background.paper",
               display: screenWidth >= 768 ? "flex" : "block",
-              height: screenWidth >= 768 ? "540px" : "auto",
+              height: screenWidth >= 768 ? "100%" : "auto",
               border: "2px solid #ebebec",
             }}
           >

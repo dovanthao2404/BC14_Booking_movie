@@ -44,7 +44,7 @@ const EditUser = (props) => {
 
   useEffect(() => {
     dispatch(actGetInfoUser(props.match.params.id));
-  }, []);
+  }, [props.match.params.id]);
 
   // Kiểm tra xem các giá trị nào thay đổi nếu thay đổi thì push vào mảng để validate
   const checkValueChange = (values) => {

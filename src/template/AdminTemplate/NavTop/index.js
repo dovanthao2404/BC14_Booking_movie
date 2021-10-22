@@ -102,9 +102,6 @@ export default function NavTop(props) {
                             color: "black",
                           }}
                           to={`/admin/edit-user/${userLogin.taiKhoan}`}
-                          onClick={() => {
-                            dispatch(actGetInfoUser(userLogin.taiKhoan));
-                          }}
                         >
                           Chỉnh sửa
                         </NavLink>

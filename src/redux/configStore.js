@@ -4,8 +4,9 @@ import { userManagementReducer } from "./reducers/UserManagementReducer";
 import { filmManagementReducer } from "./reducers/FilmManagementReducer";
 import { cinemaManagementReducer } from "./reducers/CinemaManagementReducer";
 
-const { createStore, applyMiddleware } = require("redux");
+const { createStore, applyMiddleware, compose } = require("redux");
 const { combineReducers } = require("redux");
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 export const rootReducer = combineReducers({
   userManagementReducer,
@@ -13,4 +14,7 @@ export const rootReducer = combineReducers({
   cinemaManagementReducer,
 });
 
-export const store = createStore(rootReducer, applyMiddleware(thunk));
+export const store = createStore(
+  rootReducer,
+  composeEnhancers(applyMiddleware(thunk))
+);

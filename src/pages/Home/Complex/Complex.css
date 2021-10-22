@@ -39,6 +39,7 @@ div[id^="vertical-tabpanel"] > div {
 }
 div[id^="vertical-tabpanel"] .MuiTabs-scroller {
   height: 540px;
+  overflow: auto !important;
 }
 
 @media (max-width: 767.98px) {

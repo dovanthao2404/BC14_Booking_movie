@@ -1,14 +1,10 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment } from "react";
 import { Box } from "@mui/material";
 import { Container } from "@mui/material";
 import { useSelector } from "react-redux";
 
-export default function Footer() {
-  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
-
-  window.onresize = (e) => {
-    setScreenWidth(e.target.innerWidth);
-  };
+export default function Footer(props) {
+  const { screenWidth } = props;
   const { cinemaSystemInformation } = useSelector(
     (state) => state.cinemaManagementReducer
   );

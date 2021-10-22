@@ -4,7 +4,7 @@ const initialState = {
   listFilm: null,
   listFilmComingSoon: null,
   listFilmNowShowing: null,
-  listFilmDefault: null,
+  // listFilmDefault: null,
   error: null,
   isLoading: false,
   infoFilmEdit: null,
@@ -18,7 +18,7 @@ const filmManagementReducer = (state = initialState, { type, payload }) => {
       state.error = null;
       state.listFilmComingSoon = null;
       state.listFilmNowShowing = null;
-      state.listFilmDefault = null;
+      // state.listFilmDefault = null;
       state.isLoading = true;
       return { ...state };
 

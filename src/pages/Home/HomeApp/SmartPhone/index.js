@@ -1,11 +1,8 @@
 import React from "react";
-import { Container } from "@mui/material";
 import Box from "@mui/material/Box";
-import { makeStyles } from "@mui/styles";
 import Slider from "react-slick";
 
-export default function SmartPhone(props) {
-  const { screenWidth } = props;
+export default function SmartPhone() {
   const settings = {
     dots: false,
     infinite: true,

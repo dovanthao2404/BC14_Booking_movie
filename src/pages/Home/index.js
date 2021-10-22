@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Box } from "@mui/material";
 import Loading from "./../../components/Loading";
 import { useDispatch, useSelector } from "react-redux";
@@ -14,13 +14,8 @@ import Complex from "./Complex";
 import HomeNews from "./HomeNews";
 import HomeApp from "./HomeApp";
 
-export default function HomgPage() {
-  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
-
-  window.onresize = (e) => {
-    setScreenWidth(e.target.innerWidth);
-  };
-
+export default function HomgPage(props) {
+  const { screenWidth } = props;
   const dispatch = useDispatch();
   const { listBanner, listFilmNowShowing, isLoading } = useSelector(
     (state) => state.filmManagementReducer
@@ -29,7 +24,7 @@ export default function HomgPage() {
   useEffect(() => {
     dispatch(actGetListBanner());
     dispatch(actGetListFilm());
-  }, []);
+  }, [dispatch]);
 
   const responsiveHomeTool = () => {
     if (screenWidth > 975) {
