@@ -1,4 +1,4 @@
-import { USER_LOGIN } from "utils/settings/config";
+import { TOKEN, USER_LOGIN } from "utils/settings/config";
 import * as ActionType from "./../constants/UserManagementConstants";
 
 let userLogin = null;
@@ -62,7 +62,7 @@ const userManagementReducer = (state = initialState, { type, payload }) => {
     case ActionType.LOGOUT:
       state.userLogin = null;
       localStorage.removeItem(USER_LOGIN);
-      localStorage.removeItem(ActionType.LOGOUT);
+      localStorage.removeItem(TOKEN);
       return { ...state };
 
     case ActionType.INFO_USER_REQUEST:

@@ -13,6 +13,7 @@ export const useStyles = makeStyles({
     backgroundColor: "#fff",
     color: "#000",
     boxShadow: "0 0 15px rgb(0 0 0 / 30%)",
+    zIndex: 99,
   },
   brandCheckout: {
     position: "absolute",

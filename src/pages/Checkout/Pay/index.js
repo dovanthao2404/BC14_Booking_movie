@@ -1,13 +1,23 @@
 import { Box } from "@mui/system";
 import React from "react";
 import { useStyles } from "./style";
-export default function Pay() {
+export default function Pay(props) {
   const classes = useStyles();
   const { w7, w6, w5, w4, w3, dFlex, textRight, fontBold, colorGreen } =
     classes;
-
+  const { isPayment, screenWidth } = props;
   return (
-    <Box className={classes.pay}>
+    <Box
+      className={classes.pay}
+      sx={{
+        display:
+          isPayment && screenWidth < 768.98
+            ? "block"
+            : screenWidth < 768.98
+            ? "none"
+            : "block",
+      }}
+    >
       <Box className={classes.payWrapper}>
         <Box className={classes.payItem}>
           <p className={`${classes.totalMoney} ${fontBold} ${colorGreen}`}>

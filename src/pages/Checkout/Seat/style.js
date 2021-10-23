@@ -94,10 +94,44 @@ export const useStyles = makeStyles({
     color: "#9b9b9b",
     marginTop: "5px",
   },
-
+  confirm: {
+    position: "fixed",
+    bottom: 0,
+    width: "100%",
+    // borderTop: "1px solid #ccc",
+    height: "80px",
+    // zIndex: 1,
+  },
+  confirmWrapper: {
+    display: "flex",
+    height: "100%",
+    width: "100%",
+    borderTop: "1px solid #ccc",
+  },
+  btnSeat: {
+    height: "100%",
+    width: "50%",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    fontSize: "18px",
+    fontWeight: "bold",
+    textTransform: "uppercase",
+  },
+  btnShowSeat: {
+    background: "#fff",
+    color: "#44c020",
+  },
+  btnGoNext: {
+    background: "#44c020",
+    color: "#fff",
+    cursor: "pointer",
+    userSelect: "none",
+  },
   "@media (max-width: 767.98px)": {
     seatSection: {
       width: "100%",
+      paddingBottom: "100px",
     },
     listSeat: {
       overflow: "auto",

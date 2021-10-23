@@ -59,10 +59,13 @@ export const useStyles = makeStyles({
     userSelect: "none",
     cursor: "pointer",
   },
+
   "@media (max-width: 767.98px)": {
     pay: {
-      display: "none",
       width: "100%",
+    },
+    payWrapper: {
+      paddingTop: "60px",
     },
   },
 });
