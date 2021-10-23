@@ -3,13 +3,14 @@ import { useStyles } from "./style";
 import { Box } from "@mui/system";
 import { NavLink } from "react-router-dom";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { actHandleLogout } from "redux/actions/UserManagementActions";
 
 export default function NavTop(props) {
-  const { isPayment, setIsPayment, screenWidth } = props;
   const classes = useStyles();
   const dispatch = useDispatch();
+  const { isPayment, setIsPayment, screenWidth } = props;
+  const { userLogin } = useSelector((state) => state.userManagementReducer);
 
   const handleLogout = () => {
     dispatch(actHandleLogout());
@@ -43,10 +44,10 @@ export default function NavTop(props) {
         <Box className={classes.accountContent}>
           <img
             className={classes.imgProfile}
-            src="https://picsum.photos/200/200"
-            alt=""
+            src="https://picsum.photos/50/50"
+            alt="https://picsum.photos/50/50"
           />
-          <span className={classes.nameProfile}>Đỗ Văn Thảo</span>
+          <span className={classes.nameProfile}>{userLogin?.hoTen}</span>
           <div
             onClick={handleLogout}
             className={classes.btnLogout + " btnLogoutCheckou"}

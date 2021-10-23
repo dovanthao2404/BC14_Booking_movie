@@ -59,6 +59,10 @@ export const useStyles = makeStyles({
     userSelect: "none",
     cursor: "pointer",
   },
+  btnConfirmDisabled: {
+    opacity: "0.6",
+    cursor: "default",
+  },
 
   "@media (max-width: 767.98px)": {
     pay: {

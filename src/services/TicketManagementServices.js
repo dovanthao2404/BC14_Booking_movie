@@ -6,6 +6,8 @@ class TicketManagementServices {
 
   getListTicketRoomByIdServices = (id) =>
     api.get(`/api/QuanLyDatVe/LayDanhSachPhongVe?MaLichChieu=${id}`);
+
+  bookTicketsServices = (data) => api.post(`/api/QuanLyDatVe/DatVe`, data);
 }
 
 export const ticketmanagementServices = new TicketManagementServices();

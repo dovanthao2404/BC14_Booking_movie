@@ -1,3 +1,4 @@
+import * as ActionType from "./../constants/TicketManagementConstants";
 import { ticketmanagementServices } from "services/TicketManagementServices";
 import { actSetCinemaClusterInformation } from "./CinemaManagementActions";
 
@@ -24,12 +25,69 @@ export const actCreateShowtimes = (infoShowtimes, setNotify, resetForm) => {
 
 export const actGetListTicketRoomById = (id, history) => {
   return async (dispatch) => {
+    dispatch(actListTicketRoomRequest());
     try {
       const reuslt =
         await ticketmanagementServices.getListTicketRoomByIdServices(id);
+      dispatch(actListTicketRoomSuccess(reuslt.data.content));
     } catch (error) {
-      // alert("Mã lịch chiếu hông hợp lệ")
-      // history.push("/home")
+      dispatch(actListTicketRoomFailed(error));
+    }
+  };
+};
+export const actListTicketRoomRequest = () => ({
+  type: ActionType.TICKET_ROOM_REQUEST,
+});
+export const actListTicketRoomSuccess = (data) => ({
+  type: ActionType.TICKET_ROOM_SUCCESS,
+  payload: data,
+});
+export const actListTicketRoomFailed = (error) => ({
+  type: ActionType.TICKET_ROOM_FAILED,
+  payload: error,
+});
+
+export const actAddSeatSelected = (seat) => ({
+  type: ActionType.ADD_SEAT_SELECTED,
+  payload: seat,
+});
+export const actResetSeatSelected = () => ({
+  type: ActionType.RESET_SEAT_SELECTED,
+});
+
+export const actBookTickets = (
+  data,
+  history,
+  confirmDialog,
+  setConfirmDialog,
+  IconError,
+  IconSuccess
+) => {
+  return async (dispatch) => {
+    try {
+      const result = await ticketmanagementServices.bookTicketsServices(data);
+
+      setConfirmDialog({
+        title: result.data.message,
+        subTitle: "",
+        isOpen: true,
+        onlyOne: true,
+        icon: <IconSuccess sx={{ fontSize: "80px", color: "#a5dc86" }} />,
+        onConfirm: () => {
+          history.push("/");
+        },
+      });
+    } catch (error) {
+      setConfirmDialog({
+        title: error.response.data.message,
+        subTitle: "",
+        isOpen: true,
+        onlyOne: true,
+        icon: <IconError sx={{ fontSize: "80px", color: "#fbbb86" }} />,
+        onConfirm: () => {
+          history.push("/");
+        },
+      });
     }
   };
 };
