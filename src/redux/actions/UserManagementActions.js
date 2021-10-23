@@ -38,7 +38,6 @@ export const actLoginAdmin = (infoLogin, history) => {
 
       // Kiểm tra người dùng có phải là Quản trị hay không nếu không phải thì không cho đăng nhập
       const user = result.data.content;
-      console.log(user.maLoaiNguoiDung);
       if (user.maLoaiNguoiDung === "QuanTri") {
         dispatch(actLoginSuccess(result.data.content));
 

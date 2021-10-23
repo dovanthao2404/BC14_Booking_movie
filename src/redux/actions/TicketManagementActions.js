@@ -21,3 +21,15 @@ export const actCreateShowtimes = (infoShowtimes, setNotify, resetForm) => {
     }
   };
 };
+
+export const actGetListTicketRoomById = (id, history) => {
+  return async (dispatch) => {
+    try {
+      const reuslt =
+        await ticketmanagementServices.getListTicketRoomByIdServices(id);
+    } catch (error) {
+      // alert("Mã lịch chiếu hông hợp lệ")
+      // history.push("/home")
+    }
+  };
+};

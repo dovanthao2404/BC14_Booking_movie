@@ -63,7 +63,6 @@ export const useStyles = makeStyles({
       display: "block",
     },
   },
-  seatMap: { margin: "0 20px" },
   listSeat: {
     display: "grid",
     placeItems: "center",
@@ -98,9 +97,7 @@ export const useStyles = makeStyles({
     position: "fixed",
     bottom: 0,
     width: "100%",
-    // borderTop: "1px solid #ccc",
     height: "80px",
-    // zIndex: 1,
   },
   confirmWrapper: {
     display: "flex",
@@ -128,6 +125,7 @@ export const useStyles = makeStyles({
     cursor: "pointer",
     userSelect: "none",
   },
+
   "@media (max-width: 767.98px)": {
     seatSection: {
       width: "100%",
@@ -136,6 +134,8 @@ export const useStyles = makeStyles({
     listSeat: {
       overflow: "auto",
     },
+    seatMap: { margin: "0 20px" },
+
     topLeft: {
       fontSize: "14px",
       width: "75%",

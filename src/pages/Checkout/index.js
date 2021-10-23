@@ -1,5 +1,6 @@
 import { Box } from "@mui/system";
 import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import NavTop from "./NavTop";
 import Pay from "./Pay";
 import Seat from "./Seat";
@@ -7,6 +8,12 @@ import Seat from "./Seat";
 export default function Checkout(props) {
   const [isPayment, setIsPayment] = useState(false);
   const { screenWidth } = props;
+  const dispatch = useDispatch();
+  const id = props.match.params.id;
+  useEffect(() => {
+    // dispatch()
+  }, [dispatch, id]);
+
   useEffect(() => {
     screenWidth < 767.98 ? setIsPayment(false) : setIsPayment(false);
     if (isPayment && screenWidth >= 768) {

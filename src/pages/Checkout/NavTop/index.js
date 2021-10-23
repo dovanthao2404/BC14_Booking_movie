@@ -12,7 +12,6 @@ export default function NavTop(props) {
   const dispatch = useDispatch();
 
   const handleLogout = () => {
-    console.log("logout");
     dispatch(actHandleLogout());
   };
 

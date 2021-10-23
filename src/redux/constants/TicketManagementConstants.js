@@ -1,0 +1,3 @@
+export const TICKET_ROOM_REQUEST = "@ticket/TICKET_ROOM_REQUEST";
+export const TICKET_ROOM_SUCCESS = "@ticket/TICKET_ROOM_SUCCESS";
+export const TICKET_ROOM_FAILED = "@ticket/TICKET_ROOM_FAILED";

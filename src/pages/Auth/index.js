@@ -33,6 +33,7 @@ export default function Auth(props) {
       }
     }
   }, []);
+
   return (
     <Container>
       <Box sx={{ display: "flex", justifyContent: "center" }}>

@@ -11,9 +11,9 @@ export default function Pay(props) {
       className={classes.pay}
       sx={{
         display:
-          isPayment && screenWidth < 768.98
+          isPayment && screenWidth < 767.98
             ? "block"
-            : screenWidth < 768.98
+            : screenWidth < 767.98
             ? "none"
             : "block",
       }}
