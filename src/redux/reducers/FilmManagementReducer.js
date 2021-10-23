@@ -4,7 +4,7 @@ const initialState = {
   listFilm: null,
   listFilmComingSoon: null,
   listFilmNowShowing: null,
-  // listFilmDefault: null,
+
   error: null,
   isLoading: false,
   infoFilmEdit: null,

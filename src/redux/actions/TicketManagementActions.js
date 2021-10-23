@@ -1,7 +1,6 @@
 import * as ActionType from "./../constants/TicketManagementConstants";
 import { ticketManagementServices } from "services/TicketManagementServices";
 import { actSetCinemaClusterInformation } from "./CinemaManagementActions";
-import { connection } from "index";
 
 export const actCreateShowtimes = (infoShowtimes, setNotify, resetForm) => {
   return async (dispatch) => {
@@ -48,27 +47,10 @@ export const actListTicketRoomFailed = (error) => ({
   payload: error,
 });
 
-export const actAddSeatSelected = (seat, maLichChieu) => {
-  return async (dispatch, getState) => {
-    await dispatch({
-      type: ActionType.ADD_SEAT_SELECTED,
-      payload: seat,
-    });
-    const { taiKhoan } = getState().userManagementReducer.userLogin;
-    const { listSeatSelected } = getState().ticketManagementReducer;
-
-    console.log({ maLichChieu });
-    console.log({ taiKhoan });
-    console.log({ listSeatSelected });
-
-    connection.invoke(
-      "datGhe",
-      taiKhoan,
-      JSON.stringify(listSeatSelected),
-      parseInt(maLichChieu)
-    );
-  };
-};
+export const actAddSeatSelected = (seat) => ({
+  type: ActionType.ADD_SEAT_SELECTED,
+  payload: seat,
+});
 export const actResetSeatSelected = () => ({
   type: ActionType.RESET_SEAT_SELECTED,
 });
@@ -96,7 +78,7 @@ export const actBookTickets = (
       });
     } catch (error) {
       setConfirmDialog({
-        title: error.response.data.message,
+        title: error.response?.data.message,
         subTitle: "",
         isOpen: true,
         onlyOne: true,

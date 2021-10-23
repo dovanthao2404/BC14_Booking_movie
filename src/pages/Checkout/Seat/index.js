@@ -8,7 +8,6 @@ import ErrorOutlineOutlinedIcon from "@mui/icons-material/ErrorOutlineOutlined";
 import { actAddSeatSelected } from "redux/actions/TicketManagementActions";
 import { useHistory } from "react-router-dom";
 import DialogCheckout from "../DialogCheckout";
-import { connection } from "index";
 
 function secondsToTime(secs) {
   let hours = Math.floor(secs / (60 * 60));
@@ -29,7 +28,18 @@ function secondsToTime(secs) {
 
 export default function Seat(props) {
   const [timeDown, setTimeDown] = useState(90);
+  const dispatch = useDispatch();
   const history = useHistory();
+
+  const { screenWidth, setIsPayment, listTicketRoom, listSeatSelected } = props;
+
+  const { thongTinPhim: filmInfo, danhSachGhe: listSeat } = listTicketRoom
+    ? listTicketRoom
+    : { thongTinPhim: null, danhSachGhe: null };
+
+  const { userLogin } = useSelector((state) => state.userManagementReducer);
+
+  const classes = useStyles();
   const [confirmDialog, setConfirmDialog] = useState({
     title: "",
     subTitle: "",
@@ -39,53 +49,34 @@ export default function Seat(props) {
     ),
   });
 
-  const { screenWidth, setIsPayment, listTicketRoom, listSeatSelected, id } =
-    props;
-
-  const dispatch = useDispatch();
-  const { listSeatRealtime } = useSelector(
-    (state) => state.ticketManagementReducer
-  );
-  const { thongTinPhim: filmInfo, danhSachGhe: listSeat } = listTicketRoom
-    ? listTicketRoom
-    : { thongTinPhim: null, danhSachGhe: null };
-
-  const classes = useStyles();
-
-  // useEffect(() => {
-  //   const countDow = setInterval(() => {
-  //     setTimeDown(timeDown - 1);
-  //   }, 1000);
-
-  //   timeDown === 0 &&
-  //     (clearInterval(countDow) ||
-  //       setConfirmDialog({
-  //         title: "Hết giờ",
-  //         subTitle: "Bạn có muốn đặt vé lại không",
-  //         isOpen: true,
-  //         icon: (
-  //           <ErrorOutlineOutlinedIcon
-  //             sx={{ fontSize: "80px", color: "#f8bb86" }}
-  //           />
-  //         ),
-  //         onConfirm: () => {
-  //           window.location.reload();
-  //         },
-  //         onNotConfirm: () => {
-  //           history.push("/");
-  //         },
-  //       }));
-
-  //   return () => {
-  //     clearInterval(countDow);
-  //   };
-  // }, [timeDown, history]);
-
   useEffect(() => {
-    connection.on("loadDanhSachGheDaDat", (dsGheKhachDat) => {
-      console.log(dsGheKhachDat);
-    });
-  }, []);
+    const countDow = setInterval(() => {
+      setTimeDown(timeDown - 1);
+    }, 1000);
+
+    timeDown === 0 &&
+      (clearInterval(countDow) ||
+        setConfirmDialog({
+          title: "Hết giờ",
+          subTitle: "Bạn có muốn đặt vé lại không",
+          isOpen: true,
+          icon: (
+            <ErrorOutlineOutlinedIcon
+              sx={{ fontSize: "80px", color: "#f8bb86" }}
+            />
+          ),
+          onConfirm: () => {
+            window.location.reload();
+          },
+          onNotConfirm: () => {
+            history.push("/");
+          },
+        }));
+
+    return () => {
+      clearInterval(countDow);
+    };
+  }, [timeDown, history]);
 
   const renderConfirm = () => {
     if (screenWidth < 767.98)
@@ -150,23 +141,22 @@ export default function Seat(props) {
       );
       const classSeatSelected = isSeatSelected ? "seatSelected" : "";
 
-      const isRealTime = listSeatRealtime?.find(
-        (seat) => seat.maGhe === listChair[i].maGhe
-      );
-      const classSeatRealtime = isRealTime ? "seatRealtimeSelected" : "";
+      const classMySeat =
+        userLogin?.taiKhoan === listChair[i].taiKhoanNguoiDat ? "mySeat" : "";
+
       listSeatItem.push(
         <span
           key={i}
           onClick={() => {
-            if (!classOtherSelected || !classSeatRealtime)
-              dispatch(actAddSeatSelected(listChair[i], id));
+            if (!classOtherSelected || !classMySeat)
+              dispatch(actAddSeatSelected(listChair[i]));
           }}
           className={clsx(
             styles.seat,
             styles[classVip],
             styles[classOtherSelected],
             styles[classSeatSelected],
-            styles[classSeatRealtime]
+            styles[classMySeat]
           )}
         >
           {listChair[i]?.tenGhe}
@@ -246,10 +236,8 @@ export default function Seat(props) {
             <p className={classes.seatNoteSub}>Ghế đã có người chọn</p>
           </div>
           <div className={classes.noteSeatItem}>
-            <span
-              className={`${styles.seatRealtimeSelected} ${styles.seat}`}
-            ></span>
-            <p className={classes.seatNoteSub}>Ghế đang đặt</p>
+            <span className={`${styles.mySeat} ${styles.seat}`}></span>
+            <p className={classes.seatNoteSub}>Ghế bạn đã đặt</p>
           </div>
         </Box>
       </Box>

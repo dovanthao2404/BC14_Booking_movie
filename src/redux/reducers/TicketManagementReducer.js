@@ -5,7 +5,6 @@ const initialState = {
   error: null,
   isLoading: false,
   listSeatSelected: null,
-  listSeatRealtime: [{ maGhe: 50114 }, { maGhe: 50115 }],
 };
 
 export const ticketManagementReducer = (

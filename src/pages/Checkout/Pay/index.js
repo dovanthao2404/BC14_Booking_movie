@@ -39,14 +39,7 @@ export default function Pay(props) {
     const iconError = WarningIcon;
     const iconSuccess = CheckCircleOutlineIcon;
     dispatch(
-      actBookTickets(
-        data,
-        history,
-        confirmDialog,
-        setConfirmDialog,
-        iconError,
-        iconSuccess
-      )
+      actBookTickets(data, history, setConfirmDialog, iconError, iconSuccess)
     );
   };
 

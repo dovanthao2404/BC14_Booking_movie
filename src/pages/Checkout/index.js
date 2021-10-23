@@ -61,7 +61,6 @@ export default function Checkout(props) {
           setIsPayment={setIsPayment}
           screenWidth={screenWidth}
           listSeatSelected={listSeatSelected}
-          id={id}
         />
         <Pay
           listTicketRoom={listTicketRoom}
