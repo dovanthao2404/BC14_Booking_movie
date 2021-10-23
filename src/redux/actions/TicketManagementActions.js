@@ -1,11 +1,12 @@
 import * as ActionType from "./../constants/TicketManagementConstants";
-import { ticketmanagementServices } from "services/TicketManagementServices";
+import { ticketManagementServices } from "services/TicketManagementServices";
 import { actSetCinemaClusterInformation } from "./CinemaManagementActions";
+import { connection } from "index";
 
 export const actCreateShowtimes = (infoShowtimes, setNotify, resetForm) => {
   return async (dispatch) => {
     try {
-      await ticketmanagementServices.createShowtimesServices(infoShowtimes);
+      await ticketManagementServices.createShowtimesServices(infoShowtimes);
       await setNotify({
         type: "success",
         isOpen: true,
@@ -28,7 +29,7 @@ export const actGetListTicketRoomById = (id, history) => {
     dispatch(actListTicketRoomRequest());
     try {
       const reuslt =
-        await ticketmanagementServices.getListTicketRoomByIdServices(id);
+        await ticketManagementServices.getListTicketRoomByIdServices(id);
       dispatch(actListTicketRoomSuccess(reuslt.data.content));
     } catch (error) {
       dispatch(actListTicketRoomFailed(error));
@@ -47,10 +48,27 @@ export const actListTicketRoomFailed = (error) => ({
   payload: error,
 });
 
-export const actAddSeatSelected = (seat) => ({
-  type: ActionType.ADD_SEAT_SELECTED,
-  payload: seat,
-});
+export const actAddSeatSelected = (seat, maLichChieu) => {
+  return async (dispatch, getState) => {
+    await dispatch({
+      type: ActionType.ADD_SEAT_SELECTED,
+      payload: seat,
+    });
+    const { taiKhoan } = getState().userManagementReducer.userLogin;
+    const { listSeatSelected } = getState().ticketManagementReducer;
+
+    console.log({ maLichChieu });
+    console.log({ taiKhoan });
+    console.log({ listSeatSelected });
+
+    connection.invoke(
+      "datGhe",
+      taiKhoan,
+      JSON.stringify(listSeatSelected),
+      parseInt(maLichChieu)
+    );
+  };
+};
 export const actResetSeatSelected = () => ({
   type: ActionType.RESET_SEAT_SELECTED,
 });
@@ -58,14 +76,13 @@ export const actResetSeatSelected = () => ({
 export const actBookTickets = (
   data,
   history,
-  confirmDialog,
   setConfirmDialog,
   IconError,
   IconSuccess
 ) => {
   return async (dispatch) => {
     try {
-      const result = await ticketmanagementServices.bookTicketsServices(data);
+      const result = await ticketManagementServices.bookTicketsServices(data);
 
       setConfirmDialog({
         title: result.data.message,

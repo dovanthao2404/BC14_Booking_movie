@@ -3,11 +3,12 @@ import React, { useEffect, useState } from "react";
 import { useStyles } from "./style";
 import styles from "./Seat.module.css";
 import clsx from "clsx";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import ErrorOutlineOutlinedIcon from "@mui/icons-material/ErrorOutlineOutlined";
 import { actAddSeatSelected } from "redux/actions/TicketManagementActions";
 import { useHistory } from "react-router-dom";
 import DialogCheckout from "../DialogCheckout";
+import { connection } from "index";
 
 function secondsToTime(secs) {
   let hours = Math.floor(secs / (60 * 60));
@@ -38,6 +39,19 @@ export default function Seat(props) {
     ),
   });
 
+  const { screenWidth, setIsPayment, listTicketRoom, listSeatSelected, id } =
+    props;
+
+  const dispatch = useDispatch();
+  const { listSeatRealtime } = useSelector(
+    (state) => state.ticketManagementReducer
+  );
+  const { thongTinPhim: filmInfo, danhSachGhe: listSeat } = listTicketRoom
+    ? listTicketRoom
+    : { thongTinPhim: null, danhSachGhe: null };
+
+  const classes = useStyles();
+
   // useEffect(() => {
   //   const countDow = setInterval(() => {
   //     setTimeDown(timeDown - 1);
@@ -67,15 +81,11 @@ export default function Seat(props) {
   //   };
   // }, [timeDown, history]);
 
-  const { screenWidth, setIsPayment, listTicketRoom, listSeatSelected } = props;
-
-  const dispatch = useDispatch();
-
-  const { thongTinPhim: filmInfo, danhSachGhe: listSeat } = listTicketRoom
-    ? listTicketRoom
-    : { thongTinPhim: null, danhSachGhe: null };
-
-  const classes = useStyles();
+  useEffect(() => {
+    connection.on("loadDanhSachGheDaDat", (dsGheKhachDat) => {
+      console.log(dsGheKhachDat);
+    });
+  }, []);
 
   const renderConfirm = () => {
     if (screenWidth < 767.98)
@@ -138,20 +148,25 @@ export default function Seat(props) {
       const isSeatSelected = listSeatSelected?.find(
         (seatSelected) => seatSelected.maGhe === listChair[i].maGhe
       );
-
       const classSeatSelected = isSeatSelected ? "seatSelected" : "";
 
+      const isRealTime = listSeatRealtime?.find(
+        (seat) => seat.maGhe === listChair[i].maGhe
+      );
+      const classSeatRealtime = isRealTime ? "seatRealtimeSelected" : "";
       listSeatItem.push(
         <span
           key={i}
           onClick={() => {
-            dispatch(actAddSeatSelected(listChair[i]));
+            if (!classOtherSelected || !classSeatRealtime)
+              dispatch(actAddSeatSelected(listChair[i], id));
           }}
           className={clsx(
             styles.seat,
             styles[classVip],
             styles[classOtherSelected],
-            styles[classSeatSelected]
+            styles[classSeatSelected],
+            styles[classSeatRealtime]
           )}
         >
           {listChair[i]?.tenGhe}
@@ -229,6 +244,12 @@ export default function Seat(props) {
               className={`${styles.seatOtherSelected} ${styles.seat}`}
             ></span>
             <p className={classes.seatNoteSub}>Ghế đã có người chọn</p>
+          </div>
+          <div className={classes.noteSeatItem}>
+            <span
+              className={`${styles.seatRealtimeSelected} ${styles.seat}`}
+            ></span>
+            <p className={classes.seatNoteSub}>Ghế đang đặt</p>
           </div>
         </Box>
       </Box>

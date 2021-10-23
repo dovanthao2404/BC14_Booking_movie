@@ -10,4 +10,4 @@ class TicketManagementServices {
   bookTicketsServices = (data) => api.post(`/api/QuanLyDatVe/DatVe`, data);
 }
 
-export const ticketmanagementServices = new TicketManagementServices();
+export const ticketManagementServices = new TicketManagementServices();

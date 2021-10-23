@@ -27,5 +27,7 @@
   background: #ccc;
   cursor: no-drop;
 }
-.a {
+.seatRealtimeSelected {
+  background: rgb(197, 137, 147);
+  cursor: no-drop;
 }
