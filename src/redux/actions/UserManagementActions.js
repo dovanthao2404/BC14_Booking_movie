@@ -231,3 +231,21 @@ export const UserLoginAction = (InfoLogin) =>{
     }
   }
 }
+
+export const UserRegisterAction = (InfoRegister) =>{
+  return async (dispatch) =>{
+    try{
+        const result = await userManagementServices.registerServices(InfoRegister);
+
+        if(result.data.status === 200){
+          dispatch({
+            type: REGISTER_ACTION,
+            InfoRegister: result.data.content, 
+          })
+        }
+    }
+    catch (error){
+
+    }
+  }
+}
