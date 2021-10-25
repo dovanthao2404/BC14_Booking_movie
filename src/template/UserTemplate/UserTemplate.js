@@ -1,7 +1,7 @@
 import {useFormik} from 'formik';
 import React from 'react';
 import { Route } from 'react-router';
-import { UserLoginAction } from 'redux/actions/UserManagementActions';
+
 
 const {
 	AppBar,
@@ -86,21 +86,16 @@ function Copyright() {
 	);
 }
 
-export default function Login(props) {
-  const dispatch = useDispatch();
+export default function UserTemplate(props) {
 	const formik = useFormik({
 		initialValues:{
 			account: '',
 			pass: '',
 		},
 		onsubmit: values =>{
-      const action = UserLoginAction(values);
-      dispatch(action);
 
 		},
 	});
-
-  const {userLogin} = useSelector(state => state.UserManagementReducer);
 	
 	const { Component, ...restProps } = props;
     const classes = useStyles();

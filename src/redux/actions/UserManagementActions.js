@@ -213,3 +213,21 @@ export const actUpdateInfoAccount = (data, setNotify) => {
     }
   };
 };
+
+export const UserLoginAction = (InfoLogin) =>{
+  return async (dispatch) =>{
+    try{
+        const result = await userManagementServices.loginServices(InfoLogin);
+
+        if(result.data.status === 200){
+          dispatch({
+            type: LOGIN_ACTION,
+            InfoLogin: result.data.content, 
+          })
+        }
+    }
+    catch (error){
+
+    }
+  }
+}

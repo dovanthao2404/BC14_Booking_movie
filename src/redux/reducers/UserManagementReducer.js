@@ -103,7 +103,6 @@ const userManagementReducer = (state = initialState, { type, payload }) => {
       state.error = payload;
       state.isLoading = false;
       return { ...state };
-
     default:
       return state;
   }
