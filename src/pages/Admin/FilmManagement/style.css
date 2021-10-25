@@ -1,0 +1,6 @@
+div[data-field="moTa"] {
+  line-height: unset !important;
+  text-overflow: unset !important;
+  white-space: unset !important;
+  padding: 20px 0 !important;
+}

@@ -15,6 +15,11 @@ const routeHome = [
     exact: false,
     path: "/home",
   },
+  {
+    Component: lazy(() => import("../pages/Profile")),
+    exact: false,
+    path: "/profile",
+  },
 ];
 
 const routeAdmin = [

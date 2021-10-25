@@ -21,18 +21,20 @@ const SignupSchema = Yup.object().shape({
 
 export default function Auth(props) {
   const dispatch = useDispatch();
+  const { history } = props;
+
   const { errorLogin, userLogin } = useSelector(
     (state) => state.userManagementReducer
   );
   useEffect(() => {
     if (userLogin) {
       if (userLogin.maLoaiNguoiDung === "QuanTri") {
-        props.history.replace("/admin/dashboard");
+        history.replace("/admin/dashboard");
       } else {
-        props.history.replace("/");
+        history.replace("/");
       }
     }
-  }, []);
+  }, [history, userLogin]);
 
   return (
     <Container>

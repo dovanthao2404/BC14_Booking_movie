@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useFormik } from "formik";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 
 import FormControl from "@mui/material/FormControl";
 import Box from "@mui/material/Box";
@@ -41,10 +41,10 @@ const EditUser = (props) => {
   const { infoUserEdit, error, isLoading, userLogin } = useSelector(
     (state) => state.userManagementReducer
   );
-
+  const { id } = useParams();
   useEffect(() => {
-    dispatch(actGetInfoUser(props.match.params.id));
-  }, [props.match.params.id]);
+    dispatch(actGetInfoUser(id));
+  }, [dispatch, id]);
 
   // Kiểm tra xem các giá trị nào thay đổi nếu thay đổi thì push vào mảng để validate
   const checkValueChange = (values) => {
@@ -143,7 +143,7 @@ const EditUser = (props) => {
         : undefined;
 
     // chỉ vần e errors có value thì nó check
-    // Phải xóa nếu reMatKhau trong error để khỏi check
+    // Phải xóa reMatKhau trong error để khỏi check
     // Các hàm trên tách hàm thì cũng cần xóa nên e không tách
     !errors.reMatKhau && delete errors.reMatKhau;
 

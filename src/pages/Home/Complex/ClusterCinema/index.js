@@ -1,5 +1,31 @@
 import React from "react";
 
+const getLogo = (tenRap) => {
+  if (tenRap) {
+    const listCinema = {
+      bhd: "/assets/img/BHDStar_theater.jpg",
+      cgv: "/assets/img/CGV_theater.jpg",
+      cns: "/assets/img/CGV_theater.jpg",
+      glx: "/assets/img/Galaxy_theater.jpg",
+      lotte: "/assets/img/LotteCinima_theater.jpg",
+      megags: "/assets/img/MegaGS_theater.jpg",
+    };
+
+    let anhHeThong = "";
+
+    for (let key in listCinema) {
+      if (tenRap.toLowerCase().includes(key)) {
+        anhHeThong = listCinema[key];
+      }
+    }
+    if (!anhHeThong) {
+      anhHeThong = "https://picsum.photos/50/50";
+    }
+
+    return anhHeThong;
+  }
+};
+
 export default function ClusterCinema(props) {
   const { cumRap } = props;
   return (
@@ -10,7 +36,7 @@ export default function ClusterCinema(props) {
       }}
     >
       <img
-        src={cumRap.hinhAnh}
+        src={getLogo(cumRap.tenCumRap)}
         alt={cumRap.hinhAnh}
         style={{
           width: "50px",

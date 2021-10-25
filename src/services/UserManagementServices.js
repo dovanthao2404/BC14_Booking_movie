@@ -21,11 +21,21 @@ class UserManagementServices {
   };
 
   getInfoUserServices = (taiKhoan) => {
-    return api.post(`/api/QuanLyNguoiDung/LayThongTinNguoiDung?taiKhoan=${taiKhoan}`);
+    return api.post(
+      `/api/QuanLyNguoiDung/LayThongTinNguoiDung?taiKhoan=${taiKhoan}`
+    );
   };
 
   updateInfoUserServices = (newInfo) => {
     return api.post(`/api/QuanLyNguoiDung/CapNhatThongTinNguoiDung`, newInfo);
+  };
+
+  getInfoAccountServices = () => {
+    return api.post(`/api/QuanLyNguoiDung/ThongTinTaiKhoan`);
+  };
+
+  updateInfoAccountServices = (info) => {
+    return api.put(`/api/QuanLyNguoiDung/CapNhatThongTinNguoiDung`, info);
   };
 }
 

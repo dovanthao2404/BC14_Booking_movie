@@ -13,6 +13,7 @@ const initialState = {
   userLogin,
   errorLogin: null,
   infoUserEdit: null,
+  infoAccount: null,
 };
 
 const userManagementReducer = (state = initialState, { type, payload }) => {
@@ -61,6 +62,9 @@ const userManagementReducer = (state = initialState, { type, payload }) => {
 
     case ActionType.LOGOUT:
       state.userLogin = null;
+      state.infoUserEdit = null;
+      state.infoAccount = null;
+
       localStorage.removeItem(USER_LOGIN);
       localStorage.removeItem(TOKEN);
       return { ...state };
@@ -83,6 +87,23 @@ const userManagementReducer = (state = initialState, { type, payload }) => {
       state.isLoading = false;
 
       return { ...state };
+
+    case ActionType.INFO_ACCOUNT_REQUEST:
+      state.infoAccount = null;
+      state.error = null;
+      state.isLoading = true;
+      return { ...state };
+    case ActionType.INFO_ACCOUNT_SUCCCESS:
+      state.infoAccount = payload;
+      state.error = null;
+      state.isLoading = false;
+      return { ...state };
+    case ActionType.INFO_ACCOUNT_FAILED:
+      state.infoAccount = null;
+      state.error = payload;
+      state.isLoading = false;
+      return { ...state };
+
     default:
       return state;
   }

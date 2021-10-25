@@ -11,8 +11,11 @@ class CinemaManagementServices {
   getInfoFilmShowtimesByIdServices = (id) =>
     api.get(`/api/QuanLyRap/LayThongTinLichChieuPhim?MaPhim=${id}`);
 
-  getInfoShowtimesCinemaSystemServices = () =>
-    api.get(`/api/QuanLyRap/LayThongTinLichChieuHeThongRap?maNhom=${GROUP_ID}`);
+  getInfoShowtimesCinemaSystemServices = () => {
+    return api.get(
+      `/api/QuanLyRap/LayThongTinLichChieuHeThongRap?maNhom=${GROUP_ID}`
+    );
+  };
 }
 
 export const cinemaManagementServices = new CinemaManagementServices();

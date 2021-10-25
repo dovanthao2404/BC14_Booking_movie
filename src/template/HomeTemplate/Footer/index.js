@@ -65,14 +65,14 @@ export default function Footer(props) {
               <Box
                 component="img"
                 sx={{ width: "30px", heigth: "30px", margin: "5px" }}
-                src="https://tix.vn/app/assets/img/icons/apple-logo.png"
-                alt="https://tix.vn/app/assets/img/icons/apple-logo.png"
+                src="/assets/img/apple-logo.png"
+                alt="/assets/img/apple-logo.png"
               />
               <Box
                 component="img"
                 sx={{ width: "30px", heigth: "30px", margin: "5px" }}
-                src="https://tix.vn/app/assets/img/icons/android-logo.png"
-                alt="https://tix.vn/app/assets/img/icons/android-logo.png"
+                src="/assets/img/android-logo.png"
+                alt="/assets/img/android-logo.png"
               />
             </Box>
           </Box>
@@ -84,14 +84,14 @@ export default function Footer(props) {
               <Box
                 component="img"
                 sx={{ width: "30px", heigth: "30px", margin: "5px" }}
-                src="https://tix.vn/app/assets/img/icons/facebook-logo.png"
-                alt="https://tix.vn/app/assets/img/icons/facebook-logo.png"
+                src="/assets/img/facebook-logo.png"
+                alt="/assets/img/facebook-logo.png"
               />
               <Box
                 component="img"
                 sx={{ width: "30px", heigth: "30px", margin: "5px" }}
-                src="https://tix.vn/app/assets/img/icons/zalo-logo.png"
-                alt="https://tix.vn/app/assets/img/icons/zalo-logo.png"
+                src="/assets/img/zalo-logo.png"
+                alt="/assets/img/zalo-logo.png"
               />
             </Box>
           </Box>
@@ -131,14 +131,14 @@ export default function Footer(props) {
               <Box
                 component="img"
                 sx={{ width: "30px", heigth: "30px", margin: "5px" }}
-                src="https://tix.vn/app/assets/img/icons/facebook-logo.png"
-                alt="https://tix.vn/app/assets/img/icons/facebook-logo.png"
+                src="/assets/img/facebook-logo.png"
+                alt="/assets/img/facebook-logo.png"
               />
               <Box
                 component="img"
                 sx={{ width: "30px", heigth: "30px", margin: "5px" }}
-                src="https://tix.vn/app/assets/img/icons/zalo-logo.png"
-                alt="https://tix.vn/app/assets/img/icons/zalo-logo.png"
+                src="/assets/img/zalo-logo.png"
+                alt="/assets/img/zalo-logo.png"
               />
             </Box>
           </Box>
@@ -177,8 +177,8 @@ export default function Footer(props) {
                 display: "block",
                 margin: "0 auto",
               }}
-              src="https://tix.vn/app/assets/img/icons/zion-logo.jpg"
-              alt="https://tix.vn/app/assets/img/icons/zion-logo.jpg"
+              src="/assets/img/zion-logo.jpg"
+              alt="/assets/img/zion-logo.jpg"
             />
           </Box>
           <Box

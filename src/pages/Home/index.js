@@ -13,6 +13,7 @@ import HomeFilm from "./HomeFilm";
 import Complex from "./Complex";
 import HomeNews from "./HomeNews";
 import HomeApp from "./HomeApp";
+import { actGetInfoShowtimesCinemaSystem } from "redux/actions/CinemaManagementActions";
 
 export default function HomgPage(props) {
   const { screenWidth } = props;
@@ -24,6 +25,7 @@ export default function HomgPage(props) {
   useEffect(() => {
     dispatch(actGetListBanner());
     dispatch(actGetListFilm());
+    dispatch(actGetInfoShowtimesCinemaSystem());
   }, [dispatch]);
 
   const responsiveHomeTool = () => {

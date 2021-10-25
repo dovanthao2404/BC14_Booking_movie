@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment } from "react";
 import { styled } from "@mui/material/styles";
 import ArrowForwardIosSharpIcon from "@mui/icons-material/ArrowForwardIosSharp";
 import MuiAccordion from "@mui/material/Accordion";
@@ -67,13 +67,9 @@ const useStyles = makeStyles({
 });
 
 export default function Accordions(props) {
-  const { film, screenWidth } = props;
+  const { film, screenWidth, handleChange, expanded } = props;
   let history = useHistory();
-  const [expanded, setExpanded] = useState("panel1");
   const classes = useStyles();
-  const handleChange = (panel) => (event, newExpanded) => {
-    setExpanded(newExpanded ? panel : false);
-  };
 
   // Chuyển lịch chiếu thành {ngayChieu: [<Danh sách lịch chiếu của ngày chiếu>]}
   const flatArrayShowtimesToObject = (arr) => {
@@ -141,62 +137,63 @@ export default function Accordions(props) {
   };
 
   return (
-    <div>
-      <Accordion onChange={handleChange("panel1")}>
-        <AccordionSummary
-          aria-controls="panel1d-content"
-          id="panel1d-header"
-          sx={{
-            padding: "8px 20px",
-            flexDirection: "row",
-            margin: 0,
-            paddingLeft: "12px",
-          }}
-        >
-          <Typography component="div">
-            <Box sx={{ display: "flex", margin: 0 }}>
-              <img
-                src={film?.hinhAnh}
-                alt={film?.hinhAnh}
-                onError={(e) => {
-                  e.onError = null;
-                  e.target.src =
-                    "https://bitsofco.de/content/images/2018/12/broken-1.png";
-                }}
-                style={{
-                  width: "50px",
-                  height: "50px",
-                  display: "block",
-                  borderRadius: "6px",
-                }}
-              />
-              <Box sx={{ pl: "12px", fontWeight: "bold" }}>{film?.tenPhim}</Box>
-            </Box>
-          </Typography>
-        </AccordionSummary>
-        <AccordionDetails
-          sx={{
-            maxHeight:
-              screenWidth >= 982
-                ? "200px"
-                : screenWidth >= 768
-                ? "180px"
-                : "180px",
-            overflow: "auto",
-          }}
-        >
-          <Box>
-            <Box
-              component="h2"
-              sx={{ fontWeight: "bold", mb: 1, color: "#1976d2" }}
-            >
-              2D Digital
-            </Box>
-
-            {renderShowtimes()}
+    <Accordion
+      expanded={expanded === film.maPhim}
+      onChange={handleChange(film.maPhim)}
+    >
+      <AccordionSummary
+        aria-controls="panel1d-content"
+        id={film.maPhim}
+        sx={{
+          padding: "8px 20px",
+          flexDirection: "row",
+          margin: 0,
+          paddingLeft: "12px",
+        }}
+      >
+        <Typography component="div">
+          <Box sx={{ display: "flex", margin: 0 }}>
+            <img
+              src={film?.hinhAnh}
+              alt={film?.hinhAnh}
+              onError={(e) => {
+                e.onError = null;
+                e.target.src =
+                  "https://bitsofco.de/content/images/2018/12/broken-1.png";
+              }}
+              style={{
+                width: "50px",
+                height: "50px",
+                display: "block",
+                borderRadius: "6px",
+              }}
+            />
+            <Box sx={{ pl: "12px", fontWeight: "bold" }}>{film?.tenPhim}</Box>
           </Box>
-        </AccordionDetails>
-      </Accordion>
-    </div>
+        </Typography>
+      </AccordionSummary>
+      <AccordionDetails
+        sx={{
+          maxHeight:
+            screenWidth >= 982
+              ? "200px"
+              : screenWidth >= 768
+              ? "180px"
+              : "180px",
+          overflow: "auto",
+        }}
+      >
+        <Box>
+          <Box
+            component="h2"
+            sx={{ fontWeight: "bold", mb: 1, color: "#1976d2" }}
+          >
+            2D Digital
+          </Box>
+
+          {renderShowtimes()}
+        </Box>
+      </AccordionDetails>
+    </Accordion>
   );
 }

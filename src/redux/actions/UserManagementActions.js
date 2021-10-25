@@ -170,3 +170,46 @@ export const actInfoUserRequest = () => ({
 export const actHandleLogout = () => ({
   type: ActionType.LOGOUT,
 });
+
+export const actGetInfoAccount = () => {
+  return async (dispatch) => {
+    dispatch(actInfoAccountRequest());
+    try {
+      const reuslt = await userManagementServices.getInfoAccountServices();
+      dispatch(actInfoAccountSuccess(reuslt.data.content));
+    } catch (error) {
+      dispatch(actInfoAccountFailed(error));
+    }
+  };
+};
+export const actInfoAccountRequest = () => ({
+  type: ActionType.INFO_ACCOUNT_REQUEST,
+});
+export const actInfoAccountSuccess = (data) => ({
+  type: ActionType.INFO_ACCOUNT_SUCCCESS,
+  payload: data,
+});
+export const actInfoAccountFailed = (error) => ({
+  type: ActionType.INFO_ACCOUNT_FAILED,
+  payload: error,
+});
+
+export const actUpdateInfoAccount = (data, setNotify) => {
+  return async (dispatch) => {
+    try {
+      await userManagementServices.updateInfoAccountServices(data);
+      setNotify({
+        isOpen: true,
+        message: "Bạn đã cập nhật thành công",
+        type: "success",
+      });
+      dispatch(actInfoAccountSuccess(data));
+    } catch (error) {
+      setNotify({
+        isOpen: true,
+        message: error.response.data.content,
+        type: "error",
+      });
+    }
+  };
+};

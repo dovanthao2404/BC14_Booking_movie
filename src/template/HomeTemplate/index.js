@@ -31,7 +31,7 @@ export default function HomeTeplate({ Component, ...props }) {
         render={(propsRoute) => {
           return (
             <>
-              <Navbar screenWidth={screenWidth} />
+              <Navbar screenWidth={screenWidth} {...propsRoute} />
               <Component screenWidth={screenWidth} {...propsRoute} />
               <Footer screenWidth={screenWidth} />
             </>

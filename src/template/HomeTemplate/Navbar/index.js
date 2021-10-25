@@ -30,7 +30,7 @@ const useStyles = makeStyles({
   },
 });
 
-const Navbar = () => {
+const Navbar = (props) => {
   const theme = useTheme();
   const classes = useStyles();
 
@@ -52,10 +52,13 @@ const Navbar = () => {
         <Toolbar sx={{ alignItems: "center", justifyContent: "space-between" }}>
           <Typography sx={{ lineHeight: 0 }}>
             <Box
+              onClick={() => {
+                props.history.push("/");
+              }}
               component="img"
-              sx={{ width: 50, height: 50 }}
-              src="https://tix.vn/app/assets/img/icons/web-logo.png"
-              alt="https://tix.vn/app/assets/img/icons/web-logo.png"
+              sx={{ width: 50, height: 50, cursor: "pointer" }}
+              src="/assets/img/web-logo.png"
+              alt="/assets/img/web-logo.png"
             />
           </Typography>
           {isMatch ? (
@@ -66,27 +69,27 @@ const Navbar = () => {
             <>
               <Box component="ul" sx={{ display: "flex", padding: 0 }}>
                 <Box component="li">
-                  <HashLink className={classes.hashLink} to="#homeFilm">
+                  <HashLink className={classes.hashLink} to="/#homeFilm">
                     Lịch chiếu
                   </HashLink>
                 </Box>
                 <Box component="li">
                   <HashLink
                     className={classes.hashLink}
-                    to="#homeCinemaComplex"
+                    to="/#homeCinemaComplex"
                   >
                     Cụm rạp
                   </HashLink>
                 </Box>
                 <Box component="li">
-                  <HashLink className={classes.hashLink} to="#homeNews">
+                  <HashLink className={classes.hashLink} to="/#homeNews">
                     Tin tức
                   </HashLink>
                 </Box>
                 <Box component="li">
                   <HashLink
                     className={`${classes.hashLink} ${classes.lastChild}`}
-                    to="#homeApp"
+                    to="/#homeApp"
                   >
                     Ứng dụng
                   </HashLink>

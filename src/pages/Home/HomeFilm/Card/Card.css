@@ -157,3 +157,9 @@
     position: relative;
   }
 }
+
+@media (max-width: 768px) {
+  .btn-playTrailer {
+    display: none !important;
+  }
+}

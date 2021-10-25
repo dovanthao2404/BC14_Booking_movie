@@ -3,10 +3,12 @@ import { NavLink } from "react-router-dom";
 import "./Card.css";
 import { useHistory } from "react-router";
 import moment from "moment";
+import Modalyoutube from "components/ModalYoutube";
 export default function Card(props) {
   const history = useHistory();
   const { film } = props;
   const [mousePosition, setMousePosition] = useState(0);
+  const [isOpenModal, setIsOpenModal] = useState(false);
 
   const renderStar = (totalStar) => {
     let star = [];
@@ -47,55 +49,65 @@ export default function Card(props) {
   };
 
   return (
-    <div className="home-card">
-      <div className="card-content" style={{ position: "relative" }}>
-        <NavLink
-          to={`/detail/${film.maPhim}`}
-          onMouseDown={(e) => {
-            setMousePosition(e.pageX);
-          }}
-          onClick={(e) => {
-            const { pageX } = e;
-            if (Math.abs(pageX - mousePosition) > 10) {
-              e.preventDefault();
-            }
-          }}
-        >
-          <div className="overall-img">
-            <img src={film.hinhAnh} alt={film.hinhAnh} className="card-img" />
+    <>
+      <div className="home-card">
+        <div className="card-content" style={{ position: "relative" }}>
+          <NavLink
+            to={`/detail/${film.maPhim}`}
+            onMouseDown={(e) => {
+              setMousePosition(e.pageX);
+            }}
+            onClick={(e) => {
+              const { pageX } = e;
+              if (Math.abs(pageX - mousePosition) > 10) {
+                e.preventDefault();
+              }
+            }}
+          >
+            <div className="overall-img">
+              <img src={film.hinhAnh} alt={film.hinhAnh} className="card-img" />
 
-            <div className="card-overlay"></div>
-          </div>
-        </NavLink>
-        {renderRating()}
-        <span className="publishDate ">
-          {film.sapChieu ? moment(film.ngayKhoiChieu).format("DD/MM") : ""}
-        </span>
+              <div className="card-overlay"></div>
+            </div>
+          </NavLink>
+          {renderRating()}
+          <span className="publishDate ">
+            {film.sapChieu ? moment(film.ngayKhoiChieu).format("DD/MM") : ""}
+          </span>
 
-        <img
-          className="btn-playTrailer"
-          src="https://tix.vn/app/assets/img/icons/play-video.png"
-          alt=""
-        />
-      </div>
-      <div className="homeCard__footer">
-        <div className="homeCardNameParent">
-          <div className="homeCard__filmName">
-            {film.tenPhim.length > 30
-              ? film.tenPhim.slice(0, 30) + "..."
-              : film.tenPhim}
-          </div>
+          <img
+            className="btn-playTrailer"
+            src="assets/img/play-video.png"
+            alt=""
+            onClick={() => {
+              setIsOpenModal(true);
+            }}
+          />
         </div>
+        <div className="homeCard__footer">
+          <div className="homeCardNameParent">
+            <div className="homeCard__filmName">
+              {film.tenPhim.length > 30
+                ? film.tenPhim.slice(0, 30) + "..."
+                : film.tenPhim}
+            </div>
+          </div>
 
-        <button
-          onClick={() => {
-            history.push(`/detail/${film.maPhim}`);
-          }}
-          className="btn-buyTicket"
-        >
-          MUA VÉ
-        </button>
+          <button
+            onClick={() => {
+              history.push(`/detail/${film.maPhim}`);
+            }}
+            className="btn-buyTicket"
+          >
+            MUA VÉ
+          </button>
+        </div>
       </div>
-    </div>
+      <Modalyoutube
+        url={film.trailer}
+        isOpenModal={isOpenModal}
+        setIsOpenModal={setIsOpenModal}
+      />
+    </>
   );
 }

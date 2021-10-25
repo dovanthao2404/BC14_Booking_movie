@@ -47,7 +47,7 @@ export default function CreateShowtimes(props) {
 
   useEffect(() => {
     dispatch(actGetCinemaSystemInformation());
-  }, []);
+  }, [dispatch]);
 
   const {
     cinemaSystemInformation,

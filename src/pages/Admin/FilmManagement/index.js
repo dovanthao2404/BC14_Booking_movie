@@ -15,6 +15,7 @@ import {
   actGetListFilm,
 } from "redux/actions/FilmManagementActions";
 import moment from "moment";
+import "./style.css";
 
 function toSlug(str) {
   // Chuyển hết sang chữ thường
@@ -66,7 +67,7 @@ export default function FilmManagement(props) {
   });
   useEffect(() => {
     dispatch(actGetListFilm());
-  }, []);
+  }, [dispatch]);
 
   const { listFilm } = useSelector((state) => state.filmManagementReducer);
 
@@ -109,13 +110,23 @@ export default function FilmManagement(props) {
     {
       field: "moTa",
       headerName: "Mô Tả",
+      sortable: false,
       width: 300,
-      rowHeight: 800,
+      renderCell: (cell) => {
+        return (
+          <p>
+            {cell.row.moTa.length > 150
+              ? cell.row.moTa.slice(0, 150) + "..."
+              : cell.row.moTa}
+          </p>
+        );
+      },
     },
     {
       field: "ngayKhoiChieu",
       headerName: "Ngày khởi chiếu",
       width: 200,
+      sortable: false,
       renderCell: (cell) => {
         return <p>{moment(cell.row.ngayKhoiChieu).format("DD/MM/YYYY")}</p>;
       },

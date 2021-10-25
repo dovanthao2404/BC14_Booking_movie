@@ -108,7 +108,7 @@ const DrawerComponent = (props) => {
                 color: "#000",
                 width: "100%",
               }}
-              to="#homeFilm"
+              to="/#homeFilm"
             >
               <ListItemText>Lịch chiếu</ListItemText>
             </HashLink>
@@ -127,7 +127,7 @@ const DrawerComponent = (props) => {
                 color: "#000",
                 width: "100%",
               }}
-              to="#homeCinemaComplex"
+              to="/#homeCinemaComplex"
             >
               <ListItemText>Cụm rạp</ListItemText>
             </HashLink>
@@ -146,7 +146,7 @@ const DrawerComponent = (props) => {
                 color: "#000",
                 width: "100%",
               }}
-              to="#homeNews"
+              to="/#homeNews"
             >
               <ListItemText>Tin tức</ListItemText>
             </HashLink>
@@ -165,7 +165,7 @@ const DrawerComponent = (props) => {
                 color: "#000",
                 width: "100%",
               }}
-              to="#homeApp"
+              to="/#homeApp"
             >
               <ListItemText>Ứng dụng</ListItemText>
             </HashLink>

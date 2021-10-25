@@ -84,7 +84,13 @@ export default function Seat(props) {
         <Box className={classes.confirm}>
           <Box className={classes.confirmWrapper}>
             <Box className={clsx(classes.btnSeat, classes.btnShowSeat)}>
-              Vui lòng chọn ghế
+              {listSeatSelected?.length > 0
+                ? listSeatSelected.reduce(
+                    (listSeat, seatCurrent) =>
+                      listSeat + seatCurrent.tenGhe + ", ",
+                    ""
+                  )
+                : "Vui lòng chọn ghế"}
             </Box>
             <Box
               className={clsx(classes.btnSeat, classes.btnGoNext)}
@@ -112,10 +118,10 @@ export default function Seat(props) {
       const listCinema = {
         bhd: "/assets/img/BHDStar_theater.jpg",
         cgv: "/assets/img/CGV_theater.jpg",
-        cinestar: "/assets/img/CGV_theater.jpg",
-        galaxy: "/assets/img/Galaxy_theater.jpg",
+        cns: "/assets/img/CGV_theater.jpg",
+        glx: "/assets/img/Galaxy_theater.jpg",
         lotte: "/assets/img/LotteCinima_theater.jpg",
-        mega: "/assets/img/MegaGS_theater.jpg",
+        megags: "/assets/img/MegaGS_theater.jpg",
       };
       const tenRap = filmInfo.tenCumRap;
       let anhHeThong = "";
@@ -123,6 +129,9 @@ export default function Seat(props) {
         if (tenRap.toLowerCase().includes(key)) {
           anhHeThong = listCinema[key];
         }
+      }
+      if (!anhHeThong) {
+        anhHeThong = "https://picsum.photos/50/50";
       }
       return (
         <img className={classes.topLeftImg} src={anhHeThong} alt={anhHeThong} />
@@ -148,8 +157,10 @@ export default function Seat(props) {
         <span
           key={i}
           onClick={() => {
-            if (!classOtherSelected || !classMySeat)
+            if (classOtherSelected || classMySeat) {
+            } else {
               dispatch(actAddSeatSelected(listChair[i]));
+            }
           }}
           className={clsx(
             styles.seat,

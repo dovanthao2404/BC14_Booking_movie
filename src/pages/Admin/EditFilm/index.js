@@ -27,7 +27,7 @@ import {
 } from "redux/actions/FilmManagementActions";
 import Loading from "components/Loading";
 
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 
 const validate = (values) => {
   const errors = {};
@@ -57,10 +57,10 @@ const EditFilm = (props) => {
   const { infoFilmEdit, isLoading, error } = useSelector(
     (state) => state.filmManagementReducer
   );
-
+  const { id } = useParams();
   useEffect(() => {
-    dispatch(atcGetInfoFilm(props.match.params.id));
-  }, []);
+    dispatch(atcGetInfoFilm(id));
+  }, [dispatch, id]);
 
   const formik = useFormik({
     enableReinitialize: true,

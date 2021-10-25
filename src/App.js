@@ -1,7 +1,6 @@
-import React, { lazy, Suspense } from "react";
+import React from "react";
 import { Switch, Route } from "react-router-dom";
 import "./App.css";
-import PageNotFound from "./template/PageNotFound";
 import {
   renderRouteAdmin,
   renderRouteCheckout,
@@ -10,7 +9,8 @@ import {
 } from "./routers";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import Loading from "components/Loading";
+import Auth from "pages/Auth";
+import PageNotFound from "template/PageNotFound";
 
 function App() {
   return (
@@ -20,14 +20,8 @@ function App() {
         {renderRouteAdmin()}
         {renderRouteCheckout()}
         {renderRouteUser()}
-        <Suspense fallback={<Loading />}>
-          <Route
-            exact={true}
-            path="/auth"
-            component={lazy(() => import("./pages/Auth"))}
-          />
-        </Suspense>
-        <Route path="" component={PageNotFound} />
+        <Route exact={true} path="/auth" component={Auth} />
+        <Route exact={false} path="*" component={PageNotFound} />
       </Switch>
     </>
   );

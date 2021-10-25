@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Fragment } from "react";
+import React, { useState, Fragment } from "react";
 import "./Complex.css";
 import { Container } from "@mui/material";
 import PropTypes from "prop-types";
@@ -6,10 +6,10 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-import { useDispatch, useSelector } from "react-redux";
-import { actGetInfoShowtimesCinemaSystem } from "redux/actions/CinemaManagementActions";
+import { useSelector } from "react-redux";
+
 import ClusterCinema from "./ClusterCinema";
-import Accordions from "./Accordions";
+import ListFilm from "./ListFilm";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -44,15 +44,13 @@ function a11yProps(index) {
   };
 }
 
+const SCREEN_768 = 768;
+const SCREEN_582 = 582;
+
 export default function Complex(props) {
   const { screenWidth } = props;
   const [cinema, setCinema] = useState(0);
   const [cluster, setCluster] = useState(0);
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(actGetInfoShowtimesCinemaSystem());
-  }, [dispatch]);
 
   const { infoShowtimesCinemaSystem } = useSelector(
     (state) => state.cinemaManagementReducer
@@ -73,7 +71,7 @@ export default function Complex(props) {
       return (
         <Tab
           key={heThongRap.maHeThongRap}
-          variant={screenWidth > 582 ? "standard" : "scrollable"}
+          variant={screenWidth > SCREEN_582 ? "standard" : "scrollable"}
           label={
             <Box sx={{ padding: "20px" }}>
               <Box
@@ -116,28 +114,21 @@ export default function Complex(props) {
   };
 
   const renderShowtimes = (lstCumRap) => {
-    if (lstCumRap)
-      return lstCumRap.map((listFilm, index) => {
-        return (
-          <TabPanel key={index} value={cluster} index={index}>
-            <Box
-              id="accordionDetailId"
-              sx={{
-                overflow: "auto",
-                height: screenWidth >= 768 ? "540px" : "340px",
-              }}
-            >
-              {listFilm.danhSachPhim.map((film) => {
-                return (
-                  <div key={film.maPhim} id="homeAccordion">
-                    <Accordions screenWidth={screenWidth} film={film} />
-                  </div>
-                );
-              })}
-            </Box>
-          </TabPanel>
-        );
-      });
+    return lstCumRap?.map((listFilm, index) => {
+      return (
+        <TabPanel key={index} value={cluster} index={index}>
+          <Box
+            id="accordionDetailId"
+            sx={{
+              overflow: "auto",
+              height: screenWidth >= SCREEN_768 ? "540px" : "340px",
+            }}
+          >
+            <ListFilm listFilm={listFilm.danhSachPhim} />
+          </Box>
+        </TabPanel>
+      );
+    });
   };
 
   const renderCinemaCluster = () => {
@@ -150,7 +141,7 @@ export default function Complex(props) {
               sx={{
                 flexGrow: 1,
                 bgcolor: "background.paper",
-                display: screenWidth >= 768 ? "flex" : "block",
+                display: screenWidth >= SCREEN_768 ? "flex" : "block",
                 heigth: "540px",
                 overflow: "auto",
               }}
@@ -159,11 +150,13 @@ export default function Complex(props) {
                 sx={{
                   flexGrow: 1,
                   bgcolor: "background.paper",
-                  display: screenWidth >= 768 ? "flex" : "block",
+                  display: screenWidth >= SCREEN_768 ? "flex" : "block",
                 }}
               >
                 <Tabs
-                  orientation={screenWidth >= 768 ? "vertical" : "horizontal"}
+                  orientation={
+                    screenWidth >= SCREEN_768 ? "vertical" : "horizontal"
+                  }
                   value={cluster}
                   onChange={handleChangeTabsCluster}
                   aria-label="Vertical tabs example"
@@ -183,10 +176,6 @@ export default function Complex(props) {
     }
   };
 
-  const renderTabs = () => {
-    return renderCinemaSystem();
-  };
-
   return (
     <div style={{ paddingBottom: "40px" }}>
       <Container style={{ maxWidth: "940px" }}>
@@ -196,18 +185,19 @@ export default function Complex(props) {
             sx={{
               flexGrow: 1,
               bgcolor: "background.paper",
-              display: screenWidth >= 768 ? "flex" : "block",
-              height: screenWidth >= 768 ? "100%" : "auto",
+              display: screenWidth >= SCREEN_768 ? "flex" : "block",
+              height: screenWidth >= SCREEN_768 ? "100%" : "auto",
               border: "2px solid #ebebec",
             }}
           >
             <Box>
               <Tabs
-                // centered
                 id="tabsParent"
-                orientation={screenWidth >= 768 ? "vertical" : "horizontal"}
-                variant={screenWidth > 582 ? "standard" : "scrollable"}
-                centered={screenWidth > 582 ? true : false}
+                orientation={
+                  screenWidth >= SCREEN_768 ? "vertical" : "horizontal"
+                }
+                variant={screenWidth > SCREEN_582 ? "standard" : "scrollable"}
+                centered={screenWidth > SCREEN_582 ? true : false}
                 value={cinema}
                 onChange={handleChangeTabsCinema}
                 aria-label="Vertical tabs example"
@@ -217,7 +207,7 @@ export default function Complex(props) {
                   justifyContent: "center",
                 }}
               >
-                {renderTabs()}
+                {renderCinemaSystem()}
               </Tabs>
             </Box>
             {renderCinemaCluster()}

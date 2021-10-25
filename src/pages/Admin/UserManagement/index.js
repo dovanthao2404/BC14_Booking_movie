@@ -58,7 +58,7 @@ export default function UserManagement(props) {
   });
   useEffect(() => {
     dispatch(actGetListUser());
-  }, []);
+  }, [dispatch]);
 
   const { listUser } = useSelector((state) => state.userManagementReducer);
 

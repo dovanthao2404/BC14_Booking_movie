@@ -4,6 +4,7 @@ import Slider from "react-slick";
 import "./Carousel.css";
 import { Link } from "react-router-dom";
 import { makeStyles } from "@mui/styles";
+import Modalyoutube from "components/ModalYoutube";
 
 // Custom arrow react-slick
 function SampleNextArrow(props) {
@@ -12,8 +13,8 @@ function SampleNextArrow(props) {
     <img
       onClick={onClick}
       className={className}
-      src="https://tix.vn/app/assets/img/icons/next-session.png"
-      alt="https://tix.vn/app/assets/img/icons/next-session.png"
+      src="/assets/img/next-session.png"
+      alt="/assets/img/next-session.png"
     />
   );
 }
@@ -24,8 +25,8 @@ function SamplePrevArrow(props) {
     <img
       onClick={onClick}
       className={className}
-      src="https://tix.vn/app/assets/img/icons/back-session.png"
-      alt="https://tix.vn/app/assets/img/icons/back-session.png"
+      src="/assets/img/back-session.png"
+      alt="/assets/img/back-session.png"
     />
   );
 }
@@ -66,12 +67,21 @@ const useStyles = makeStyles({
   },
 });
 
+const listTrailer = [
+  "https://www.youtube.com/embed/uqJ9u7GSaYM",
+  "https://www.youtube.com/embed/kBY2k3G6LsM",
+  "https://www.youtube.com/embed/NYH2sLid0Zc",
+];
+
 export default function Carousel(props) {
   const [mousePosition, setMousePosition] = useState(0);
   const classes = useStyles(props);
+  const [isOpenModal, setIsOpenModal] = useState(false);
+  const [url, setUrl] = useState("");
 
   const renderBanner = () => {
-    return props.listBanner?.map((item) => {
+    return props.listBanner?.map((item, i) => {
+      item.trailer = listTrailer[i];
       return (
         <Box key={item.maPhim} className={classes.relativeFull}>
           <Box className={`${classes.absoluteFull} carousel__item`}>
@@ -85,7 +95,7 @@ export default function Carousel(props) {
                   e.preventDefault();
                 }
               }}
-              to="/detail/"
+              to={`/detail/${item.maPhim}`}
               style={{ position: "relative" }}
             >
               <Box
@@ -102,11 +112,12 @@ export default function Carousel(props) {
               ></Box>
             </Link>
             <img
-              src="https://tix.vn/app/assets/img/icons/play-video.png"
-              alt="https://tix.vn/app/assets/img/icons/play-video.png"
+              src="/assets/img/play-video.png"
+              alt="/assets/img/play-video.png"
               className="play-icon"
               onClick={() => {
-                console.log("a");
+                setUrl(item.trailer);
+                setIsOpenModal(true);
               }}
             />
           </Box>
@@ -136,6 +147,11 @@ export default function Carousel(props) {
           </Box>
         </Box>
       </Box>
+      <Modalyoutube
+        url={url}
+        isOpenModal={isOpenModal}
+        setIsOpenModal={setIsOpenModal}
+      />
     </>
   );
 }

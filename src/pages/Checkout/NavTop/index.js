@@ -5,15 +5,18 @@ import { NavLink } from "react-router-dom";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import { useDispatch, useSelector } from "react-redux";
 import { actHandleLogout } from "redux/actions/UserManagementActions";
+import { useHistory } from "react-router-dom";
 
 export default function NavTop(props) {
   const classes = useStyles();
   const dispatch = useDispatch();
   const { isPayment, setIsPayment, screenWidth } = props;
   const { userLogin } = useSelector((state) => state.userManagementReducer);
+  const history = useHistory();
 
   const handleLogout = () => {
     dispatch(actHandleLogout());
+    history.replace("/");
   };
 
   return (
@@ -22,8 +25,8 @@ export default function NavTop(props) {
         {!isPayment ? (
           <NavLink to="/" onClick={() => setIsPayment(false)}>
             <img
-              src="https://tix.vn/app/assets/img/icons/web-logo.png"
-              alt="https://tix.vn/app/assets/img/icons/web-logo.png"
+              src="/assets/img/web-logo.png"
+              alt="/assets/img/web-logo.png"
               className={classes.imgBrand}
             />
           </NavLink>

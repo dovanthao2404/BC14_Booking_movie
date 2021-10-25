@@ -12,8 +12,8 @@ function SampleNextArrow(props) {
     <img
       onClick={onClick}
       className={className}
-      src="https://tix.vn/app/assets/img/icons/next-session.png"
-      alt="https://tix.vn/app/assets/img/icons/next-session.png"
+      src="/assets/img/next-session.png"
+      alt="/assets/img/next-session.png"
     />
   );
 }
@@ -24,8 +24,8 @@ function SamplePrevArrow(props) {
     <img
       onClick={onClick}
       className={className}
-      src="https://tix.vn/app/assets/img/icons/back-session.png"
-      alt="https://tix.vn/app/assets/img/icons/back-session.png"
+      src="/assets/img/back-session.png"
+      alt="/assets/img/back-session.png"
     />
   );
 }
@@ -65,28 +65,30 @@ export default function HomeFilm(props) {
   };
 
   return (
-    <Container id="homeFilm" className="home-slick">
-      <ul className={"tab-header"}>
-        <li
-          onClick={() => {
-            setIsNowShow(true);
-          }}
-          className={`tab-header__child  ${isNowShow ? `active` : ""}`}
-        >
-          Đang chiếu{" "}
-        </li>
-        <li
-          onClick={() => {
-            setIsNowShow(false);
-          }}
-          className={`tab-header__child ${!isNowShow ? `active` : ""}`}
-        >
-          Sắp chiếu{" "}
-        </li>
-      </ul>
-      <div>
-        <Slider {...settings}>{renderCardFilm()}</Slider>
-      </div>
-    </Container>
+    <>
+      <Container id="homeFilm" className="home-slick">
+        <ul className={"tab-header"}>
+          <li
+            onClick={() => {
+              setIsNowShow(true);
+            }}
+            className={`tab-header__child  ${isNowShow ? `active` : ""}`}
+          >
+            Đang chiếu{" "}
+          </li>
+          <li
+            onClick={() => {
+              setIsNowShow(false);
+            }}
+            className={`tab-header__child ${!isNowShow ? `active` : ""}`}
+          >
+            Sắp chiếu{" "}
+          </li>
+        </ul>
+        <div>
+          <Slider {...settings}>{renderCardFilm()}</Slider>
+        </div>
+      </Container>
+    </>
   );
 }

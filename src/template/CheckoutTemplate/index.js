@@ -18,7 +18,7 @@ export default function CheckoutTemplate({ Component, ...props }) {
   const { userLogin } = useSelector((state) => state.userManagementReducer);
 
   if (!userLogin) {
-    return <Redirect to="/" />;
+    return <Redirect to="/login" />;
   }
 
   return (
