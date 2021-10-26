@@ -214,34 +214,35 @@ export const actUpdateInfoAccount = (data, setNotify) => {
   };
 };
 
-export const UserLoginAction = (InfoLogin) => {
+export const actUserLogin = (InfoLogin, history) => {
   return async (dispatch) => {
     try {
       const result = await userManagementServices.loginServices(InfoLogin);
-
-      if (result.data.status === 200) {
-        dispatch({
-          type: ActionType.LOGIN_ACTION,
-          InfoLogin: result.data.content,
-        });
-      }
-    } catch (error) {}
+      console.log(result.data.content);
+      dispatch(actLoginSuccess(result.data.content));
+      localStorage.setItem(USER_LOGIN, JSON.stringify(result.data.content));
+      localStorage.setItem(TOKEN, result.data.content[TOKEN]);
+      history.replace("/");
+    } catch (error) {
+      dispatch(actLoginFailed(error));
+    }
   };
 };
 
-export const UserRegisterAction = (InfoRegister) => {
+export const actUserRegister = (InfoRegister, history) => {
   return async (dispatch) => {
+    console.log("davao");
     try {
       const result = await userManagementServices.registerServices(
         InfoRegister
       );
-
-      if (result.data.status === 200) {
-        dispatch({
-          type: REGISTER_ACTION,
-          InfoRegister: result.data.content,
-        });
-      }
-    } catch (error) {}
+      console.log(result);
+      dispatch(actUserLogin(InfoRegister, history));
+    } catch (error) {
+      dispatch({
+        type: ActionType.REGISTER_ACTION_FAILED,
+        InfoRegister: error,
+      });
+    }
   };
 };

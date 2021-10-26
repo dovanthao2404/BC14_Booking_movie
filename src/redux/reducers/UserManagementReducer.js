@@ -103,6 +103,10 @@ const userManagementReducer = (state = initialState, { type, payload }) => {
       state.error = payload;
       state.isLoading = false;
       return { ...state };
+    case ActionType.REGISTER_ACTION_FAILED:
+      state.error = payload;
+
+      return { ...state };
     default:
       return state;
   }

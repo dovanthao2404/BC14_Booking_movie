@@ -1,0 +1,8 @@
+#form-login .form-input,
+#form-login .MuiInputLabel-root,
+#form-login .MuiOutlinedInput-input {
+  color: white !important;
+}
+#form-login .MuiOutlinedInput-notchedOutline {
+  border-color: #ffff;
+}

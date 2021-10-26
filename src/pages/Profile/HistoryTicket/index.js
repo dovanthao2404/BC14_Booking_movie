@@ -1,5 +1,3 @@
-
-
 import * as React from "react";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
@@ -54,7 +52,7 @@ export default function StickyHeadTable(props) {
     let newRender = "";
     if (column.format && typeof value === "number") {
       newRender = column.format(value);
-    } else if (console.log(column) || column.id === "hinhAnh") {
+    } else if (column.id === "hinhAnh") {
       newRender = (
         <img
           src={value}

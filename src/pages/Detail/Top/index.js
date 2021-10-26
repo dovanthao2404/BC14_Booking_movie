@@ -1,11 +1,11 @@
-import { makeStyles, styled } from "@mui/styles";
+import { makeStyles } from "@mui/styles";
 import { Box } from "@mui/system";
 import React, { useEffect, useState } from "react";
 import { Container } from "@mui/material";
-import Button from "@mui/material/Button";
 import "react-circular-progressbar/dist/styles.css";
 import Rating from "./Rating";
 import moment from "moment";
+import { HashLink } from "react-router-hash-link";
 
 const useStyles = makeStyles({
   flexCenter: {
@@ -71,6 +71,18 @@ const useStyles = makeStyles({
     color: "#9e9e9e",
     background: "rgb(10, 32, 41)",
   },
+  buyTicket: {
+    textDecoration: "none",
+    padding: "8px 10px",
+    margin: "10px 0",
+    background: "#fb4226",
+    textAlign: "center",
+    color: "#fff",
+    borderRadius: "4px",
+    "&:hover": {
+      background: "#b42a14",
+    },
+  },
   "@media (max-width: 768px)": {
     imgBackground: {
       filter: "blur(0)",
@@ -78,15 +90,15 @@ const useStyles = makeStyles({
   },
 });
 
-const NewButton = styled(Button)(({ theme }) => ({
-  "&.MuiButton-root": {
-    background: "#fb4226",
-    margin: "25px 0",
-    "&:hover": {
-      background: "#b42a14",
-    },
-  },
-}));
+// const NewButton = styled(Button)(({ theme }) => ({
+//   "&.MuiButton-root": {
+//     background: "#fb4226",
+//     margin: "25px 0",
+//     "&:hover": {
+//       background: "#b42a14",
+//     },
+//   },
+// }));
 
 export default function Top(props) {
   const { screenWidth, infoFilm } = props;
@@ -164,7 +176,14 @@ export default function Top(props) {
                   alt={infoFilm.hinhAnh}
                   className={classes.infoImg}
                 />
-                <Box sx={{ padding: "0 20px" }}>
+                <Box
+                  sx={{
+                    padding: "0 20px",
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "center",
+                  }}
+                >
                   <p>
                     {moment(infoFilm.ngayKhoiChieu).format(
                       "DD/MM/YYYY - hh:mm"
@@ -175,9 +194,13 @@ export default function Top(props) {
                       ? infoFilm.tenPhim.slice(0, 25) + " ..."
                       : infoFilm.tenPhim}
                   </p>
-                  <NewButton id="btnBuyTicket" variant="contained">
+                  <HashLink
+                    to="#complex"
+                    className={classes.buyTicket}
+                    variant="contained"
+                  >
                     Mua vé
-                  </NewButton>
+                  </HashLink>
                 </Box>
               </Box>
               <Box>

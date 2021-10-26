@@ -46,7 +46,6 @@ export default function Info(props) {
         values.reMatKhau !== values.matKhau && valueChange.push("reMatKhau");
       }
     }
-    console.log(valueChange);
 
     return valueChange;
   };

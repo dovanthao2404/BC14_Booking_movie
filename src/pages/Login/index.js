@@ -1,365 +1,104 @@
-// import { useFormik } from "formik";
-// import React from "react";
-// import { useDispatch, useSelector } from "react-redux";
-// import { Route } from "react-router";
-// import { UserLoginAction } from "redux/actions/UserManagementActions";
-// // import LightBulbIcon from "@mui/icons-material/LightBulbIcon";
-// const {
-//   AppBar,
-//   colors,
-//   Avatar,
-//   CssBaseline,
-//   ThemeProvider,
-//   Typography,
-//   Container,
-//   createMuiTheme,
-//   Box,
-//   Grid,
-//   makeStyles,
-//   Button,
-//   SvgIcon,
-//   FormControlLabel,
-//   Checkbox,
-//   TextField,
-//   Link,
-// } = MaterialUI;
-
-// // Create a theme instance.
-
-// const theme = createMuiTheme({
-//   palette: {
-//     primary: {
-//       main: "#556cd6",
-//     },
-//     secondary: {
-//       main: "#19857b",
-//     },
-//     error: {
-//       main: colors.red.A400,
-//     },
-//     background: {
-//       default: "#fff",
-//     },
-//   },
-// });
-
-// const useStyles = makeStyles((theme) => ({
-//   paper: {
-//     marginTop: theme.spacing(8),
-//     display: "flex",
-//     flexDirection: "column",
-//     alignItems: "center",
-//   },
-//   avatar: {
-//     margin: theme.spacing(1),
-//     backgroundColor: theme.palette.secondary.main,
-//   },
-//   form: {
-//     width: "100%", // Fix IE 11 issue.
-//     marginTop: theme.spacing(3),
-//   },
-//   submit: {
-//     margin: theme.spacing(3, 0, 2),
-//   },
-// }));
-
-// function ProTip() {
-//   const classes = useStyles();
-//   return (
-//     <Typography className={classes.root} color="textSecondary">
-//       {/* <LightBulbIcon className={classes.lightBulb} /> */}
-//       Pro tip: See more{" "}
-//       <Link href="https://material-ui.com/getting-started/templates/">
-//         templates
-//       </Link>{" "}
-//       on the Material-UI documentation.
-//     </Typography>
-//   );
-// }
-
-// function Copyright() {
-//   return (
-//     <Typography variant="body2" color="textSecondary" align="center">
-//       {"Copyright © "}
-//       <Link color="inherit" href="https://material-ui.com/">
-//         Your Website
-//       </Link>{" "}
-//       {new Date().getFullYear()}
-//       {"."}
-//     </Typography>
-//   );
-// }
-
-// export default function Login(props) {
-//   const dispatch = useDispatch();
-//   const formik = useFormik({
-//     initialValues: {
-//       account: "",
-//       pass: "",
-//     },
-//     onsubmit: (values) => {
-//       const action = UserLoginAction(values);
-//       dispatch(action);
-//     },
-//   });
-
-//   const { userLogin } = useSelector((state) => state.UserManagementReducer);
-
-//   const { Component, ...restProps } = props;
-//   const classes = useStyles();
-//   return (
-//     <Route
-//       {...restProps}
-//       render={(propsRoute) => {
-//         return (
-//           <form
-//             onsubmit={(e) => {
-//               e.preventDefault();
-//               formik.handleSubmit(e);
-//             }}
-//           >
-//             <Container component="main" maxWidth="xs">
-//               <CssBaseline />
-//               <div className={classes.paper}>
-//                 <Avatar className={classes.avatar} />
-//                 <Typography component="h1" variant="h5">
-//                   Sign up
-//                 </Typography>
-//                 <div className={classes.form} noValidate>
-//                   <Grid container spacing={2}>
-//                     <Grid item xs={12}>
-//                       <input
-//                         variant="outlined"
-//                         required
-//                         fullWidth
-//                         id="account"
-//                         label="Account name"
-//                         name="account"
-//                         autoComplete="Account"
-//                         onChange={formik.handleChange}
-//                       />
-//                     </Grid>
-//                     <Grid item xs={12}>
-//                       <input
-//                         variant="outlined"
-//                         required
-//                         fullWidth
-//                         name="password"
-//                         label="Password"
-//                         type="password"
-//                         id="password"
-//                         autoComplete="current-password"
-//                         onChange={formik.handleChange}
-//                       />
-//                     </Grid>
-//                   </Grid>
-//                   <Button
-//                     type="submit"
-//                     fullWidth
-//                     variant="contained"
-//                     color="primary"
-//                     className={classes.submit}
-//                   >
-//                     Sign Up
-//                   </Button>
-//                   <Grid container justify="flex-end">
-//                     <Grid item>
-//                       <Link href="#" variant="body2">
-//                         Already have an account? Sign in
-//                       </Link>
-//                     </Grid>
-//                   </Grid>
-//                 </div>
-//               </div>
-//               <Box mt={5}>
-//                 <Copyright />
-//               </Box>
-//             </Container>
-//           </form>
-//         );
-//       }}
-//     />
-//   );
-// }
-import { useFormik } from "formik";
 import React from "react";
-import { Route } from "react-router";
-import { UserLoginAction } from "redux/actions/UserManagementActions";
+import TextField from "@mui/material/TextField";
+import { Button } from "@mui/material";
+import { Box } from "@mui/system";
+import { useDispatch, useSelector } from "react-redux";
+import FormHelperText from "@mui/material/FormHelperText";
 
-const {
-  AppBar,
-  colors,
-  Avatar,
-  CssBaseline,
-  ThemeProvider,
-  Typography,
-  Container,
-  createMuiTheme,
-  Box,
-  Grid,
-  makeStyles,
-  Button,
-  SvgIcon,
-  FormControlLabel,
-  Checkbox,
-  TextField,
-  Link,
-} = MaterialUI;
+import { useFormik } from "formik";
+import { NavLink } from "react-router-dom";
+import { actUserLogin } from "redux/actions/UserManagementActions";
+import { useHistory } from "react-router-dom";
+const validate = (values) => {
+  const errors = {};
+  if (!values.taiKhoan) {
+    errors.taiKhoan = "Tài khoản không được để trống!";
+  } else if (values.taiKhoan.length > 24 || values.taiKhoan.length < 6) {
+    errors.taiKhoan = "Tài khoản có độ dài từ 6 đến 24 ký tự!";
+  } else if (!/^[a-zA-Z0-9]+$/i.test(values.taiKhoan)) {
+    errors.taiKhoan = "Tài khoản chỉ gồm chữ và số!";
+  }
 
-// Create a theme instance.
+  if (!values.matKhau) {
+    errors.matKhau = "Mật khẩu không được để trống!";
+  } else if (values.matKhau.length > 32 || values.matKhau.length < 8) {
+    errors.matKhau = "Mật khẩu có độ dài từ 8 đến 32 ký tự!";
+  }
 
-const theme = createMuiTheme({
-  palette: {
-    primary: {
-      main: "#556cd6",
-    },
-    secondary: {
-      main: "#19857b",
-    },
-    error: {
-      main: colors.red.A400,
-    },
-    background: {
-      default: "#fff",
-    },
-  },
-});
+  return errors;
+};
 
-const useStyles = makeStyles((theme) => ({
-  paper: {
-    marginTop: theme.spacing(8),
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-  },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
-  },
-  form: {
-    width: "100%", // Fix IE 11 issue.
-    marginTop: theme.spacing(3),
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
-  },
-}));
-
-function ProTip() {
-  const classes = useStyles();
-  return (
-    <Typography className={classes.root} color="textSecondary">
-      <LightBulbIcon className={classes.lightBulb} />
-      Pro tip: See more{" "}
-      <Link href="https://material-ui.com/getting-started/templates/">
-        templates
-      </Link>{" "}
-      on the Material-UI documentation.
-    </Typography>
-  );
-}
-
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {"Copyright © "}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
-
-export default function Login(props) {
+function Login(props) {
   const dispatch = useDispatch();
+  const history = useHistory();
+  const { errorLogin } = useSelector((state) => state.userManagementReducer);
+
   const formik = useFormik({
     initialValues: {
-      account: "",
-      pass: "",
+      taiKhoan: "",
+      matKhau: "",
     },
-    onsubmit: (values) => {
-      const action = UserLoginAction(values);
-      dispatch(action);
+
+    validate,
+    onSubmit: (values) => {
+      dispatch(actUserLogin(values, history));
     },
   });
 
-  const { userLogin } = useSelector((state) => state.UserManagementReducer);
-
-  const { Component, ...restProps } = props;
-  const classes = useStyles();
   return (
-    <Route
-      {...restProps}
-      render={(propsRoute) => {
-        return (
-          <form
-            onsubmit={(e) => {
-              e.preventDefault();
-              formik.handleSubmit(e);
-            }}
-          >
-            <Container component="main" maxWidth="xs">
-              <CssBaseline />
-              <div className={classes.paper}>
-                <Avatar className={classes.avatar} />
-                <Typography component="h1" variant="h5">
-                  Sign up
-                </Typography>
-                <div className={classes.form} noValidate>
-                  <Grid container spacing={2}>
-                    <Grid item xs={12}>
-                      <input
-                        variant="outlined"
-                        required
-                        fullWidth
-                        id="account"
-                        label="Account name"
-                        name="account"
-                        autoComplete="Account"
-                        onChange={formik.handleChange}
-                      />
-                    </Grid>
-                    <Grid item xs={12}>
-                      <input
-                        variant="outlined"
-                        required
-                        fullWidth
-                        name="password"
-                        label="Password"
-                        type="password"
-                        id="password"
-                        autoComplete="current-password"
-                        onChange={formik.handleChange}
-                      />
-                    </Grid>
-                  </Grid>
-                  <Button
-                    type="submit"
-                    fullWidth
-                    variant="contained"
-                    color="primary"
-                    className={classes.submit}
-                  >
-                    Sign Up
-                  </Button>
-                  <Grid container justify="flex-end">
-                    <Grid item>
-                      <Link href="#" variant="body2">
-                        Already have an account? Sign in
-                      </Link>
-                    </Grid>
-                  </Grid>
-                </div>
-              </div>
-              <Box mt={5}>
-                <Copyright />
-              </Box>
-            </Container>
-          </form>
-        );
-      }}
-    />
+    <>
+      <div>
+        <img
+          src="/assets/img/group@2x.png"
+          alt=""
+          style={{ maxWidth: "100%" }}
+        />
+      </div>
+      <div>
+        <form onSubmit={formik.handleSubmit}>
+          <p style={{ color: "#f4511e", fontSize: "20px" }}>
+            {errorLogin ? errorLogin.response?.data.content : ""}
+          </p>
+          <Box sx={{ padding: "20px 0" }}>
+            <TextField
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.taiKhoan}
+              sx={{ width: "100%" }}
+              label="Tài khoản *"
+              name="taiKhoan"
+            />
+            {formik.touched.taiKhoan && formik.errors.taiKhoan ? (
+              <FormHelperText sx={{ color: "red", fontSize: "16px" }}>
+                {formik.errors.taiKhoan}
+              </FormHelperText>
+            ) : null}
+          </Box>
+          <Box sx={{ padding: "20px 0" }}>
+            <TextField
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              type="password"
+              value={formik.values.mạt}
+              sx={{ width: "100%" }}
+              label="Mật khẩu *"
+              name="matKhau"
+            />
+            {formik.touched.matKhau && formik.errors.matKhau ? (
+              <FormHelperText sx={{ color: "red", fontSize: "16px" }}>
+                {formik.errors.matKhau}
+              </FormHelperText>
+            ) : null}
+          </Box>
+          <Button type="submit" variant="contained" sx={{ marginTop: "8px" }}>
+            Đăng nhập
+          </Button>
+          <Box sx={{ margin: "20px 0" }}>
+            Bạn chưa có tài khoản? <NavLink to="/register">Đăng ký</NavLink>
+          </Box>
+        </form>
+      </div>
+    </>
   );
 }
+export default Login;

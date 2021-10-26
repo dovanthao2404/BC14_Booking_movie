@@ -1,268 +1,206 @@
-import React, { Component } from "react";
-import { withStyles } from "@material-ui/core/styles";
-import { register } from "./RegistrationStyles";
-import InputAdornment from "@material-ui/core/InputAdornment";
-
-import CssBaseline from "@material-ui/core/CssBaseline";
-import Paper from "@material-ui/core/Paper";
-import Avatar from "@material-ui/core/Avatar";
-import { FormControl, Input, InputLabel, Button } from "@material-ui/core";
-import PeopleAltIcon from "@material-ui/icons/PeopleAlt";
-import Snackbar from "@material-ui/core/Snackbar";
-import SnackbarContent from "@material-ui/core/SnackbarContent";
-import IconButton from "@material-ui/core/IconButton";
-import ErrorIcon from "@material-ui/icons/Error";
-import VisibilityTwoToneIcon from "@material-ui/icons/VisibilityTwoTone";
-import VisibilityOffTwoToneIcon from "@material-ui/icons/VisibilityOffTwoTone";
-import CloseIcon from "@material-ui/icons/Close";
-import { useDispatch } from "react-redux";
+import React from "react";
+import TextField from "@mui/material/TextField";
+import { Button } from "@mui/material";
+import { Box } from "@mui/system";
+import { useDispatch, useSelector } from "react-redux";
+import FormHelperText from "@mui/material/FormHelperText";
 import { useFormik } from "formik";
-import { UserRegisterAction } from "redux/actions/UserManagementActions";
+import { NavLink } from "react-router-dom";
+import { actUserRegister } from "redux/actions/UserManagementActions";
+import { useHistory } from "react-router-dom";
+import { GROUP_ID } from "./../../utils/settings/config";
 
-class Registration extends Component {
-  state = {
-    account: "",
-    password: "",
-    passwordConfrim: "",
-    fullname: "",
-    phone: "",
-    email: "",
-    hidePassword: true,
-    error: null,
-    errorOpen: false,
-  };
-
-  errorClose = (e) => {
-    this.setState({
-      errorOpen: false,
-    });
-  };
-
-  handleChange = (name) => (e) => {
-    this.setState({
-      [name]: e.target.value,
-    });
-  };
-
-  passwordMatch = () => this.state.password === this.state.passwordConfrim;
-
-  showPassword = () => {
-    this.setState((prevState) => ({ hidePassword: !prevState.hidePassword }));
-  };
-
-  isValid = () => {
-    if (this.state.email === "") {
-      return false;
-    }
-    return true;
-  };
-  submitRegistration = (e) => {
-    e.preventDefault();
-    if (!this.passwordMatch()) {
-      this.setState({
-        errorOpen: true,
-        error: "Passwords don't match",
-      });
-    }
-    const dispatch = useDispatch();
-    const formik = useFormik({
-      initialValues: {
-        account: "",
-        password: "",
-        fullname: "",
-        phone: "",
-        email: "",
-      },
-      onsubmit: (values) => {
-        const action = UserRegisterAction(values);
-        dispatch(action);
-      },
-    });
-  };
-
-  render() {
-    const { classes } = this.props;
-    return (
-      <div className={classes.main}>
-        <CssBaseline />
-
-        <Paper className={classes.paper}>
-          <Avatar className={classes.avatar}>
-            <PeopleAltIcon className={classes.icon} />
-          </Avatar>
-          <form
-            className={classes.form}
-            onSubmit={() => this.submitRegistration}
-          >
-            <FormControl required fullWidth margin="normal">
-              <InputLabel htmlFor="account" className={classes.labels}>
-                Account Name
-              </InputLabel>
-              <Input
-                name="account"
-                autoComplete="account"
-                className={classes.inputs}
-                disableUnderline={true}
-                onChange={this.handleChange("account")}
-              />
-            </FormControl>
-
-            <FormControl required fullWidth margin="normal">
-              <InputLabel htmlFor="password" className={classes.labels}>
-                password
-              </InputLabel>
-              <Input
-                name="password"
-                autoComplete="password"
-                className={classes.inputs}
-                disableUnderline={true}
-                onChange={this.handleChange("password")}
-                type={this.state.hidePassword ? "password" : "input"}
-                endAdornment={
-                  this.state.hidePassword ? (
-                    <InputAdornment position="end">
-                      <VisibilityOffTwoToneIcon
-                        fontSize="default"
-                        className={classes.passwordEye}
-                        onClick={this.showPassword}
-                      />
-                    </InputAdornment>
-                  ) : (
-                    <InputAdornment position="end">
-                      <VisibilityTwoToneIcon
-                        fontSize="default"
-                        className={classes.passwordEye}
-                        onClick={this.showPassword}
-                      />
-                    </InputAdornment>
-                  )
-                }
-              />
-            </FormControl>
-
-            <FormControl required fullWidth margin="normal">
-              <InputLabel htmlFor="passwordConfrim" className={classes.labels}>
-                confrim password
-              </InputLabel>
-              <Input
-                name="passwordConfrim"
-                autoComplete="passwordConfrim"
-                className={classes.inputs}
-                disableUnderline={true}
-                onClick={this.state.showPassword}
-                onChange={this.handleChange("passwordConfrim")}
-                type={this.state.hidePassword ? "password" : "input"}
-                endAdornment={
-                  this.state.hidePassword ? (
-                    <InputAdornment position="end">
-                      <VisibilityOffTwoToneIcon
-                        fontSize="default"
-                        className={classes.passwordEye}
-                        onClick={this.showPassword}
-                      />
-                    </InputAdornment>
-                  ) : (
-                    <InputAdornment position="end">
-                      <VisibilityTwoToneIcon
-                        fontSize="default"
-                        className={classes.passwordEye}
-                        onClick={this.showPassword}
-                      />
-                    </InputAdornment>
-                  )
-                }
-              />
-            </FormControl>
-
-            <FormControl required fullWidth margin="normal">
-              <InputLabel htmlFor="email" className={classes.labels}>
-                Full Name
-              </InputLabel>
-              <Input
-                name="fullname"
-                onChange={this.handleChange("fullname")}
-                autoComplete="fullname"
-                className={classes.inputs}
-                disableUnderline={true}
-              />
-            </FormControl>
-
-            <FormControl required fullWidth margin="normal">
-              <InputLabel htmlFor="email" className={classes.labels}>
-                e-mail
-              </InputLabel>
-              <Input
-                name="email"
-                type="email"
-                autoComplete="email"
-                className={classes.inputs}
-                disableUnderline={true}
-                onChange={this.handleChange("email")}
-              />
-            </FormControl>
-
-            <FormControl required fullWidth margin="normal">
-              <InputLabel htmlFor="email" className={classes.labels}>
-                Phone Number
-              </InputLabel>
-              <Input
-                name="phone"
-                className={classes.inputs}
-                disableUnderline={true}
-                onChange={this.handleChange("phone")}
-              />
-            </FormControl>
-            <Button
-              disabled={!this.isValid()}
-              disableRipple
-              fullWidth
-              variant="outlined"
-              className={classes.button}
-              type="submit"
-              onClick={this.submitRegistration}
-            >
-              Join
-            </Button>
-          </form>
-
-          {this.state.error ? (
-            <Snackbar
-              variant="error"
-              key={this.state.error}
-              anchorOrigin={{
-                vertical: "bottom",
-                horizontal: "center",
-              }}
-              open={this.state.errorOpen}
-              onClose={this.errorClose}
-              autoHideDuration={3000}
-            >
-              <SnackbarContent
-                className={classes.error}
-                message={
-                  <div>
-                    <span style={{ marginRight: "8px" }}>
-                      <ErrorIcon fontSize="large" color="error" />
-                    </span>
-                    <span> {this.state.error} </span>
-                  </div>
-                }
-                action={[
-                  <IconButton
-                    key="close"
-                    aria-label="close"
-                    onClick={this.errorClose}
-                  >
-                    <CloseIcon color="error" />
-                  </IconButton>,
-                ]}
-              />
-            </Snackbar>
-          ) : null}
-        </Paper>
-      </div>
-    );
+const validate = (values) => {
+  const errors = {};
+  if (!values.taiKhoan) {
+    errors.taiKhoan = "Tài khoản không được để trống!";
+  } else if (values.taiKhoan.length > 24 || values.taiKhoan.length < 6) {
+    errors.taiKhoan = "Tài khoản có độ dài từ 6 đến 24 ký tự!";
+  } else if (!/^[a-zA-Z0-9]+$/i.test(values.taiKhoan)) {
+    errors.taiKhoan = "Tài khoản chỉ gồm chữ và số!";
   }
-}
 
-export default withStyles(register)(Registration);
+  if (!values.matKhau) {
+    errors.matKhau = "Mật khẩu không được để trống!";
+  } else if (values.matKhau.length > 32 || values.matKhau.length < 8) {
+    errors.matKhau = "Mật khẩu có độ dài từ 8 đến 32 ký tự!";
+  }
+
+  if (!values.email) {
+    errors.email = "Email không được để trống!";
+  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+    errors.email = "Email bạn nhập không đúng định dạng!";
+  }
+
+  if (!values.soDt) {
+    errors.soDt = "Số điện thoại không được để trống!";
+  } else if (!/^(84|0[3|5|7|8|9])+([0-9]{8})\b$/i.test(values.soDt)) {
+    errors.soDt = "Số điện thoại bạn nhập không đúng!";
+  }
+
+  if (!values.hoTen) {
+    errors.hoTen = "Họ và Tên không được để trống!";
+  } else if (
+    !/^[a-zA-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ ]+$/i.test(
+      values.hoTen
+    )
+  ) {
+    errors.hoTen = "Họ và Tên không hợp lệ!";
+  }
+
+  errors.reMatKhau = validateRePass(values.reMatKhau, values.matKhau)
+    ? validateRePass(values.reMatKhau, values.matKhau)
+    : undefined;
+
+  if (!errors.reMatKhau) {
+    delete errors.reMatKhau;
+  }
+  console.log(errors);
+  return errors;
+};
+
+const validateRePass = (value, password) => {
+  let error;
+  if (!value) {
+    error = "Vui lòng nhập lại mật khẩu";
+  } else if (value !== password) {
+    error = "Mật khẩu không khớp";
+  }
+  return error;
+};
+
+function Login(props) {
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const { errorLogin } = useSelector((state) => state.userManagementReducer);
+
+  const formik = useFormik({
+    initialValues: {
+      taiKhoan: "",
+      matKhau: "",
+      email: "",
+      soDt: "",
+      maNhom: GROUP_ID,
+      hoTen: "",
+      reMatKhau: "",
+    },
+    validate,
+    onSubmit: (values) => {
+      console.log(values);
+      dispatch(actUserRegister(values, history));
+    },
+  });
+
+  return (
+    <>
+      <div>
+        <form onSubmit={formik.handleSubmit}>
+          <p style={{ color: "#f4511e", fontSize: "10px" }}>
+            {errorLogin ? errorLogin.response?.data.content : ""}
+          </p>
+          <Box sx={{ paddingBottom: "10px" }}>
+            <TextField
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.taiKhoan}
+              sx={{ width: "100%" }}
+              label="Tài khoản *"
+              name="taiKhoan"
+            />
+            {formik.touched.taiKhoan && formik.errors.taiKhoan ? (
+              <FormHelperText sx={{ color: "red", fontSize: "16px" }}>
+                {formik.errors.taiKhoan}
+              </FormHelperText>
+            ) : null}
+          </Box>
+          <Box sx={{ paddingBottom: "10px" }}>
+            <TextField
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.hoTen}
+              sx={{ width: "100%" }}
+              label="Họ tên *"
+              name="hoTen"
+              id="hoTen"
+            />
+            {formik.touched.hoTen && formik.errors.hoTen ? (
+              <FormHelperText sx={{ color: "red", fontSize: "16px" }}>
+                {formik.errors.hoTen}
+              </FormHelperText>
+            ) : null}
+          </Box>
+          <Box sx={{ paddingBottom: "10px" }}>
+            <TextField
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.soDt}
+              sx={{ width: "100%" }}
+              label="Số điện thoại *"
+              name="soDt"
+            />
+            {formik.touched.soDt && formik.errors.soDt ? (
+              <FormHelperText sx={{ color: "red", fontSize: "16px" }}>
+                {formik.errors.soDt}
+              </FormHelperText>
+            ) : null}
+          </Box>
+          <Box sx={{ paddingBottom: "10px" }}>
+            <TextField
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.email}
+              sx={{ width: "100%" }}
+              label="Email *"
+              name="email"
+            />
+            {formik.touched.email && formik.errors.email ? (
+              <FormHelperText sx={{ color: "red", fontSize: "16px" }}>
+                {formik.errors.email}
+              </FormHelperText>
+            ) : null}
+          </Box>
+
+          <Box sx={{ paddingBottom: "10px" }}>
+            <TextField
+              type="password"
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.matKhau}
+              sx={{ width: "100%" }}
+              label="Mật khẩu *"
+              name="matKhau"
+            />
+            {formik.touched.matKhau && formik.errors.matKhau ? (
+              <FormHelperText sx={{ color: "red", fontSize: "16px" }}>
+                {formik.errors.matKhau}
+              </FormHelperText>
+            ) : null}
+          </Box>
+          <Box sx={{ paddingBottom: "10px" }}>
+            <TextField
+              type="password"
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.reMatKhau}
+              sx={{ width: "100%" }}
+              label="Nhập lại mật khẩu *"
+              name="reMatKhau"
+            />
+            {formik.touched.reMatKhau && formik.errors.reMatKhau ? (
+              <FormHelperText sx={{ color: "red", fontSize: "16px" }}>
+                {formik.errors.reMatKhau}
+              </FormHelperText>
+            ) : null}
+          </Box>
+          <Button type="submit" variant="contained" sx={{ marginTop: "8px" }}>
+            Đăng ký
+          </Button>
+          <Box sx={{ margin: "20px 0" }}>
+            Bạn có tài khoản? <NavLink to="/login">Đăng nhập</NavLink>
+          </Box>
+        </form>
+      </div>
+    </>
+  );
+}
+export default Login;
