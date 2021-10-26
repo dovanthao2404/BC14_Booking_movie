@@ -29,7 +29,7 @@ export const actListFilmFailed = (error) => ({
 export const actDeleteFilm = (maPhim, setNotify) => {
   return async (dispatch) => {
     try {
-      await filmManagementServices.deleteFilmServices(maPhim);
+      await filmManagementServices.deleteFilmByIdServices(maPhim);
       setNotify({
         type: "success",
         isOpen: true,
@@ -83,7 +83,7 @@ export const atcGetInfoFilm = (maPhim) => {
   return async (dispatch) => {
     dispatch(actInfoFilmRequest());
     try {
-      const result = await filmManagementServices.getInfoFilm(maPhim);
+      const result = await filmManagementServices.getInfoFilmByIdServices(maPhim);
       dispatch(actInfoFilmSuccess(result.data.content));
     } catch (error) {
       dispatch(actInfoFilmFailed(error));
@@ -138,3 +138,4 @@ export const actGetListBanner = () => {
     }
   };
 };
+

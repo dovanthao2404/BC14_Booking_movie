@@ -17,6 +17,44 @@ html {
 
 /* Tabs */
 
+/* div[id^="vertical-tabpanel"] > div {
+  padding: 0;
+} */
+
+div[id^="vertical-tabpanel"] > div {
+  padding: 0;
+}
+#homeCinemaComplex .MuiTabs-scroller,
+.accordionDetailId {
+  overflow-y: scroll !important;
+  overflow-x: scroll !important;
+}
+div[id^="vertical-tabpanel"] .MuiTabs-scroller {
+  height: 540px;
+  overflow: auto !important;
+}
+
+@media (max-width: 767.98px) {
+  #homeCinemaComplex .MuiTabs-indicator {
+    display: none;
+  }
+  div[id^="vertical-tabpanel"] .MuiTabs-scroller {
+    height: auto;
+  }
+  div[id^="vertical-tabpanel"] .MuiTabs-flexContainer {
+    overflow: auto;
+  }
+
+  #tabsParent .MuiTabs-indicator {
+    display: block;
+  }
+  div[id^="vertical-tabpanel"] .MuiTabs-flexContainer::-webkit-scrollbar,
+  #homeCinemaComplex .MuiTabs-scroller::-webkit-scrollbar,
+  #accordionDetailId::-webkit-scrollbar {
+    display: none;
+  }
+}
+
 .tab-header {
   display: flex;
   justify-content: center;

@@ -32,9 +32,24 @@ const cinemaManagementReducer = (state = initialState, { type, payload }) => {
       state.cinemaClusterInformation = payload;
       return { ...state };
 
-    case ActionType.SET_INFO_FILM_SHOWTIMES:
-      state.infoFilmShowtimes = payload;
+    case ActionType.INFO_FILM_SHOWTIMES_REQUEST:
+      state.error = null;
+      state.infoFilmShowtimes = null;
+      state.isLoading = true;
       return { ...state };
+
+    case ActionType.INFO_FILM_SHOWTIMES_SUCCESS:
+      state.error = null;
+      state.infoFilmShowtimes = payload;
+      state.isLoading = false;
+      return { ...state };
+
+    case ActionType.INFO_FILM_SHOWTIMES_FAILED:
+      state.error = payload;
+      state.infoFilmShowtimes = null;
+      state.isLoading = false;
+      return { ...state };
+
     case ActionType.SET_INFO_SHOWTIMES_CINEMA_SYSTEM:
       state.infoShowtimesCinemaSystem = payload;
       return { ...state };

@@ -7,7 +7,7 @@ class FilmManagementServices {
     return api.get(`/api/QuanLyPhim/LayDanhSachPhim?maNhom=${GROUP_ID}`);
   };
 
-  getInfoFilm = (maPhim) => {
+  getInfoFilmByIdServices = (maPhim) => {
     return api.get(`/api/QuanLyPhim/LayThongTinPhim?MaPhim=${maPhim}`);
   };
 
@@ -15,7 +15,7 @@ class FilmManagementServices {
     return api.get(`/api/QuanLyPhim/LayDanhSachBanner`);
   };
 
-  deleteFilmServices = (maPhim) => {
+  deleteFilmByIdServices = (maPhim) => {
     return api.delete(`/api/QuanLyPhim/XP?MaPhim=${maPhim}`, maPhim);
   };
 
@@ -26,6 +26,8 @@ class FilmManagementServices {
   updateFilmServices = (formData) => {
     return api.post(`/api/QuanLyPhim/CapNhatPhimUpload`, formData);
   };
+
+
 }
 
 export const filmManagementServices = new FilmManagementServices();

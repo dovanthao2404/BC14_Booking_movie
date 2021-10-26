@@ -54,7 +54,7 @@ const EditFilm = (props) => {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const { infoFilmEdit, isLoading, error } = useSelector(
+  const { infoFilm, isLoading, error } = useSelector(
     (state) => state.filmManagementReducer
   );
   const { id } = useParams();
@@ -65,15 +65,15 @@ const EditFilm = (props) => {
   const formik = useFormik({
     enableReinitialize: true,
     initialValues: {
-      tenPhim: infoFilmEdit?.tenPhim,
-      trailer: infoFilmEdit?.trailer,
-      moTa: infoFilmEdit?.moTa,
-      maNhom: infoFilmEdit?.maNhom,
-      ngayKhoiChieu: infoFilmEdit?.ngayKhoiChieu,
-      sapChieu: infoFilmEdit?.sapChieu,
-      dangChieu: infoFilmEdit?.dangChieu,
-      hot: infoFilmEdit?.hot,
-      danhGia: infoFilmEdit?.danhGia,
+      tenPhim: infoFilm?.tenPhim,
+      trailer: infoFilm?.trailer,
+      moTa: infoFilm?.moTa,
+      maNhom: infoFilm?.maNhom,
+      ngayKhoiChieu: infoFilm?.ngayKhoiChieu,
+      sapChieu: infoFilm?.sapChieu,
+      dangChieu: infoFilm?.dangChieu,
+      hot: infoFilm?.hot,
+      danhGia: infoFilm?.danhGia,
       hinhAnh: null,
     },
     validate,
@@ -96,7 +96,7 @@ const EditFilm = (props) => {
         formData.append(key, date);
       }
     }
-    formData.append("maPhim", infoFilmEdit.maPhim);
+    formData.append("maPhim", infoFilm.maPhim);
 
     return formData;
   };
@@ -337,7 +337,7 @@ const EditFilm = (props) => {
               <Box sx={{ paddingTop: "10px" }}>
                 <Box
                   component="img"
-                  src={srcImg || infoFilmEdit?.hinhAnh}
+                  src={srcImg || infoFilm?.hinhAnh}
                   alt={srcImg}
                   sx={{ width: "200px", height: "auto", objectFit: "cover" }}
                 />

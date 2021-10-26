@@ -327,7 +327,7 @@ export default function HomeTools(props) {
               }`}
               onClick={() => {
                 infoHomeTool.showtimeId &&
-                  history.push(`/detail/${infoHomeTool.showtimeId}`);
+                  history.push(`/checkout/${infoHomeTool.showtimeId}`);
               }}
             >
               Mua vé ngay

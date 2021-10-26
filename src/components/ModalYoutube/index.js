@@ -3,7 +3,7 @@ import Dialog from "@mui/material/Dialog";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 import { styled } from "@mui/material/styles";
 
-export default function Modalyoutube(props) {
+export default function ModalYoutube(props) {
   const { url, isOpenModal, setIsOpenModal } = props;
 
   const BootstrapDialog = styled(Dialog)(({ theme }) => ({

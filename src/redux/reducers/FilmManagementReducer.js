@@ -7,7 +7,7 @@ const initialState = {
 
   error: null,
   isLoading: false,
-  infoFilmEdit: null,
+  infoFilm: null,
   listBanner: null,
 };
 
@@ -48,20 +48,20 @@ const filmManagementReducer = (state = initialState, { type, payload }) => {
       return { ...state };
 
     case ActionType.INFO_FILM_REQUEST:
-      state.infoFilmEdit = null;
+      state.infoFilm = null;
       state.error = null;
       state.isLoading = true;
 
       return { ...state };
 
     case ActionType.INFO_FILM_SUCCCESS:
-      state.infoFilmEdit = payload;
+      state.infoFilm = payload;
       state.error = null;
       state.isLoading = false;
 
       return { ...state };
     case ActionType.INFO_FILM_FAILED:
-      state.infoFilmEdit = null;
+      state.infoFilm = null;
       state.error = payload;
       state.isLoading = false;
 

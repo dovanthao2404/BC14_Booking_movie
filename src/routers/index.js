@@ -2,7 +2,7 @@ import { lazy } from "react";
 import AdminTemplate from "template/AdminTemplate";
 import CheckoutTemplate from "template/CheckoutTemplate";
 import UserTemplate from "template/CheckoutTemplate";
-import HomeTeplate from "../template/HomeTemplate";
+import HomeTemplate from "../template/HomeTemplate";
 
 const routeHome = [
   {
@@ -19,7 +19,11 @@ const routeHome = [
     Component: lazy(() => import("../pages/Profile")),
     exact: false,
     path: "/profile",
-  },
+  }, {
+    Component: lazy(() => import("../pages/Detail")),
+    exact: false,
+    path: "/detail/:id",
+  }
 ];
 
 const routeAdmin = [
@@ -94,7 +98,7 @@ const routeUser = [
 export const renderRouteHome = () => {
   return routeHome.map((route, key) => {
     return (
-      <HomeTeplate
+      <HomeTemplate
         key={key}
         exact={route.exact}
         Component={route.Component}

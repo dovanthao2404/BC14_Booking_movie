@@ -24,7 +24,7 @@ export default function HomeApp(props) {
   const classes = useStyles();
 
   return (
-    <Box id="homeApp" sx={{ padding: "" }}>
+    <Box id="homeApp">
       <Container style={{ maxWidth: "940px" }}>
         <Box
           sx={{

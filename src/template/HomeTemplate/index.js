@@ -6,7 +6,7 @@ import { actGetCinemaSystemInformation } from "redux/actions/CinemaManagementAct
 import Footer from "./Footer";
 import Navbar from "./Navbar";
 
-export default function HomeTeplate({ Component, ...props }) {
+export default function HomeTemplate({ Component, ...props }) {
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
   const dispatch = useDispatch();
 

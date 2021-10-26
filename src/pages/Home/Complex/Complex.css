@@ -28,7 +28,7 @@ button[id^="vertical-tab-"]::before {
   border-color: rgba(238, 238, 238, 0.88);
 }
 /* Chọn tất cả các button có tiền tố id là vertical-tabpanel */
-
+/*
 div[id^="vertical-tabpanel"] > div {
   padding: 0;
 }
@@ -61,4 +61,4 @@ div[id^="vertical-tabpanel"] .MuiTabs-scroller {
   #accordionDetailId::-webkit-scrollbar {
     display: none;
   }
-}
+} */

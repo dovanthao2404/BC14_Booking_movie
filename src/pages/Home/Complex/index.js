@@ -8,7 +8,7 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import { useSelector } from "react-redux";
 
-import ClusterCinema from "./ClusterCinema";
+import ClusterCinema from "../../../components/ClusterCinema";
 import ListFilm from "./ListFilm";
 
 function TabPanel(props) {
@@ -133,47 +133,46 @@ export default function Complex(props) {
 
   const renderCinemaCluster = () => {
     if (infoShowtimesCinemaSystem) {
-      return infoShowtimesCinemaSystem?.map((heThongRap, index) => {
-        heThongRap.id = index;
-        return (
-          <TabPanel key={index} value={cinema} index={index}>
+
+      return (
+        <TabPanel value={cinema} index={cinema}>
+          <Box
+            sx={{
+              flexGrow: 1,
+              bgcolor: "background.paper",
+              display: screenWidth >= SCREEN_768 ? "flex" : "block",
+              height: "540px",
+              overflow: "auto",
+            }}
+          >
             <Box
               sx={{
                 flexGrow: 1,
                 bgcolor: "background.paper",
                 display: screenWidth >= SCREEN_768 ? "flex" : "block",
-                heigth: "540px",
-                overflow: "auto",
               }}
             >
-              <Box
+              <Tabs
+                orientation={
+                  screenWidth >= SCREEN_768 ? "vertical" : "horizontal"
+                }
+                value={cluster}
+                onChange={handleChangeTabsCluster}
+                aria-label="Vertical tabs example"
                 sx={{
-                  flexGrow: 1,
-                  bgcolor: "background.paper",
-                  display: screenWidth >= SCREEN_768 ? "flex" : "block",
+                  borderRight: 1,
+                  borderColor: "divider",
                 }}
               >
-                <Tabs
-                  orientation={
-                    screenWidth >= SCREEN_768 ? "vertical" : "horizontal"
-                  }
-                  value={cluster}
-                  onChange={handleChangeTabsCluster}
-                  aria-label="Vertical tabs example"
-                  sx={{
-                    borderRight: 1,
-                    borderColor: "divider",
-                  }}
-                >
-                  {renderClusterCinema()}
-                </Tabs>
-              </Box>
-              {renderShowtimes(infoShowtimesCinemaSystem[cinema].lstCumRap)}
+                {renderClusterCinema()}
+              </Tabs>
             </Box>
-          </TabPanel>
-        );
-      });
-    }
+            {renderShowtimes(infoShowtimesCinemaSystem[cinema].lstCumRap)}
+          </Box>
+        </TabPanel>
+      );
+
+    };
   };
 
   return (

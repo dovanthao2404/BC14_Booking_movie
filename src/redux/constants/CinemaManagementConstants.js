@@ -13,7 +13,14 @@ export const SET_CINEMA_CLUSTER_INFORMATION =
   "@cinema/SET_CINEMA_CLUSTER_INFORMATION";
 
 // Lịch chiếu phim
-export const SET_INFO_FILM_SHOWTIMES = "@cinema/SET_INFO_FILM_SHOWTIMES";
+export const INFO_FILM_SHOWTIMES_REQUEST =
+  "@cinema/INFO_FILM_SHOWTIMES_REQUEST";
+
+export const INFO_FILM_SHOWTIMES_SUCCESS =
+  "@cinema/INFO_FILM_SHOWTIMES_SUCCESS";
+
+export const INFO_FILM_SHOWTIMES_FAILED =
+  "@cinema/INFO_FILM_SHOWTIMES_FAILED";
 
 // Lịch chiếu hệ thống rạp
 

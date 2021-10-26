@@ -36,7 +36,7 @@ export const actGetCinemaClusterInformationBySystemId = (id) => {
           id
         );
       dispatch(actSetCinemaClusterInformation(result.data.content));
-    } catch (error) {}
+    } catch (error) { }
   };
 };
 
@@ -45,20 +45,28 @@ export const actSetCinemaClusterInformation = (data) => ({
   payload: data,
 });
 
-export const actGetInfoFilmShowtimesById = (maPhim) => {
+export const actGetInfoFilmShowtimesById = (maPhim, isPage) => {
   return async (dispatch) => {
+    isPage && (actSetInfoFilmShotimesRequest());
     try {
       const result =
         await cinemaManagementServices.getInfoFilmShowtimesByIdServices(maPhim);
-      dispatch(actSetInfoFilmShowtimes(result.data.content));
+      dispatch(actSetInfoFilmShotimesSuccess(result.data.content));
     } catch (error) {
-      console.log(error);
+      dispatch(actSetInfoFilmShotimesFailed(error));
     }
   };
 };
-export const actSetInfoFilmShowtimes = (data) => ({
-  type: ActionType.SET_INFO_FILM_SHOWTIMES,
-  payload: data,
+export const actSetInfoFilmShotimesRequest = () => ({
+  type: ActionType.INFO_FILM_SHOWTIMES_REQUEST,
+});
+export const actSetInfoFilmShotimesSuccess = (data) => ({
+  type: ActionType.INFO_FILM_SHOWTIMES_SUCCESS,
+  payload: data
+});
+export const actSetInfoFilmShotimesFailed = (error) => ({
+  type: ActionType.INFO_FILM_SHOWTIMES_FAILED,
+  payload: error
 });
 
 export const actGetInfoShowtimesCinemaSystem = () => {
