@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Box } from "@mui/material";
-import Loading from "../../../components/Loading";
+import Loading from "components/Loading";
 import { useDispatch, useSelector } from "react-redux";
 
 import Carousel from "./Carousel";

@@ -2,7 +2,11 @@
   "compilerOptions": {
     "baseUrl": "./src",
     "paths": {
-      "components/*": ["./src/components"]
+      "components/*": ["./src/components"],
+      "data/*": ["./src/data"],
+      "routes/*": ["./src/routers"],
+      "redux/*": ["./src/redux"],
+      "utils/*": ["./src/utils"]
     }
   }
 }

@@ -6,7 +6,7 @@ import Box from "@mui/material/Box";
 import Tab from "@mui/material/Tab";
 import { makeStyles } from "@mui/styles";
 import clsx from "clsx";
-import ClusterCinema from "../../../../components/ClusterCinema";
+import ClusterCinema from "components/ClusterCinema";
 import Accordions from "components/Accordions";
 import "./style.css";
 function TabPanel(props) {

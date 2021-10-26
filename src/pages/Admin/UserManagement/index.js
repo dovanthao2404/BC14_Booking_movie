@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import {
   actDeleteUser,
   actGetListUser,
-} from "../../../redux/actions/UserManagementActions";
+} from "redux/actions/UserManagementActions";
 import { DataGrid } from "@mui/x-data-grid";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";

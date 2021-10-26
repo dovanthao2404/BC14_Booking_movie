@@ -6,22 +6,22 @@ import HomeTemplate from "../template/HomeTemplate";
 
 const routeHome = [
   {
-    Component: lazy(() => import("../pages/Home/Home")),
+    Component: lazy(() => import("pages/Home/Home")),
     exact: true,
     path: "/",
   },
   {
-    Component: lazy(() => import("../pages/Home/Home")),
+    Component: lazy(() => import("pages/Home/Home")),
     exact: false,
     path: "/home",
   },
   {
-    Component: lazy(() => import("../pages/Home/Profile")),
+    Component: lazy(() => import("pages/Home/Profile")),
     exact: false,
     path: "/profile",
   },
   {
-    Component: lazy(() => import("../pages/Home/Detail")),
+    Component: lazy(() => import("pages/Home/Detail")),
     exact: false,
     path: "/detail/:id",
   },
@@ -29,43 +29,43 @@ const routeHome = [
 
 const routeAdmin = [
   {
-    Component: lazy(() => import("../pages/Admin/UserManagement")),
+    Component: lazy(() => import("pages/Admin/UserManagement")),
     exact: true,
     path: "/admin",
   },
 
   {
-    Component: lazy(() => import("../pages/Admin/UserManagement")),
+    Component: lazy(() => import("pages/Admin/UserManagement")),
     exact: false,
     path: "/admin/user-management",
   },
   {
-    Component: lazy(() => import("../pages/Admin/AddUser")),
+    Component: lazy(() => import("pages/Admin/AddUser")),
     exact: false,
     path: "/admin/add-user",
   },
   {
-    Component: lazy(() => import("../pages/Admin/EditUser")),
+    Component: lazy(() => import("pages/Admin/EditUser")),
     exact: false,
     path: "/admin/edit-user/:id",
   },
   {
-    Component: lazy(() => import("../pages/Admin/FilmManagement")),
+    Component: lazy(() => import("pages/Admin/FilmManagement")),
     exact: false,
     path: "/admin/film-management",
   },
   {
-    Component: lazy(() => import("../pages/Admin/EditFilm")),
+    Component: lazy(() => import("pages/Admin/EditFilm")),
     exact: false,
     path: "/admin/edit-film/:id",
   },
   {
-    Component: lazy(() => import("../pages/Admin/AddFilm")),
+    Component: lazy(() => import("pages/Admin/AddFilm")),
     exact: false,
     path: "/admin/add-film",
   },
   {
-    Component: lazy(() => import("../pages/Admin/CreateShowtimes")),
+    Component: lazy(() => import("pages/Admin/CreateShowtimes")),
     exact: false,
     path: "/admin/create-showtimes/:id/",
   },
@@ -73,7 +73,7 @@ const routeAdmin = [
 
 const routeTicketRoom = [
   {
-    Component: lazy(() => import("../pages/TicketRoom")),
+    Component: lazy(() => import("pages/TicketRoom")),
     exact: false,
     path: "/ticketroom/:id",
   },
@@ -81,12 +81,12 @@ const routeTicketRoom = [
 
 const routeUser = [
   {
-    Component: lazy(() => import("../pages/User/Login")),
+    Component: lazy(() => import("pages/User/Login")),
     exact: false,
     path: "/login",
   },
   {
-    Component: lazy(() => import("../pages/User/Register")),
+    Component: lazy(() => import("pages/User/Register")),
     exact: false,
     path: "/register",
   },

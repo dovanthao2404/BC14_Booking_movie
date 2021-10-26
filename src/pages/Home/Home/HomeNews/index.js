@@ -2,9 +2,9 @@ import React, { useState, Fragment } from "react";
 import { Container } from "@mui/material";
 import "./HomeNews.css";
 import Box from "@mui/material/Box";
-import news from "../../../../data/news.json";
-import reviews from "../../../../data/reviews.json";
-import promotions from "../../../../data/bonus.json";
+import news from "data/news.json";
+import reviews from "data/reviews.json";
+import promotions from "data/bonus.json";
 import Button from "@mui/material/Button";
 
 import CardXL from "./CardXL";

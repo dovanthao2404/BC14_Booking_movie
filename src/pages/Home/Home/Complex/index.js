@@ -8,7 +8,7 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import { useSelector } from "react-redux";
 
-import ClusterCinema from "../../../../components/ClusterCinema";
+import ClusterCinema from "components/ClusterCinema";
 import ListFilm from "./ListFilm";
 
 function TabPanel(props) {
