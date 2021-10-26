@@ -15,11 +15,7 @@ export default function Card(props) {
     for (let i = 0; i < totalStar; i++) {
       star.push(
         <li key={i}>
-          <img
-            className="rating__icon"
-            src="https://tix.vn/app/assets/img/icons/star1.png"
-            alt=""
-          />
+          <img className="rating__icon" src="assets/img/star1.png" alt="" />
         </li>
       );
     }
@@ -35,11 +31,7 @@ export default function Card(props) {
           {renderStar(totalStar)}
 
           <li>
-            <img
-              className="rating__haft"
-              src="https://tix.vn/app/assets/img/icons/star1.2.png"
-              alt=""
-            />
+            <img className="rating__haft" src="assets/img/star1.2.png" alt="" />
           </li>
         </ul>
       </span>
@@ -65,7 +57,15 @@ export default function Card(props) {
             }}
           >
             <div className="overall-img">
-              <img src={film.hinhAnh} alt={film.hinhAnh} className="card-img" />
+              <img
+                src={film.hinhAnh}
+                alt={film.hinhAnh}
+                className="card-img"
+                onError={(e) => {
+                  e.onError = null;
+                  e.target.src = "/assets/img/broken-1.png";
+                }}
+              />
 
               <div className="card-overlay"></div>
             </div>

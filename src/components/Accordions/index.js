@@ -166,8 +166,7 @@ export default function Accordions(props) {
                 alt={film?.hinhAnh}
                 onError={(e) => {
                   e.onError = null;
-                  e.target.src =
-                    "https://bitsofco.de/content/images/2018/12/broken-1.png";
+                  e.target.src = "/assets/img/broken-1.png";
                 }}
                 style={{
                   width: "50px",
