@@ -11,7 +11,7 @@ class UserManagementServices {
   loginServices = (infoLogin) => {
     return api.post(`/api/QuanLyNguoiDung/DangNhap`, infoLogin);
   };
-
+  
   deleteUserServices = (taiKhoan) => {
     return api.delete(`/api/QuanLyNguoiDung/XoaNguoiDung?TaiKhoan=${taiKhoan}`);
   };
@@ -36,6 +36,10 @@ class UserManagementServices {
 
   updateInfoAccountServices = (info) => {
     return api.put(`/api/QuanLyNguoiDung/CapNhatThongTinNguoiDung`, info);
+  };
+
+  registerServices = (infoRegister) =>{
+    return api.post(`/api/QuanLyNguoiDung/DangKy`,infoRegister );
   };
 }
 
