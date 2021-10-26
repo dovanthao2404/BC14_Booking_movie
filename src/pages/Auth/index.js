@@ -29,7 +29,7 @@ export default function Auth(props) {
   useEffect(() => {
     if (userLogin) {
       if (userLogin.maLoaiNguoiDung === "QuanTri") {
-        history.replace("/admin/dashboard");
+        history.replace("/admin");
       } else {
         history.replace("/");
       }

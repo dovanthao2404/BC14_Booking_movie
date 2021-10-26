@@ -1,5 +1,5 @@
 import { userManagementServices } from "services/UserManagementServices";
-import { TOKEN, USER_LOGIN } from "utils/settings/config";
+import { TICKET_ROOM_ID, TOKEN, USER_LOGIN } from "utils/settings/config";
 import * as ActionType from "./../constants/UserManagementConstants";
 
 export const actGetListUser = () => {
@@ -21,7 +21,7 @@ export const actListUserRequest = () => ({
 });
 
 export const actListUserSuccess = (listUser) => ({
-  type: ActionType.LIST_USER_SUCCCESS,
+  type: ActionType.LIST_USER_SUCCESS,
   payload: listUser,
 });
 
@@ -43,7 +43,7 @@ export const actLoginAdmin = (infoLogin, history) => {
 
         localStorage.setItem(USER_LOGIN, JSON.stringify(result.data.content));
         localStorage.setItem(TOKEN, result.data.content[TOKEN]);
-        history.replace("/admin/dashboard");
+        history.replace("/admin");
       } else {
         // Tạo lỗi
         const error = {
@@ -67,7 +67,7 @@ export const actLoginRequest = () => ({
 });
 
 export const actLoginSuccess = (userLogin) => ({
-  type: ActionType.LOGIN_SUCCCESS,
+  type: ActionType.LOGIN_SUCCESS,
   payload: userLogin,
 });
 
@@ -101,7 +101,7 @@ export const actUpdateInfoUser = (newInfo, setNotify) => {
   return async (dispatch) => {
     try {
       await userManagementServices.updateInfoUserServices(newInfo);
-      console.log("dvao");
+
       setNotify({
         type: "success",
         isOpen: true,
@@ -109,8 +109,6 @@ export const actUpdateInfoUser = (newInfo, setNotify) => {
       });
       dispatch(actGetInfoUser(newInfo.taiKhoan));
     } catch (error) {
-      console.log("eror");
-
       setNotify({
         type: "error",
         isOpen: true,
@@ -154,7 +152,7 @@ export const actGetInfoUser = (taiKhoan) => {
 };
 
 export const actInfoUserSuccess = (infoUser) => ({
-  type: ActionType.INFO_USER_SUCCCESS,
+  type: ActionType.INFO_USER_SUCCESS,
   payload: infoUser,
 });
 
@@ -186,7 +184,7 @@ export const actInfoAccountRequest = () => ({
   type: ActionType.INFO_ACCOUNT_REQUEST,
 });
 export const actInfoAccountSuccess = (data) => ({
-  type: ActionType.INFO_ACCOUNT_SUCCCESS,
+  type: ActionType.INFO_ACCOUNT_SUCCESS,
   payload: data,
 });
 export const actInfoAccountFailed = (error) => ({
@@ -216,12 +214,19 @@ export const actUpdateInfoAccount = (data, setNotify) => {
 
 export const actUserLogin = (InfoLogin, history) => {
   return async (dispatch) => {
+    dispatch(actLoginRequest());
     try {
       const result = await userManagementServices.loginServices(InfoLogin);
-      dispatch(actLoginSuccess(result.data.content));
+
+      const id = localStorage.getItem(TICKET_ROOM_ID);
+
       localStorage.setItem(USER_LOGIN, JSON.stringify(result.data.content));
       localStorage.setItem(TOKEN, result.data.content[TOKEN]);
-      history.replace("/");
+      await dispatch(actLoginSuccess(result.data.content));
+      if (id) {
+        history.replace(`/ticketroom/${id}`);
+        localStorage.removeItem(TICKET_ROOM_ID);
+      }
     } catch (error) {
       dispatch(actLoginFailed(error));
     }

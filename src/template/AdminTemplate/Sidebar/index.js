@@ -7,7 +7,6 @@ import {
   List,
   Collapse,
 } from "@mui/material";
-import AvTimerIcon from "@mui/icons-material/AvTimer";
 import GroupIcon from "@mui/icons-material/Group";
 import PersonIcon from "@mui/icons-material/Person";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
@@ -19,7 +18,7 @@ import { Box } from "@mui/system";
 
 export default function Sidebar() {
   const [openUser, setOpenUser] = useState(true);
-  const [openFilm, setOpenFilm] = useState(false);
+  const [openFilm, setOpenFilm] = useState(true);
   return (
     <Box
       sx={{
@@ -53,18 +52,6 @@ export default function Sidebar() {
               component="nav"
               aria-labelledby="nested-list-subheader"
             >
-              <NavLink
-                activeStyle={{ color: "#FB4021" }}
-                to="/admin/dashboard"
-                style={{ textDecoration: "none", color: "white" }}
-              >
-                <ListItemButton>
-                  <ListItemIcon>
-                    <AvTimerIcon style={{ color: "white" }} />
-                  </ListItemIcon>
-                  <ListItemText primary="Dashboard" />
-                </ListItemButton>
-              </NavLink>
               <ListItemButton
                 onClick={() => {
                   setOpenUser(!openUser);

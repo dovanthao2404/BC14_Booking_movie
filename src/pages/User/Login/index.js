@@ -8,7 +8,6 @@ import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
 import { useFormik } from "formik";
 import { NavLink } from "react-router-dom";
 import { actUserLogin } from "redux/actions/UserManagementActions";
-import { useHistory } from "react-router-dom";
 const validate = (values) => {
   const errors = {};
   if (!values.taiKhoan) {
@@ -29,8 +28,8 @@ const validate = (values) => {
 };
 
 function Login(props) {
+  const { history } = props;
   const dispatch = useDispatch();
-  const history = useHistory();
   const { errorLogin } = useSelector((state) => state.userManagementReducer);
 
   const formik = useFormik({

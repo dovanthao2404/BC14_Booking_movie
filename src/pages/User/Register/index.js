@@ -8,8 +8,9 @@ import { useFormik } from "formik";
 import { NavLink } from "react-router-dom";
 import { actUserRegister } from "redux/actions/UserManagementActions";
 import { useHistory } from "react-router-dom";
-import { GROUP_ID } from "../../../../utils/settings/config";
+import { GROUP_ID } from "../../../utils/settings/config";
 import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
+
 const validate = (values) => {
   const errors = {};
   if (!values.taiKhoan) {

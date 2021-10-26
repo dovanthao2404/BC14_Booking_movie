@@ -89,7 +89,7 @@ export const useStyles = makeStyles({
       display: "none",
     },
     btnLogout: {
-      top: "180%",
+      top: "160%",
     },
   },
 });

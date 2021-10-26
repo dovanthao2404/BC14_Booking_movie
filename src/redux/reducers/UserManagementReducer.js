@@ -25,7 +25,7 @@ const userManagementReducer = (state = initialState, { type, payload }) => {
 
       return { ...state };
 
-    case ActionType.LIST_USER_SUCCCESS:
+    case ActionType.LIST_USER_SUCCESS:
       state.listUser = payload;
       state.isLoading = false;
       state.error = null;
@@ -53,7 +53,7 @@ const userManagementReducer = (state = initialState, { type, payload }) => {
 
       return { ...state };
 
-    case ActionType.LOGIN_SUCCCESS:
+    case ActionType.LOGIN_SUCCESS:
       state.userLogin = payload;
       state.isLoading = false;
       state.errorLogin = null;
@@ -81,7 +81,7 @@ const userManagementReducer = (state = initialState, { type, payload }) => {
       state.isLoading = false;
       return { ...state };
 
-    case ActionType.INFO_USER_SUCCCESS:
+    case ActionType.INFO_USER_SUCCESS:
       state.infoUserEdit = payload;
       state.error = null;
       state.isLoading = false;
@@ -93,7 +93,7 @@ const userManagementReducer = (state = initialState, { type, payload }) => {
       state.error = null;
       state.isLoading = true;
       return { ...state };
-    case ActionType.INFO_ACCOUNT_SUCCCESS:
+    case ActionType.INFO_ACCOUNT_SUCCESS:
       state.infoAccount = payload;
       state.error = null;
       state.isLoading = false;

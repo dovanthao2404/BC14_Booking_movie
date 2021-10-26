@@ -4,6 +4,7 @@ import Loading from "components/Loading";
 import React, { Suspense, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Route, useHistory } from "react-router";
+import { TICKET_ROOM_ID } from "utils/settings/config";
 import "./index.css";
 
 const useStyles = makeStyles({
@@ -35,10 +36,16 @@ export default function UserTemplate({ Component, ...props }) {
   const history = useHistory();
   const classes = useStyles();
   useEffect(() => {
-    if (userLogin) {
+    if (userLogin && !localStorage.getItem(TICKET_ROOM_ID)) {
       history.push("/");
     }
   }, [history, userLogin]);
+
+  useEffect(() => {
+    return () => {
+      localStorage.removeItem(TICKET_ROOM_ID);
+    };
+  }, []);
 
   return (
     <Suspense fallback={<Loading />}>

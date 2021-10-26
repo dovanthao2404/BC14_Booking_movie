@@ -1,8 +1,8 @@
 import Loading from "components/Loading";
 import React, { Suspense, useEffect, useState } from "react";
-import { Redirect } from "react-router-dom";
+
 import { Route } from "react-router";
-import { useSelector } from "react-redux";
+
 export default function CheckoutTemplate({ Component, ...props }) {
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
 
@@ -15,12 +15,6 @@ export default function CheckoutTemplate({ Component, ...props }) {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
-  const { userLogin } = useSelector((state) => state.userManagementReducer);
-
-  if (!userLogin) {
-    return <Redirect to="/login" />;
-  }
-
   return (
     <Suspense fallback={<Loading />}>
       <Route

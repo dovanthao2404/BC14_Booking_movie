@@ -9,8 +9,8 @@ import {
 import NavTop from "./NavTop";
 import Pay from "./Pay";
 import Seat from "./Seat";
-import { useParams } from "react-router-dom";
-
+import { useParams, Redirect } from "react-router-dom";
+import { TICKET_ROOM_ID } from "utils/settings/config";
 export default function Checkout(props) {
   const dispatch = useDispatch();
   const [isPayment, setIsPayment] = useState(false);
@@ -19,7 +19,9 @@ export default function Checkout(props) {
     (state) => state.ticketManagementReducer
   );
 
+  const { userLogin } = useSelector((state) => state.userManagementReducer);
   const { id } = useParams();
+
   useEffect(() => {
     dispatch(actGetListTicketRoomById(id));
   }, [dispatch, id]);
@@ -38,6 +40,14 @@ export default function Checkout(props) {
       dispatch(actResetSeatSelected());
     };
   }, [dispatch]);
+
+  if (!userLogin && !localStorage.setItem(TICKET_ROOM_ID, id)) {
+    localStorage.setItem(TICKET_ROOM_ID, id);
+    return <Redirect to="/login" />;
+  } else if (!userLogin) {
+    localStorage.removeItem(TICKET_ROOM_ID);
+    return <Redirect to="/login" />;
+  }
 
   if (isLoading) {
     return <Loading />;

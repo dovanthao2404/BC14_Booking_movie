@@ -29,15 +29,11 @@ const routeHome = [
 
 const routeAdmin = [
   {
-    Component: lazy(() => import("../pages/Admin/Dashboard")),
+    Component: lazy(() => import("../pages/Admin/UserManagement")),
     exact: true,
     path: "/admin",
   },
-  {
-    Component: lazy(() => import("../pages/Admin/Dashboard")),
-    exact: false,
-    path: "/admin/dashboard",
-  },
+
   {
     Component: lazy(() => import("../pages/Admin/UserManagement")),
     exact: false,
@@ -90,7 +86,7 @@ const routeUser = [
     path: "/login",
   },
   {
-    Component: lazy(() => import("../pages/User/Login/Register")),
+    Component: lazy(() => import("../pages/User/Register")),
     exact: false,
     path: "/register",
   },
