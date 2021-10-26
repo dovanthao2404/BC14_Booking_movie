@@ -1,5 +1,5 @@
 # Link deploy [Booking movie](https://booking-movie-cybersoft.surge.sh/).
-# Bảng phân chia công việc [Tại dây](https://docs.google.com/spreadsheets/d/1eAaVIkXWOQlURtTHiPnj2FH5VzkGp64MJA79_8Lof_A/edit?usp=sharing)
+# Bảng phân chia công việc [Tại đây](https://docs.google.com/spreadsheets/d/1eAaVIkXWOQlURtTHiPnj2FH5VzkGp64MJA79_8Lof_A/edit?usp=sharing)
 ## Available Scripts
 
 In the project directory, you can run:
