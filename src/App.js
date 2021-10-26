@@ -3,7 +3,7 @@ import { Switch, Route } from "react-router-dom";
 import "./App.css";
 import {
   renderRouteAdmin,
-  renderRouteCheckout,
+  renderRouteTicketRoom,
   renderRouteHome,
   renderRouteUser,
 } from "./routers";
@@ -18,13 +18,13 @@ function App() {
       <Switch>
         {renderRouteHome()}
         {renderRouteAdmin()}
-        {renderRouteCheckout()}
+        {renderRouteTicketRoom()}
         {renderRouteUser()}
         <Route exact={true} path="/auth" component={Auth} />
         <Route exact={false} path="*" component={PageNotFound} />
       </Switch>
     </>
   );
-} 
+}
 
 export default App;

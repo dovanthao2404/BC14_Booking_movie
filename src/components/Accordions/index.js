@@ -67,7 +67,8 @@ const useStyles = makeStyles({
 });
 
 export default function Accordions(props) {
-  const { film, screenWidth, handleChange, expanded, filmInfo, lichChieuPhim } = props;
+  const { film, screenWidth, handleChange, expanded, filmInfo, lichChieuPhim } =
+    props;
   let history = useHistory();
   const classes = useStyles();
   const [isOpen, setIsOpen] = useState("panel1");
@@ -103,12 +104,11 @@ export default function Accordions(props) {
 
   const renderTime = (danhSachLichChieuTheoNgay, key) => {
     return danhSachLichChieuTheoNgay[key].map((lichChieu, index) => {
-
       return (
         <Box
           key={index}
           onClick={() => {
-            history.push(`/checkout/${lichChieu.maLichChieu}`);
+            history.push(`/ticketroom/${lichChieu.maLichChieu}`);
           }}
           component="button"
           className={classes.btnCheckout}
@@ -121,7 +121,6 @@ export default function Accordions(props) {
   };
 
   const renderShowtimes = () => {
-
     const danhSachLichChieuTheoNgay = flatArrayShowtimesToObject(
       film?.lstLichChieuTheoPhim || lichChieuPhim
     );
@@ -187,8 +186,8 @@ export default function Accordions(props) {
               screenWidth >= 982
                 ? "200px"
                 : screenWidth >= 768
-                  ? "180px"
-                  : "180px",
+                ? "180px"
+                : "180px",
             overflow: "auto",
           }}
         >
@@ -208,64 +207,68 @@ export default function Accordions(props) {
   }
 
   if (filmInfo) {
-
-    return <Accordion
-      expanded={isOpen === 'panel1'} onChange={handleChangeDetail('panel1')}
-    >
-      <AccordionSummary
-        aria-controls="panel1d-content"
-        id={filmInfo.maPhim}
-        sx={{
-          padding: "8px 20px",
-          flexDirection: "row",
-          margin: 0,
-          paddingLeft: "12px",
-        }}
+    return (
+      <Accordion
+        expanded={isOpen === "panel1"}
+        onChange={handleChangeDetail("panel1")}
       >
-        <Typography component="div">
-          <Box sx={{ display: "flex", margin: 0 }}>
-            <img
-              src={filmInfo?.hinhAnh}
-              alt={filmInfo?.hinhAnh}
-              onError={(e) => {
-                e.onError = null;
-                e.target.src =
-                  "https://bitsofco.de/content/images/2018/12/broken-1.png";
-              }}
-              style={{
-                width: "50px",
-                height: "50px",
-                display: "block",
-                borderRadius: "6px",
-              }}
-            />
-            <Box sx={{ pl: "12px", fontWeight: "bold" }}>{filmInfo?.tenPhim}</Box>
-          </Box>
-        </Typography>
-      </AccordionSummary>
-      <AccordionDetails
-        sx={{
-          maxHeight:
-            screenWidth >= 982
-              ? "200px"
-              : screenWidth >= 768
+        <AccordionSummary
+          aria-controls="panel1d-content"
+          id={filmInfo.maPhim}
+          sx={{
+            padding: "8px 20px",
+            flexDirection: "row",
+            margin: 0,
+            paddingLeft: "12px",
+          }}
+        >
+          <Typography component="div">
+            <Box sx={{ display: "flex", margin: 0 }}>
+              <img
+                src={filmInfo?.hinhAnh}
+                alt={filmInfo?.hinhAnh}
+                onError={(e) => {
+                  e.onError = null;
+                  e.target.src =
+                    "https://bitsofco.de/content/images/2018/12/broken-1.png";
+                }}
+                style={{
+                  width: "50px",
+                  height: "50px",
+                  display: "block",
+                  borderRadius: "6px",
+                }}
+              />
+              <Box sx={{ pl: "12px", fontWeight: "bold" }}>
+                {filmInfo?.tenPhim}
+              </Box>
+            </Box>
+          </Typography>
+        </AccordionSummary>
+        <AccordionDetails
+          sx={{
+            maxHeight:
+              screenWidth >= 982
+                ? "200px"
+                : screenWidth >= 768
                 ? "180px"
                 : "180px",
-          overflow: "auto",
-        }}
-      >
-        <Box>
-          <Box
-            component="h2"
-            sx={{ fontWeight: "bold", mb: 1, color: "#1976d2" }}
-          >
-            2D Digital
-          </Box>
+            overflow: "auto",
+          }}
+        >
+          <Box>
+            <Box
+              component="h2"
+              sx={{ fontWeight: "bold", mb: 1, color: "#1976d2" }}
+            >
+              2D Digital
+            </Box>
 
-          {renderShowtimes()}
-        </Box>
-      </AccordionDetails>
-    </ Accordion>;
+            {renderShowtimes()}
+          </Box>
+        </AccordionDetails>
+      </Accordion>
+    );
   }
   return <></>;
 }

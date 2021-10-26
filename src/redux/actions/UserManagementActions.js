@@ -218,7 +218,6 @@ export const actUserLogin = (InfoLogin, history) => {
   return async (dispatch) => {
     try {
       const result = await userManagementServices.loginServices(InfoLogin);
-      console.log(result.data.content);
       dispatch(actLoginSuccess(result.data.content));
       localStorage.setItem(USER_LOGIN, JSON.stringify(result.data.content));
       localStorage.setItem(TOKEN, result.data.content[TOKEN]);
@@ -231,12 +230,8 @@ export const actUserLogin = (InfoLogin, history) => {
 
 export const actUserRegister = (InfoRegister, history) => {
   return async (dispatch) => {
-    console.log("davao");
     try {
-      const result = await userManagementServices.registerServices(
-        InfoRegister
-      );
-      console.log(result);
+      await userManagementServices.registerServices(InfoRegister);
       dispatch(actUserLogin(InfoRegister, history));
     } catch (error) {
       dispatch({

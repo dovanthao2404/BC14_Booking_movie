@@ -1,4 +1,4 @@
-import React, { useState, } from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import Tabs from "@mui/material/Tabs";
 import Typography from "@mui/material/Typography";
@@ -6,7 +6,7 @@ import Box from "@mui/material/Box";
 import Tab from "@mui/material/Tab";
 import { makeStyles } from "@mui/styles";
 import clsx from "clsx";
-import ClusterCinema from "./../../../components/ClusterCinema";
+import ClusterCinema from "../../../../components/ClusterCinema";
 import Accordions from "components/Accordions";
 import "./style.css";
 function TabPanel(props) {
@@ -47,7 +47,7 @@ const useStyles = makeStyles({
     display: "flex",
     justifyContent: "center",
     flexWrap: "wrap",
-    margin: "auto"
+    margin: "auto",
   },
   cinemaLogo: {
     width: "50px",
@@ -55,23 +55,20 @@ const useStyles = makeStyles({
     borderRadius: "50%",
     margin: "10px",
     cursor: "pointer",
-    opacity: "0.6"
+    opacity: "0.6",
   },
   classActiveSystem: {
-    opacity: "1"
+    opacity: "1",
   },
   "@media (max-width: 575.98px)": {
     listSystemCinema: {
       maxWidth: "210px",
-    }
-  }
-
+    },
+  },
 });
-
 
 const SCREEN_768 = 768;
 export default function Complex(props) {
-
   const { infoFilmShowtimes, screenWidth } = props;
   const { heThongRapChieu } = infoFilmShowtimes ? infoFilmShowtimes : [];
 
@@ -88,57 +85,83 @@ export default function Complex(props) {
   };
 
   const renderCinemaSystem = () => {
-
-    return heThongRapChieu?.[systemCinemaCurrent]?.cumRapChieu.map((cumRap, index) => {
-      return <Tab
-        sx={{ width: "300px", padding: 0 }}
-        key={index}
-        value={index}
-        label={
-          <>
-            <ClusterCinema cumRap={cumRap} />
-          </>
-        }
-        {...a11yProps(index)}
-      />;
-    });
+    return heThongRapChieu?.[systemCinemaCurrent]?.cumRapChieu.map(
+      (cumRap, index) => {
+        return (
+          <Tab
+            sx={{ width: "300px", padding: 0 }}
+            key={index}
+            value={index}
+            label={
+              <>
+                <ClusterCinema cumRap={cumRap} />
+              </>
+            }
+            {...a11yProps(index)}
+          />
+        );
+      }
+    );
   };
 
   const renderListSystemCinema = () => {
     return heThongRapChieu?.map((heThongRap, i) => {
       const classActiveSystem = i === systemCinemaCurrent ? true : false;
-      return <img onClick={() => { setSystemCinemaCurrent(i); setCinema(0); }
-      }
-        key={heThongRap.maHeThongRap}
-        className={clsx(classes.cinemaLogo, classActiveSystem ? classes.classActiveSystem : "")}
-        src={heThongRap.logo}
-        alt={heThongRap.tenHeThongRap} />;
+      return (
+        <img
+          onClick={() => {
+            setSystemCinemaCurrent(i);
+            setCinema(0);
+          }}
+          key={heThongRap.maHeThongRap}
+          className={clsx(
+            classes.cinemaLogo,
+            classActiveSystem ? classes.classActiveSystem : ""
+          )}
+          src={heThongRap.logo}
+          alt={heThongRap.tenHeThongRap}
+        />
+      );
     });
   };
 
   const renderTabPanel = () => {
-    return heThongRapChieu?.[systemCinemaCurrent]?.cumRapChieu.map((value, index) => {
-      return <TabPanel style={{
-        width: screenWidth >= SCREEN_768 ? "calc(100% - 300px)" : "100%"
-      }} key={index} value={cinema} index={index} >
-        <Accordions lichChieuPhim={value.lichChieuPhim} filmInfo={infoFilmShowtimes} screenWidth={screenWidth} />
-      </TabPanel>;
-    });
-
+    return heThongRapChieu?.[systemCinemaCurrent]?.cumRapChieu.map(
+      (value, index) => {
+        return (
+          <TabPanel
+            style={{
+              width: screenWidth >= SCREEN_768 ? "calc(100% - 300px)" : "100%",
+            }}
+            key={index}
+            value={cinema}
+            index={index}
+          >
+            <Accordions
+              lichChieuPhim={value.lichChieuPhim}
+              filmInfo={infoFilmShowtimes}
+              screenWidth={screenWidth}
+            />
+          </TabPanel>
+        );
+      }
+    );
   };
 
   return (
     <>
-      <div className={classes.listSystemCinema} >
-        {renderListSystemCinema()}
-      </div>
+      <div className={classes.listSystemCinema}>{renderListSystemCinema()}</div>
 
       <Box
         sx={{
-          flexGrow: 1, bgcolor: 'background.paper',
-          display: screenWidth >= SCREEN_768 ? "flex" : "block"
-          , maxHeight: "540px"
-          , minHeight: "272px", color: "#333", overflow: "hidden", marginTop: "20px"
+          flexGrow: 1,
+          bgcolor: "background.paper",
+          display: screenWidth >= SCREEN_768 ? "flex" : "block",
+          maxHeight: "540px",
+          minHeight: "272px",
+          color: "#333",
+          overflow: "hidden",
+          marginTop: "20px",
         }}
       >
         <Tabs
@@ -147,14 +170,11 @@ export default function Complex(props) {
           value={cinema}
           onChange={handleChangeTabsCinema}
           aria-label="Vertical tabs example"
-          sx={{ borderRight: 1, borderColor: 'divider', }}
+          sx={{ borderRight: 1, borderColor: "divider" }}
         >
-
           {renderCinemaSystem()}
-
         </Tabs>
         {renderTabPanel()}
-
       </Box>
     </>
   );

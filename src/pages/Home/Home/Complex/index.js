@@ -8,7 +8,7 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import { useSelector } from "react-redux";
 
-import ClusterCinema from "../../../components/ClusterCinema";
+import ClusterCinema from "../../../../components/ClusterCinema";
 import ListFilm from "./ListFilm";
 
 function TabPanel(props) {
@@ -133,7 +133,6 @@ export default function Complex(props) {
 
   const renderCinemaCluster = () => {
     if (infoShowtimesCinemaSystem) {
-
       return (
         <TabPanel value={cinema} index={cinema}>
           <Box
@@ -141,7 +140,7 @@ export default function Complex(props) {
               flexGrow: 1,
               bgcolor: "background.paper",
               display: screenWidth >= SCREEN_768 ? "flex" : "block",
-              height: "540px",
+              height: "screenWidth" >= SCREEN_768 ? "540px" : "auto",
               overflow: "auto",
             }}
           >
@@ -171,8 +170,7 @@ export default function Complex(props) {
           </Box>
         </TabPanel>
       );
-
-    };
+    }
   };
 
   return (

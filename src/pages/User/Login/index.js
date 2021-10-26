@@ -4,7 +4,7 @@ import { Button } from "@mui/material";
 import { Box } from "@mui/system";
 import { useDispatch, useSelector } from "react-redux";
 import FormHelperText from "@mui/material/FormHelperText";
-
+import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
 import { useFormik } from "formik";
 import { NavLink } from "react-router-dom";
 import { actUserLogin } from "redux/actions/UserManagementActions";
@@ -47,6 +47,14 @@ function Login(props) {
 
   return (
     <>
+      <Box sx={{ position: "absolute", top: "-10px", right: "-10px" }}>
+        <CancelOutlinedIcon
+          onClick={() => {
+            history.push("/");
+          }}
+          style={{ fontSize: "30px", cursor: "pointer" }}
+        />
+      </Box>
       <div>
         <img
           src="/assets/img/group@2x.png"

@@ -8,8 +8,8 @@ import { useFormik } from "formik";
 import { NavLink } from "react-router-dom";
 import { actUserRegister } from "redux/actions/UserManagementActions";
 import { useHistory } from "react-router-dom";
-import { GROUP_ID } from "./../../utils/settings/config";
-
+import { GROUP_ID } from "../../../../utils/settings/config";
+import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
 const validate = (values) => {
   const errors = {};
   if (!values.taiKhoan) {
@@ -55,7 +55,6 @@ const validate = (values) => {
   if (!errors.reMatKhau) {
     delete errors.reMatKhau;
   }
-  console.log(errors);
   return errors;
 };
 
@@ -86,13 +85,20 @@ function Login(props) {
     },
     validate,
     onSubmit: (values) => {
-      console.log(values);
       dispatch(actUserRegister(values, history));
     },
   });
 
   return (
     <>
+      <Box sx={{ position: "absolute", top: "-10px", right: "-10px" }}>
+        <CancelOutlinedIcon
+          onClick={() => {
+            history.push("/");
+          }}
+          style={{ fontSize: "30px", cursor: "pointer" }}
+        />
+      </Box>
       <div>
         <form onSubmit={formik.handleSubmit}>
           <p style={{ color: "#f4511e", fontSize: "10px" }}>
@@ -103,7 +109,7 @@ function Login(props) {
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.taiKhoan}
-              sx={{ width: "100%" }}
+              sx={{ width: "300px" }}
               label="Tài khoản *"
               name="taiKhoan"
             />
@@ -118,7 +124,7 @@ function Login(props) {
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.hoTen}
-              sx={{ width: "100%" }}
+              sx={{ width: "300px" }}
               label="Họ tên *"
               name="hoTen"
               id="hoTen"
@@ -134,7 +140,7 @@ function Login(props) {
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.soDt}
-              sx={{ width: "100%" }}
+              sx={{ width: "300px" }}
               label="Số điện thoại *"
               name="soDt"
             />
@@ -149,7 +155,7 @@ function Login(props) {
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.email}
-              sx={{ width: "100%" }}
+              sx={{ width: "300px" }}
               label="Email *"
               name="email"
             />
@@ -166,7 +172,7 @@ function Login(props) {
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.matKhau}
-              sx={{ width: "100%" }}
+              sx={{ width: "300px" }}
               label="Mật khẩu *"
               name="matKhau"
             />
@@ -182,7 +188,7 @@ function Login(props) {
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.reMatKhau}
-              sx={{ width: "100%" }}
+              sx={{ width: "300px" }}
               label="Nhập lại mật khẩu *"
               name="reMatKhau"
             />

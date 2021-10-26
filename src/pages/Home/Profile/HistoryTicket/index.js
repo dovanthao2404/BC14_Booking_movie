@@ -98,7 +98,7 @@ export default function StickyHeadTable(props) {
             </TableRow>
           </TableHead>
           <TableBody>
-            {infoTiket.map((row, index) => {
+            {infoTiket?.map((row, index) => {
               return (
                 <TableRow hover role="checkbox" tabIndex={-1} key={row.maVe}>
                   {columns.map((column) => {

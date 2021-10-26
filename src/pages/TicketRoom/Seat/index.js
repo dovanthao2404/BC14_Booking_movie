@@ -100,7 +100,10 @@ export default function Seat(props) {
                 }
               }}
               sx={{
-                opacity: listSeatSelected?.length ? "1" : "0.6",
+                opacity: "1",
+                background: listSeatSelected?.length
+                  ? "#44c020"
+                  : "#88d073 !important",
                 cursor: listSeatSelected?.length
                   ? "pointer"
                   : "default !important",

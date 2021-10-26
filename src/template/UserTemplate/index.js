@@ -21,7 +21,6 @@ const useStyles = makeStyles({
   },
   "@media (max-width: 767.98)": {
     form: {
-      // maxWidth: "400px",
       padding: "40px 32px 30px",
       position: "relative",
       top: "unset",

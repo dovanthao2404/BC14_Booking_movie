@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Accordions from "../../../../components/Accordions";
+import Accordions from "../../../../../components/Accordions";
 
 export default function ListFilm(props) {
   const { listFilm, screenWidth } = props;

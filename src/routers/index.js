@@ -1,27 +1,27 @@
 import { lazy } from "react";
 import AdminTemplate from "template/AdminTemplate";
-import CheckoutTemplate from "template/CheckoutTemplate";
+import TicketTemplate from "template/TicketTemplate";
 import UserTemplate from "template/UserTemplate";
 import HomeTemplate from "../template/HomeTemplate";
 
 const routeHome = [
   {
-    Component: lazy(() => import("../pages/Home")),
+    Component: lazy(() => import("../pages/Home/Home")),
     exact: true,
     path: "/",
   },
   {
-    Component: lazy(() => import("../pages/Home")),
+    Component: lazy(() => import("../pages/Home/Home")),
     exact: false,
     path: "/home",
   },
   {
-    Component: lazy(() => import("../pages/Profile")),
+    Component: lazy(() => import("../pages/Home/Profile")),
     exact: false,
     path: "/profile",
   },
   {
-    Component: lazy(() => import("../pages/Detail")),
+    Component: lazy(() => import("../pages/Home/Detail")),
     exact: false,
     path: "/detail/:id",
   },
@@ -75,22 +75,22 @@ const routeAdmin = [
   },
 ];
 
-const routeCheckout = [
+const routeTicketRoom = [
   {
-    Component: lazy(() => import("../pages/Checkout")),
+    Component: lazy(() => import("../pages/TicketRoom")),
     exact: false,
-    path: "/checkout/:id",
+    path: "/ticketroom/:id",
   },
 ];
 
 const routeUser = [
   {
-    Component: lazy(() => import("../pages/Login")),
+    Component: lazy(() => import("../pages/User/Login")),
     exact: false,
     path: "/login",
   },
   {
-    Component: lazy(() => import("../pages/Register")),
+    Component: lazy(() => import("../pages/User/Login/Register")),
     exact: false,
     path: "/register",
   },
@@ -122,10 +122,10 @@ export const renderRouteAdmin = () => {
   });
 };
 
-export const renderRouteCheckout = () => {
-  return routeCheckout.map((route, key) => {
+export const renderRouteTicketRoom = () => {
+  return routeTicketRoom.map((route, key) => {
     return (
-      <CheckoutTemplate
+      <TicketTemplate
         key={key}
         exact={route.exact}
         Component={route.Component}
