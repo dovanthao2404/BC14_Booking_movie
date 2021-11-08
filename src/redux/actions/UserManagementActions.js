@@ -241,7 +241,7 @@ export const actUserRegister = (InfoRegister, history) => {
     } catch (error) {
       dispatch({
         type: ActionType.REGISTER_ACTION_FAILED,
-        InfoRegister: error,
+        payload: error,
       });
     }
   };

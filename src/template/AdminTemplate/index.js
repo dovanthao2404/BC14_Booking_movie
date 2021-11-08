@@ -15,7 +15,7 @@ export default function AdminTemplate({ Component, ...props }) {
     <Route
       {...props}
       render={(propsRoute) => {
-        if (userLogin) {
+        if (userLogin && userLogin.maLoaiNguoiDung === "QuanTri") {
           return (
             <>
               <Box

@@ -72,7 +72,7 @@ const validateRePass = (value, password) => {
 function Login(props) {
   const dispatch = useDispatch();
   const history = useHistory();
-  const { errorLogin } = useSelector((state) => state.userManagementReducer);
+  const { error } = useSelector((state) => state.userManagementReducer);
 
   const formik = useFormik({
     initialValues: {
@@ -102,8 +102,8 @@ function Login(props) {
       </Box>
       <div>
         <form onSubmit={formik.handleSubmit}>
-          <p style={{ color: "#f4511e", fontSize: "10px" }}>
-            {errorLogin ? errorLogin.response?.data.content : ""}
+          <p style={{ color: "#f4511e", fontSize: "20px" }}>
+            {error ? error.response?.data.content : ""}
           </p>
           <Box sx={{ paddingBottom: "10px" }}>
             <TextField
