@@ -75,12 +75,12 @@ const DrawerComponent = (props) => {
                   src={
                     userLogin
                       ? "https://picsum.photos/30/30"
-                      : "https://tix.vn/app/assets/img/avatar.png"
+                      : "/assets/img/avatar.png"
                   }
                   alt={
                     userLogin
                       ? "https://picsum.photos/30/30"
-                      : "https://tix.vn/app/assets/img/avatar.png"
+                      : "/assets/img/avatar.png"
                   }
                 />
                 <Box

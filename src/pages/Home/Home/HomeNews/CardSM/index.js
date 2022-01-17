@@ -70,8 +70,8 @@ export default function CardSM(props) {
                   },
                 }}
                 component="img"
-                src="https://tix.vn/app/assets/img/icons/like.png"
-                alt="https://tix.vn/app/assets/img/icons/like.png"
+                src="/assets/img/like.png"
+                alt="/assets/img/like.png"
               />
               <span style={{ marginLeft: "4px" }}>{news?.up_vote}</span>
             </Box>
@@ -87,8 +87,8 @@ export default function CardSM(props) {
                   },
                 }}
                 component="img"
-                src="https://tix.vn/app/assets/img/icons/comment.png"
-                alt="https://tix.vn/app/assets/img/icons/comment.png"
+                src="/assets/img/comment.png"
+                alt="/assets/img/comment.png"
               />
               <span style={{ marginLeft: "4px" }}>{news?.total_comment}</span>
             </Box>

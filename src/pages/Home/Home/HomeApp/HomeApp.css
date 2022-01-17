@@ -1,6 +1,6 @@
 #homeApp {
   padding: 120px 0 80px 0;
-  background: url(https://tix.vn/app/assets/img/icons/backapp.jpg);
+  background: url("../../../../assets/img/background.jpg");
   background-size: contain;
   color: #fff;
 }

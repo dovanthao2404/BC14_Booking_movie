@@ -44,7 +44,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "deploy": "yarn build && cd build && cp index.html 500.html && surge . booking-movie-cybersoft.surge.sh"
   },
   "eslintConfig": {
     "extends": [

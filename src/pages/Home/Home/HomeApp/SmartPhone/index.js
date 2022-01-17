@@ -21,8 +21,8 @@ export default function SmartPhone(props) {
           <Box
             component="img"
             sx={{ width: "100%", height: "100%", display: "block" }}
-            src={`https://tix.vn/app/assets/img/icons/slide/slide${i}.jpg`}
-            alt={`https://tix.vn/app/assets/img/icons/slide/slide${i}.jpg`}
+            src={`/assets/img/slide${i}.jpg`}
+            alt={`/assets/img/slide${i}.jpg`}
           />
         </Box>
       );
@@ -33,8 +33,8 @@ export default function SmartPhone(props) {
     <Box sx={{ position: "relative" }}>
       <Box
         component="img"
-        src="https://tix.vn/app/assets/img/icons/mobile.png"
-        alt="https://tix.vn/app/assets/img/icons/mobile.png"
+        src="/assets/img/mobile.png"
+        alt="/mobile.png"
         sx={{
           maxWidth: "100%",
           height: "auto",
